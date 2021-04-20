@@ -29,7 +29,10 @@ module.exports = {
       state: {
         type: Sequelize.STRING
       },
-      coordinates: {
+      latitude: {
+        type: Sequelize.STRING
+      },
+      longitude: {
         type: Sequelize.STRING
       },
       createdAt: {

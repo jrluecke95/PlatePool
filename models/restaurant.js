@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Restaurant.hasMany(models.Order)
+      Restaurant.hasMany(models.Item)
     }
   };
   Restaurant.init({
@@ -21,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     zipcode: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    coordinates: DataTypes.STRING
+    latitude: DataTypes.STRING,
+    longitude: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Restaurant',
