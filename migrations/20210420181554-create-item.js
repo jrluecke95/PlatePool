@@ -17,10 +17,19 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      RestaurantId: {
+      cuisine: {
+        type: Sequelize.STRING
+      },
+      quantity: {
+        type: Sequelize.INTEGER
+      },
+      allergenInfo: {
+        type: Sequelize.STRING
+      },
+      UserId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Restaurants',
+          model: 'Users',
           key: 'id'
         }
       },
