@@ -4,6 +4,9 @@ import Modal from '@material-ui/core/Modal';
 import { Button, TextField } from '@material-ui/core';
 import { useParams } from 'react-router';
 
+// TODO set up backend for ratings 
+
+
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
