@@ -5,6 +5,7 @@ import './App.css'
 import Login from "./pages/Login";
 import Register from './pages/Register'
 import Navbar from "./components/Navbar";
+import CreatePlate from "./pages/CreatePlate";
 
 
 
@@ -25,6 +26,9 @@ function App() {
               </Route>
               <Route path='/login'>
                 <Login />
+              </Route>
+              <Route path='/CreatePlate'>
+                <CreatePlate />
               </Route>
               {/* <Route path="/#">
                 <Page />
