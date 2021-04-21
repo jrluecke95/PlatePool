@@ -38,5 +38,28 @@ router.post('/create', checkAuth, async (req, res) => {
 
   return res.status(201).json(newPlate)
 })
+// localhost:3000/api/v1/plates/:id/addcomment
+router.post('/:id/addcomment', checkAuth, async (req, res) => {
+  const plate = await models.Plate.findByPk(req.params.id)
+  if (!plate) {
+    return res.status(404).json({
+      error: "could not find recipe with that id"
+    })
+  }
+
+  if (!req.body.text) {
+    res.status(400).json({
+      error: "please include all required fields"
+    })
+  }
+
+  const comment = await plate.createComment({
+    text: req.body.text,
+    PlateId: req.params.id,
+    UserId: req.session.user.id
+  })
+
+  res.status(201).json(comment)
+})
 
 module.exports = router;
