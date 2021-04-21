@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core';
 import { NavLink, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from './redux/actions';
+import { setUser } from '../redux/actions';
 
 const useStyles = makeStyles({
     toolBar: {
