@@ -74,12 +74,15 @@ router.get('/getall', async (req, res) => {
   res.status(201).json(plates)
 })
 
+// gets plate based on id of plate
 // localhost:3000/api/v1/plates/:id/getplate
 router.get('/:id/getplate', async (req, res) => {
   const plate = await models.Plate.findByPk(req.params.id)
   res.status(201).json(plate)
 })
 
+// gets plates based on user being searched
+// could be used to view other user's recipes
 // localhost:3000/api/v1/plates/:id/getuserplates
 router.get('/:id/getuserplates', async (req, res) => {
   const plates = await models.Plate.findAll({
@@ -91,5 +94,14 @@ router.get('/:id/getuserplates', async (req, res) => {
 })
 
 // localhost:3000/api/v1/plates/ownplates
+router.get('/ownplates', checkAuth, async (req, res) => {
+  const { user } = req.session;
+  const plates = await models.Plate.findAll({
+    where: {
+      UserId: user.id
+    }
+  })
+  res.json(plates)
+})
 
 module.exports = router;
