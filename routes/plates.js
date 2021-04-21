@@ -66,6 +66,23 @@ router.post('/:id/addcomment', checkAuth, async (req, res) => {
   res.status(201).json(comment)
 })
 
+// gets all comment for a plate/post
+// localhost:3000/api/v1/:id/getcomments
+router.get('/:id/getcomments', async (req, res) => {
+  const plate = await models.Plate.findByPk(req.params.id)
+  if (!plate) {
+    return res.status(404).json({
+      error: "could not find recipe with that id"
+    })
+  }
+
+  const comments = await plate.getComments({
+    include: [{ model: models.User, attributes: ['username', 'id'] }]
+  })
+
+  res.status(201).json(comments)
+})
+
 // for the home page - gets all plates that are available
 // localhost:3000/api/v1/plates/getall
 router.get('/getall', async (req, res) => {
@@ -88,7 +105,7 @@ router.get('/:id/getplate', async (req, res) => {
 // gets plates based on user being searched
 // could be used to view other user's recipes
 // localhost:3000/api/v1/plates/:id/getuserplates
-router.get('/:id/getuserplates', async (req, res) => {
+router.get('/:id/getusersplates', async (req, res) => {
   const plates = await models.Plate.findAll({
     where: {
       UserId: req.params.id
@@ -99,7 +116,7 @@ router.get('/:id/getuserplates', async (req, res) => {
 
 // gets users own plates that they might want to edit
 // localhost:3000/api/v1/plates/ownplates
-router.get('/ownplates', checkAuth, async (req, res) => {
+router.get('/getownplates', checkAuth, async (req, res) => {
   const { user } = req.session;
   const plates = await models.Plate.findAll({
     where: {
