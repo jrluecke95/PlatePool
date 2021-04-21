@@ -38,7 +38,7 @@ router.post('/register', async (req, res) => {
     password: hash,
     street: req.body.street,
     zipcode: req.body.zipcode,
-    city: req.body.zipcode,
+    city: req.body.city,
     state: req.body.state
   })
   // respond with success message
@@ -82,5 +82,7 @@ router.post('/login', async (req, res) => {
     updatedAt: user.updatedAt
   })
 })
+
+
 
 module.exports = router;

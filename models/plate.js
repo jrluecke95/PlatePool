@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Plate.belongsTo(models.User)
+      Plate.hasMany(models.Comment)
     }
   };
   Plate.init({
