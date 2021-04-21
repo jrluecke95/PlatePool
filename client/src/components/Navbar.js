@@ -43,11 +43,16 @@ export default function Navbar() {
                     <IconButton edge="start" color="inherit" aria-label="menu">
                     </IconButton>
                     <Typography variant="h6" >
-                        PlatePool
+                        <Button color="inherit" component={NavLink} to="/">
+                            PlatePool
+                        </Button>
                     </Typography>
                     {user ? (
                         <>
                         {user.username}
+                            <Button component={NavLink} to="/profile">
+                            <i class="far fa-user"></i>
+                            </Button>
                             <Button color="inherit" onClick={logout}>
                                 Logout
                             </Button>
