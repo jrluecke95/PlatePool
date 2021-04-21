@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const models = require('../models');
 const checkAuth = require('../auth/CheckAuth');
+const plate = require('../models/plate');
 
 //localhost:3000/api/v1/plates/create
 router.post('/create', checkAuth, async (req, res) => {
@@ -62,5 +63,15 @@ router.post('/:id/addcomment', checkAuth, async (req, res) => {
   res.status(201).json(comment)
 })
 
+// localhost:3000/api/v1/plates/getall
+router.get('/getall', async (req, res) => {
+  const plates = await models.Plate.findAll({
+    include: [{
+      model: models.User, 
+      attributes: ['name', 'id']
+    }]
+  })
+  res.status(201).json(plates)
+})
 
 module.exports = router;
