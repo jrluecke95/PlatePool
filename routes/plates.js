@@ -4,6 +4,7 @@ const models = require('../models');
 const checkAuth = require('../auth/CheckAuth');
 const plate = require('../models/plate');
 
+// creating new plate
 //localhost:3000/api/v1/plates/create
 router.post('/create', checkAuth, async (req, res) => {
   //check to make sure recipe has all fields filled out
@@ -26,7 +27,7 @@ router.post('/create', checkAuth, async (req, res) => {
       error: "you already have this recipe listed!"
     })
   }
-// creates new recipe
+// creates new plate
   const newPlate = await models.Plate.create({
     name: req.body.name,
     price: req.body.price,
@@ -39,6 +40,8 @@ router.post('/create', checkAuth, async (req, res) => {
 
   return res.status(201).json(newPlate)
 })
+
+// adding a comment to a plate route
 // localhost:3000/api/v1/plates/:id/addcomment
 router.post('/:id/addcomment', checkAuth, async (req, res) => {
   const plate = await models.Plate.findByPk(req.params.id)
@@ -63,6 +66,7 @@ router.post('/:id/addcomment', checkAuth, async (req, res) => {
   res.status(201).json(comment)
 })
 
+// for the home page - gets all plates that are available
 // localhost:3000/api/v1/plates/getall
 router.get('/getall', async (req, res) => {
   const plates = await models.Plate.findAll({
@@ -93,6 +97,7 @@ router.get('/:id/getuserplates', async (req, res) => {
   res.status(201).json(plates)
 })
 
+// gets users own plates that they might want to edit
 // localhost:3000/api/v1/plates/ownplates
 router.get('/ownplates', checkAuth, async (req, res) => {
   const { user } = req.session;
@@ -102,6 +107,33 @@ router.get('/ownplates', checkAuth, async (req, res) => {
     }
   })
   res.json(plates)
+})
+
+// lets user remove plate from their listings
+// localhost:3000/api/v1/plates/:id/deleteplate
+router.delete('/:id/deleteplate', checkAuth, async (req, res) => {
+  await models.Plate.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  res.status(204).json('plate deleted')
+})
+
+router.put('/:id/editplate', checkAuth, async (req, res) => {
+  const recipe = await models.Plate.update({
+    name: req.body.name,
+    price: req.body.price,
+    description: req.body.description,
+    cuisine: req.body.cuisine,
+    quantity: req.body.quantity,
+    allergenInfo: req.body.allergenInfo
+  }, {
+    where: {
+      id: req.params.id
+    }
+  })
+  res.status(204).json(recipe)
 })
 
 module.exports = router;
