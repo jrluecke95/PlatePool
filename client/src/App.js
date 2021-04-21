@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 import { Container } from "@material-ui/core";
 import Home from './pages/Home'
 import './App.css'
+import Login from "./pages/Login";
+import Register from './pages/Register'
 
 
 
@@ -37,6 +39,12 @@ function App() {
             <Switch>
               <Route path="/" exact>
                 <Home />
+              </Route>
+              <Route path='/register'>
+                <Register />
+              </Route>
+              <Route path='/login'>
+                <Login />
               </Route>
               {/* <Route path="/#">
                 <Page />
