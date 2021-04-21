@@ -1,15 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, TextField } from '@material-ui/core'
 
 const LoginSection = () => {
+
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        fetch('/api/v1/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: form.email,
+                password: form.password,
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error)
+                } else {
+                    alert('User logged in Successfully')
+                }
+            });
+    };
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const [ values ] = useState({
+        showPassword: false
+    })
+
+
     return (
         <div>
             <h1>Login Form</h1>
-            <form noValidate autoComplete="off">
-                <TextField style={{ width: '75%'}} fullWidth  id="standard-multiline-flexible" label="email" />
-                <TextField style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="password" />
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <TextField onChange={handleChange} name="email" value={form.email} style={{ width: '75%'}} fullWidth  id="standard-multiline-flexible" label="email" />
+                <TextField onChange={handleChange} type={values.showPassword ? "text" : "password"} name="password" value={form.password} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="password" />
                 <br />
-                <Button style={{ marginTop: '2%' }} variant="contained" color="primary">Login</Button>
+                <Button type="submit" style={{ marginTop: '2%' }} variant="contained" color="primary">Login</Button>
             </form>
         </div>
     )

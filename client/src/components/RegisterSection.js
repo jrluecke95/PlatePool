@@ -208,8 +208,50 @@ const RegisterSection = () => {
         }
     ]
 
-    
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
+        password: '',
+        address: '',
+        city: '',
+        state: '',
+        zipcode: ''
+    })
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        fetch('/api/v1/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: form.name,
+                email: form.email,
+                password: form.password,
+                street: form.street,
+                city: form.city,
+                state: form.state,
+                zipcode: form.zipcode
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error)
+                } else {
+                    alert('User registered Successfully')
+                }
+            });
+    };
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+ 
     const [ values ] = useState({
         showPassword: false
     })
@@ -218,13 +260,13 @@ const RegisterSection = () => {
     return (
         <div>
             <h1>Register Form</h1>
-            <form noValidate autoComplete="off">
-                <TextField style={{ width: '75%', marginTop: '2%' }} fullWidth multiline id="standard-multiline-flexible" label="name" />
-                <TextField style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic" multiline label="email" />
-                <TextField style={{ width: '75%', marginTop: '2%'}} type={values.showPassword ? "text" : "password"} fullWidth id="standard-basic" label="password" />
-                <TextField style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic" label="Street Address" />
-                <TextField style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic" label="City" />
-                <TextField style={{ width: '75%', marginTop: '3%' }} select id="standard-select-state" label="State">
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <TextField onChange={handleChange} name="name" value={form.name} style={{ width: '75%', marginTop: '2%' }} fullWidth  id="standard-multiline-flexible" label="name" />
+                <TextField onChange={handleChange} name="email" value={form.email} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="email" />
+                <TextField onChange={handleChange} name="password" value={form.password} style={{ width: '75%', marginTop: '2%'}} type={values.showPassword ? "text" : "password"} fullWidth id="standard-basic" label="password" />
+                <TextField onChange={handleChange} name="street" value={form.street} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic" label="Street Address" />
+                <TextField onChange={handleChange} name="city" value={form.city} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic" label="City" />
+                <TextField onChange={handleChange} name="state" value={form.state} style={{ width: '75%', marginTop: '3%' }} select id="standard-select-state" label="State">
                 {
                     states.map((state) => (
                         <MenuItem key={state.name} value={state.name} >
@@ -233,9 +275,9 @@ const RegisterSection = () => {
                     ))
                 }
                 </TextField>
-                <TextField style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="Zipcode" />
+                <TextField name="zipcode" onChange={handleChange} value={form.zipcode} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="Zipcode" />
                 <br />
-                <Button style={{ marginTop: '2%' }} variant="contained" color="primary">Register</Button>
+                <Button type="submit" style={{ marginTop: '2%' }} variant="contained" color="primary">Register</Button>
             </form>
         </div>
     )
