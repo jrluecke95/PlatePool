@@ -1,13 +1,10 @@
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import Home from './pages/Home'
 import './App.css'
 import Login from "./pages/Login";
 import Register from './pages/Register'
+import Navbar from "./components/Navbar";
 
 
 
@@ -17,24 +14,7 @@ function App() {
     <div className="App">
 
       <Router>
-        <AppBar position="static">
-          <Toolbar variant="dense">          
-            <Typography variant="h6" color="inherit">
-              GreenLeaf
-            </Typography>
-              <>
-              <Button color="inherit" component={NavLink} to="/">
-                  Restaurants
-                </Button> 
-                <Button color="inherit" component={NavLink} to="/List">
-                  Order
-                </Button>
-                {/* <Button color="inherit" component={NavLink} to="/Add">
-                  button
-                </Button> */}
-              </>
-          </Toolbar>
-        </AppBar>
+        <Navbar />
         <Container style={{ margin: '2em auto' }}>
             <Switch>
               <Route path="/" exact>
