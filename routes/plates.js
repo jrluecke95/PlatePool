@@ -74,4 +74,22 @@ router.get('/getall', async (req, res) => {
   res.status(201).json(plates)
 })
 
+// localhost:3000/api/v1/plates/:id/getplate
+router.get('/:id/getplate', async (req, res) => {
+  const plate = await models.Plate.findByPk(req.params.id)
+  res.status(201).json(plate)
+})
+
+// localhost:3000/api/v1/plates/:id/getuserplates
+router.get('/:id/getuserplates', async (req, res) => {
+  const plates = await models.Plate.findAll({
+    where: {
+      UserId: req.params.id
+    }
+  })
+  res.status(201).json(plates)
+})
+
+// localhost:3000/api/v1/plates/ownplates
+
 module.exports = router;
