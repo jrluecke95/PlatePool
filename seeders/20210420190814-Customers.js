@@ -27,6 +27,19 @@ module.exports = {
       longitude: "-84.43161906687209",
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      name: 'andres icedo',
+      email: "andresicedo24@gmail.com",
+      password: '$2b$10$/8DySr9wBlA/.pg8Y4LsmOyNd2GMe4.zjjsDmMG.fBsmCIoWu6EOK', //password
+      street: "411 Highland Cross Dr",
+      zipcode: "77073",
+      city: "Houston",
+      state: "TX",
+      latitude: "30.026150",
+      longitude: "-95.423050",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }],
   )},
 
