@@ -251,7 +251,7 @@ const RegisterSection = () => {
             [e.target.name]: e.target.value
         })
     }
- 
+
     const [ values ] = useState({
         showPassword: false
     })
