@@ -35,6 +35,7 @@ router.post('/create', checkAuth, async (req, res) => {
     cuisine: req.body.cuisine,
     quantity: req.body.quantity,
     allergenInfo: req.body.allergenInfo,
+    isForSale: req.body.isForSale,
     UserId: user.id,
   })
 
