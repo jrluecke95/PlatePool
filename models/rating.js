@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Rating.belongsTo(models.User)
+      // storing a userid as reviewer id - aliasing
+      Rating.belongsTo(models.User, {as: 'Reviewer', foreignKey: 'ReviewerId'})
     }
   };
   Rating.init({
