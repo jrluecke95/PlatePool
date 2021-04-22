@@ -9,6 +9,7 @@ module.exports = {
       cuisine: "American",
       quantity: 5,
       allergenInfo: "",
+      isForSale: true,
       UserId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -20,6 +21,7 @@ module.exports = {
       cuisine: "American",
       quantity: 5,
       allergenInfo: "Vegan",
+      isForSale: false,
       UserId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -31,6 +33,7 @@ module.exports = {
       cuisine: "American",
       quantity: 5,
       allergenInfo: "",
+      isForSale: true,
       UserId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -42,6 +45,7 @@ module.exports = {
       cuisine: "American",
       quantity: 5,
       allergenInfo: "Vegatarian",
+      isForSale: false,
       UserId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
