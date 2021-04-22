@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, TextField } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
 const LoginSection = () => {
 
@@ -7,6 +8,7 @@ const LoginSection = () => {
         email: '',
         password: ''
     })
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,6 +28,7 @@ const LoginSection = () => {
                     alert(data.error)
                 } else {
                     alert('User logged in Successfully')
+                    history.push('/')
                 }
             });
     };

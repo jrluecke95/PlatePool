@@ -1,5 +1,6 @@
 import { Button, FormControl, Input, InputLabel, MenuItem, TextField } from '@material-ui/core';
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const CreatePlateSection = () => {
     // name, price, 
@@ -13,7 +14,8 @@ const CreatePlateSection = () => {
         cuisine: '',
         allergies: '',
         quantity: ''
-    }) 
+    })
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -37,6 +39,7 @@ const CreatePlateSection = () => {
                     alert(data.error)
                 } else {
                     alert('User Created Meal Successfully')
+                    history.push('/')
                 }
             })
     }

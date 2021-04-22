@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { TextField, Button, MenuItem } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -217,6 +218,8 @@ const RegisterSection = () => {
         state: '',
         zipcode: ''
     })
+    const history = useHistory();
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -241,6 +244,7 @@ const RegisterSection = () => {
                     alert(data.error)
                 } else {
                     alert('User registered Successfully')
+                    history.push('/login')
                 }
             });
     };
