@@ -100,6 +100,18 @@ router.get('/current', (req, res) => {
   }
 })
 
+// localhost:3000/api/v1/users/:id
+router.get('/:id', async (req, res) => {
+  const user = await models.User.findByPk(req.params.id);
+  if (!user) {
+    return res.status(404).json({
+      error: 'could not find user with that id'
+    })
+  }
+
+  res.json(user)
+})
+
 router.get('/logout', (req, res) => {
   req.session.user = null;
   res.json({
@@ -172,24 +184,17 @@ router.post('/:id/rate', async (req, res) => {
 })
 
 // localhost:3000/api/v1/users/:id/rating
-router.get('/:id/rating', async (req, res) => {
-  const user = await models.User.findByPk(req.params.id)
-  if (!user) {
-    return res.status(404).json({
-      error: "could not find user with that id"
-    })
-  }
+// router.get('/:id/rating', async (req, res) => {
+//   const user = await models.User.findByPk(req.params.id)
+//   if (!user) {
+//     return res.status(404).json({
+//       error: "could not find user with that id"
+//     })
+//   }
 
-  const ratings = await user.getRatings()
-  let totalSum = 0;
-  let totalRatings = 0;
-  for (const rating of ratings) {
-    totalSum += rating.rating;
-    totalRatings++;
-  }
-  const averageRating = totalSum / totalRatings
+  
 
-  res.json(averageRating)
-})
+//   res.json(averageRating)
+// })
 
 module.exports = router;
