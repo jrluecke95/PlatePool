@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Button, TextField } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { setUser } from "../redux/actions";
 
 const LoginSection = () => {
+    const dispatch = useDispatch();
 
     const [form, setForm] = useState({
         email: '',
@@ -28,6 +31,7 @@ const LoginSection = () => {
                     alert(data.error)
                 } else {
                     alert('User logged in Successfully')
+                    dispatch(setUser(data))
                     history.push('/')
                 }
             });
