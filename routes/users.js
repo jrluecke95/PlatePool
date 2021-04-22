@@ -83,6 +83,22 @@ router.post('/login', async (req, res) => {
   })
 })
 
+// checking to see if user is logged in and sending back appropriate data to redux to store
+router.get('/current', (req, res) => {
+  const { user } = req.session;
+  if (user) {
+    res.json({
+      id: user.id,
+      name: user.name,
+      updatedAt: user.updatedAt,
+    })
+  } else {
+    res.status(401).json({
+      error: 'not logged in'
+    })
+  }
+})
+
 router.get('/logout', (req, res) => {
   req.session.user = null;
   res.json({
