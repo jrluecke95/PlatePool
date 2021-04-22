@@ -26,6 +26,9 @@ module.exports = {
       allergenInfo: {
         type: Sequelize.STRING
       },
+      isForSale: {
+        type: Sequelize.BOOLEAN
+      },
       UserId: {
         type: Sequelize.INTEGER,
         references: {
