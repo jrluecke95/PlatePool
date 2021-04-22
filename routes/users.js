@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const models = require('../models');
 const bcrypt = require('bcrypt');
+const { route } = require('./plates');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -83,12 +84,112 @@ router.post('/login', async (req, res) => {
   })
 })
 
+// checking to see if user is logged in and sending back appropriate data to redux to store
+router.get('/current', (req, res) => {
+  const { user } = req.session;
+  if (user) {
+    res.json({
+      id: user.id,
+      name: user.name,
+      updatedAt: user.updatedAt,
+    })
+  } else {
+    res.status(401).json({
+      error: 'not logged in'
+    })
+  }
+})
+
 router.get('/logout', (req, res) => {
   req.session.user = null;
   res.json({
     success: 'logged out'
   })
 })
+// localhost:3000/api/v1/users/follow
+// lets user follow another user
+router.post('/follow', async (req, res) => {
+  if (req.session.user.id === req.body.id) {
+    return res.status(400).json({
+      error: 'cannot follow yourself'
+    })
+  }
 
+  const user = await models.User.findByPk(req.session.user.id)
+  if (!req.body.id) {
+    return res.status(400).json({
+      error: 'please include user id'
+    })
+  }
+
+  const follow = await models.User.findByPk(req.body.id);
+  if (!follow) {
+    return res.status(404).json({
+      error: 'could not find user with that id'
+    })
+  }
+
+  user.addFollow(follow)
+  res.status(201).json(follow)
+})
+
+// localhost:3000/api/v1/users/:id/followers
+// allows someone to view a users followers based on id passed through param
+router.get('/:id/followers', async (req, res) => {
+  const user = await models.User.findByPk(req.params.id);
+  res.json(await user.getFollowers())
+})
+
+// localhost:3000/api/v1/users/:id/following
+router.get('/:id/following', async (req, res) => {
+  const user = await models.User.findByPk(req.params.id);
+  res.json(await user.getFollows())
+})
+
+// localhost:3000/api/v1/users/:id/rate
+// allows users to submit a rating for another user
+router.post('/:id/rate', async (req, res) => {
+  if (!req.body.rating) {
+    res.status(400).json({
+      error: 'please include rating'
+    })
+  }
+
+  const user = await models.User.findByPk(req.session.user.id);
+  const ratee = await models.User.findByPk(req.params.id);
+  if (!ratee) {
+    res.status(404).json({
+      error: 'could not find user'
+    })
+  }
+
+  const rating = await ratee.createRating({
+    rating: req.body.rating,
+    ReviewerId: req.session.user.id
+  })
+
+  res.status(201).json(rating)
+})
+
+// localhost:3000/api/v1/users/:id/rating
+router.get('/:id/rating', async (req, res) => {
+  const user = await models.User.findByPk(req.params.id)
+  if (!user) {
+    return res.status(404).json({
+      error: "could not find user with that id"
+    })
+  }
+
+  const ratings = await user.getRatings()
+  let totalSum = 0;
+  let totalRatings = 0;
+  for (const rating of ratings) {
+    totalSum += rating.rating;
+    totalRatings++;
+  }
+  const averageRating = totalSum / totalRatings
+
+  res.json(averageRating)
+})
 
 module.exports = router;

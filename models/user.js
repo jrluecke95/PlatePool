@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Plate)
       User.hasMany(models.Comment)
       User.hasMany(models.Rating)
+      // creates relationship between users through the ratings foreignkey of reviewerid
+      User.belongsToMany(models.User, {through: models.Rating, foreignKey: 'ReviewerId', as: 'Reviewers'})
+      //sets up realationship to see what followers a user has
+      User.belongsToMany(models.User, {through: 'UserFollowers', as: 'Followers', foreignKey: 'FollowId'})
+      // sets up relationship to see who a user follows
+      User.belongsToMany(models.User, {through: 'UserFollowers', as: 'Follows', foreignKey: 'FollowerId'})
     }
   };
   User.init({
