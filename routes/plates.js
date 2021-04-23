@@ -88,6 +88,9 @@ router.get('/:id/getcomments', async (req, res) => {
 // localhost:3000/api/v1/plates/getall
 router.get('/getall', async (req, res) => {
   const plates = await models.Plate.findAll({
+    where: {
+      isForSale: true
+    },
     include: [{
       model: models.User, 
       attributes: ['name', 'id']

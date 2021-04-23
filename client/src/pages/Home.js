@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import LeftContainer from '../components/LeftContainer/LeftContainer';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
