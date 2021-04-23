@@ -19,13 +19,19 @@ export const UserProfile = () => {
   const user = useSelector((state) => state.user);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={8}>
-        <Paper className={classes.paper}>{user.name}</Paper>
+    <>
+      {user ? (
+        <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>{user.name}</Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>Right</Paper>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.paper}>Right</Paper>
-      </Grid>
-    </Grid>
+      ) : (
+        'Loding'
+      )}
+    </>
   )
 }
