@@ -19,3 +19,8 @@
     text-align: left;
     color: black;
   }
+
+  .starRating {
+    display: flex;
+    justify-content: center;
+  }
