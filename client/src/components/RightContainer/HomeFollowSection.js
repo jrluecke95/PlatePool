@@ -70,7 +70,7 @@ const HomeFollowSection = () => {
             {
                 user ? (
                     <>
-                        <Typography variant="h4">
+                        <Typography style={{color: 'black'}} variant="h4">
                             People you Know
                 <List style={{ marginTop: '5%' }} className={classes.root} subheader={<li />}>
                                 {['Followers'].map((sectionId) => (
