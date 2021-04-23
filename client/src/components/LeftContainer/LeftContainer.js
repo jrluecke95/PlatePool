@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import './LeftContainer.css';
+import StarRating from '../StarRating';
 
 export default function LeftContainer() {
     const user = useSelector((state) => state.user);
@@ -20,7 +21,11 @@ export default function LeftContainer() {
                     <div className="left2">
                         <h2>{user.name}</h2>
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
-                        <p>Rating: </p>
+                        <div>Rating:
+                            <div className="starRating">
+                                <StarRating />
+                            </div>
+                        </div>
                     </div>
                     <br></br>
                     <br></br>
