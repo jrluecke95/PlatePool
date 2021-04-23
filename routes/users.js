@@ -101,7 +101,7 @@ router.get('/current', (req, res) => {
 })
 
 // localhost:3000/api/v1/users/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id/getuser', async (req, res) => {
   const user = await models.User.findByPk(req.params.id);
   if (!user) {
     return res.status(404).json({
@@ -112,12 +112,14 @@ router.get('/:id', async (req, res) => {
   res.json(user)
 })
 
+// localhost:3000/api/v1/users/logout
 router.get('/logout', (req, res) => {
   req.session.user = null;
   res.json({
     success: 'logged out'
   })
 })
+
 // localhost:3000/api/v1/users/follow
 // lets user follow another user
 router.post('/follow', async (req, res) => {

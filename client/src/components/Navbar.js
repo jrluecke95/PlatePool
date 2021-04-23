@@ -27,6 +27,7 @@ export default function Navbar() {
         fetch('/api/v1/users/logout')
             .then((res) => res.json())
             .then((data) => {
+                console.log('wprking')
                 if (data.success) {
                     alert(data.success);
                     dispatch(setUser(null));
@@ -68,9 +69,8 @@ export default function Navbar() {
                     </Typography>
                     {user ? (
                         <>
-                        {user.name}
-                            <Button component={NavLink} to="/profile">
-                            <i className="far fa-user"></i>
+                        
+                            <Button color="inherit" component={NavLink} to="/profile">{user.name}
                             </Button>
                             <Button color="inherit" onClick={logout}>
                                 Logout
