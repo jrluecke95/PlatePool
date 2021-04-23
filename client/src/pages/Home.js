@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core'
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import LeftContainer from '../components/LeftContainer/LeftContainer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-  },
+  }
 }));
 
 
@@ -23,7 +24,7 @@ export default function Home() {
       <h1>Home</h1>
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <Paper className={classes.paper}>Left</Paper>
+          <Paper className={classes.paper}><LeftContainer /></Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>Center</Paper>

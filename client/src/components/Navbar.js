@@ -70,7 +70,7 @@ export default function Navbar() {
                         <>
                         {user.name}
                             <Button component={NavLink} to="/profile">
-                            <i class="far fa-user"></i>
+                            <i className="far fa-user"></i>
                             </Button>
                             <Button color="inherit" onClick={logout}>
                                 Logout
