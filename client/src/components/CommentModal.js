@@ -36,7 +36,6 @@ export default function CommentModal() {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [ text, setText ] = React.useState('');
-  const { id } = useParams();
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,6 +51,7 @@ export default function CommentModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // TODO update this id with id being passed through props on click
     fetch(`/api/v1/plates/2/addcomment`, {
       method: 'POST',
       headers: {
@@ -83,9 +83,9 @@ export default function CommentModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         Add Comment
-      </button>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
