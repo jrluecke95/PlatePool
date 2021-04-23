@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import HomeFollowSection from '../components/HomeFollowSection';
 import LeftContainer from '../components/LeftContainer/LeftContainer';
+import Feed from '../components/MiddleContainer/Feed';
 
 
 
@@ -30,7 +31,7 @@ export default function Home() {
           <Paper className={classes.paper}><LeftContainer /></Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>Center</Paper>
+          <Paper className={classes.paper}><Feed /></Paper>
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}><HomeFollowSection /></Paper>
