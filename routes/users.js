@@ -167,7 +167,7 @@ router.post('/:id/rate', async (req, res) => {
     })
   }
 
-  const user = await models.User.findByPk(req.session.user.id);
+  // const user = await models.User.findByPk(req.session.user.id);
   const ratee = await models.User.findByPk(req.params.id);
   if (!ratee) {
     res.status(404).json({
@@ -175,26 +175,33 @@ router.post('/:id/rate', async (req, res) => {
     })
   }
 
-  const rating = await ratee.createRating({
-    rating: req.body.rating,
-    ReviewerId: req.session.user.id
+  const checkRating = await models.Rating.findOne({
+    where: {
+      ReviewerId: req.session.user.id,
+      UserId: req.params.id
+    }
   })
 
-  res.status(201).json(rating)
+  if (checkRating) {
+    await models.Rating.update({
+      rating: req.body.rating,
+      ReviewerId: req.session.user.id
+    }, {
+      where: {
+        ReviewerId: req.session.user.id,
+        UserId: req.params.id
+      }
+    })
+    res.status(204).json({
+      message: 'rating updated'
+    })
+  } else {
+    const newRating = await ratee.createRating({
+      rating: req.body.rating,
+      ReviewerId: req.session.user.id
+    })
+    res.status(201).json(newRating)
+  }
 })
-
-// localhost:3000/api/v1/users/:id/rating
-// router.get('/:id/rating', async (req, res) => {
-//   const user = await models.User.findByPk(req.params.id)
-//   if (!user) {
-//     return res.status(404).json({
-//       error: "could not find user with that id"
-//     })
-//   }
-
-  
-
-//   res.json(averageRating)
-// })
 
 module.exports = router;
