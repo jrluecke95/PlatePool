@@ -4,7 +4,7 @@ import { Avatar, Button } from "@material-ui/core";
 
 function PostBox() {
   const [postMessage, setPostMessage] = useState("");
-  const [postImage, setPostImage] = useState("");
+  // const [postImage, setPostImage] = useState("");
 
   const sendPost = (e) => {
     e.preventDefault();
@@ -19,8 +19,18 @@ function PostBox() {
     // });
 
     setPostMessage("");
-    setPostImage("");
+    // setPostImage("");
   };
+
+  
+    function handleClick(e) {
+      e.preventDefault();
+      console.log('The link was clicked.');
+    }
+
+
+
+
 
   return (
     <div className="postBox">
@@ -34,20 +44,23 @@ function PostBox() {
             type="text"
           />
         </div>
-        <input
+        {/* <input
           value={postImage}
           onChange={(e) => setPostImage(e.target.value)}
           className="postBox__imageInput"
           placeholder="Optional: Enter image URL"
           type="text"
-        />
+        /> */}
 
         <Button
-          onClick={sendPost}
+          onClick={handleClick}
+          // {sendPost}
           type="submit"
           className="postBox__postButton"
         >
           post
+
+          
         </Button>
       </form>
     </div>

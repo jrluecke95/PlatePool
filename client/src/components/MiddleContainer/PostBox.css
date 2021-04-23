@@ -1,17 +1,20 @@
 .postBox {
   padding-bottom: 10px;
-  border-bottom: 8px solid var(--twitter-background);
-  padding-right: 10px;
+  border-bottom: 8px solid var(--post-background);
 }
 
 .postBox > form {
+  border: 1px solid var(--post-background);
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .postBox__input {
   padding: 20px;
   display: flex;
+  border-bottom: black;
+  border-style: solid;
 }
 
 .postBox__input > input {
@@ -27,9 +30,9 @@
 }
 
 .postBox__postButton {
-  background-color: var(--twitter-color) !important;
-  border: none !important;
-  color: white !important;
+  background-color: --twitter-color;
+  border: 1px solid !important;
+  color: rgb(21, 4, 248) !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
   border-radius: 30px !important;

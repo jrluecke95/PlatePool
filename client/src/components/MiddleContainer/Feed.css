@@ -1,9 +1,10 @@
 .feed {
-  --twitter-background: rgba(3, 0, 200, 0.904);
+  --post-background: rgba(0, 0, 0, 0.904);
   flex: 0.4;
-  border-right: 1px solid var(--twitter-background);
+  border: 1px solid var(--post-background);
   min-width: fit-content;
   overflow-y: scroll;
+  padding: 10px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -18,7 +19,7 @@
   top: 0;
   background-color: white;
   z-index: 100;
-  border: 1px solid var(--twitter-background);
+  border: 1px solid var(--post-background);
   padding: 15px 20px;
 }
 

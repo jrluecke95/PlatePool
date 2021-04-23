@@ -19,7 +19,7 @@ function Feed() {
   return (
     <div className="feed">
       <div className="feed__header">
-        <h2>Home</h2>
+        <h2>Activity</h2>
       </div>
 
       <PostBox />
@@ -30,7 +30,7 @@ function Feed() {
             key={post.id}
             name={post.name}
             username={post.User.name}
-            dsecription={post.description}
+            description={post.description}
           />
         ))}
       </FlipMove>

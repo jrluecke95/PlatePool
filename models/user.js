@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "ReviewerId",
         as: "Reviewers",
       });
-      //sets up realationship to see what followers a user has
+      //sets up relationship to see what followers a user has
       User.belongsToMany(models.User, {
         through: "UserFollowers",
         as: "Followers",
