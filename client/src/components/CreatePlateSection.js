@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Input, InputLabel, MenuItem, Radio, RadioGroup, TextField } from '@material-ui/core';
+import { Button, FormControl, FormControlLabel, FormLabel, Input, InputLabel, MenuItem, Radio, RadioGroup, TextField } from '@material-ui/core';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -54,12 +54,6 @@ const CreatePlateSection = () => {
         })
     }
 
-    const handleCheckboxChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.checked
-        })
-    }
 
 
 

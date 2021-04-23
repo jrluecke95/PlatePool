@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core'
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import HomeFollowSection from '../components/HomeFollowSection';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ export default function Home() {
           <Paper className={classes.paper}>Center</Paper>
         </Grid>
         <Grid item xs={3}>
-          <Paper className={classes.paper}>Right</Paper>
+          <Paper className={classes.paper}><HomeFollowSection /></Paper>
         </Grid>
       </Grid>
     </div>
