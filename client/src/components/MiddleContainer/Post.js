@@ -7,17 +7,17 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 
 const Post = forwardRef(
-  ({ displayName, username, text, image, avatar }, ref) => {
+  ({ name, username, description }, ref) => {
     return (
-      <div className="post" ref={ref}>
+      <div className="post" key={ref}>
         <div className="post__avatar">
-          <Avatar src={avatar} />
+          <Avatar src='profpic' />
         </div>
         <div className="post__body">
           <div className="post__header">
             <div className="post__headerText">
               <h3>
-                {displayName}{" "}
+                {name}{" "}
                 <span className="post__headerSpecial">
                   @
                   {username}
@@ -25,10 +25,10 @@ const Post = forwardRef(
               </h3>
             </div>
             <div className="post__headerDescription">
-              <p>{text}</p>
+              <p>{description}</p>
             </div>
           </div>
-          <img src={image} alt="" />
+          <img src='food' alt="" />
           <div className="post__footer">
             <ChatBubbleOutlineIcon fontSize="small" />
             <RepeatIcon fontSize="small" />
