@@ -101,26 +101,26 @@ router.get('/getall', async (req, res) => {
 
 // gets plate based on id of plate
 // localhost:3000/api/v1/plates/:id/getplate
-router.get('/:id/getplate', async (req, res) => {
+router.get('/:id/plate', async (req, res) => {
   const plate = await models.Plate.findByPk(req.params.id)
-  res.status(201).json(plate)
+  res.status(200).json(plate)
 })
 
 // gets plates based on user being searched
 // could be used to view other user's recipes
 // localhost:3000/api/v1/plates/:id/getuserplates
-router.get('/:id/getusersplates', async (req, res) => {
+router.get('/:id/usersplates', async (req, res) => {
   const plates = await models.Plate.findAll({
     where: {
       UserId: req.params.id
     }
   })
-  res.status(201).json(plates)
+  res.status(200).json(plates)
 })
 
 // gets users own plates that they might want to edit
 // localhost:3000/api/v1/plates/ownplates
-router.get('/getownplates', checkAuth, async (req, res) => {
+router.get('/ownplates', checkAuth, async (req, res) => {
   const { user } = req.session;
   const plates = await models.Plate.findAll({
     where: {
