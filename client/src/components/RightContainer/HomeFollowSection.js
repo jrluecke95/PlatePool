@@ -27,13 +27,11 @@ const HomeFollowSection = () => {
     const user = useSelector((state) => state.user)
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
-    console.log(following)
 
     useEffect(() => {
         fetch(`/api/v1/users/${user.id}/followers`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setFollowers(data)
             })
     }, [])
@@ -42,7 +40,6 @@ const HomeFollowSection = () => {
         fetch(`/api/v1/users/${user.id}/following`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setFollowing(data)
             })
     }, [])
