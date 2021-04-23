@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomeFollowSection = () => {
-    const {id} = useSelector((state) => state.user);
+    // const {id} = useSelector((state) => state.user);
     const user = useSelector((state) => state.user)
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
     console.log(following)
 
     useEffect(() => {
-        fetch(`/api/v1/users/${id}/followers`)
+        fetch(`/api/v1/users/${user.id}/followers`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)
@@ -39,7 +39,7 @@ const HomeFollowSection = () => {
     }, [])
 
     useEffect(() => {
-        fetch(`/api/v1/users/${id}/following`)
+        fetch(`/api/v1/users/${user.id}/following`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)

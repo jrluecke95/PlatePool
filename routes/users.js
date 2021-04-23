@@ -79,6 +79,7 @@ router.post('/login', async (req, res) => {
   //respond with success
   return res.json({
     id: user.id,
+    name: user.name,
     email: user.email,
     updatedAt: user.updatedAt
   })
@@ -91,7 +92,8 @@ router.get('/current', (req, res) => {
     res.json({
       id: user.id,
       name: user.name,
-      updatedAt: user.updatedAt,
+      email: user.email,
+      updatedAt: user.updatedAt
     })
   } else {
     res.status(401).json({
