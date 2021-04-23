@@ -93,7 +93,7 @@ const HomeFollowSection = () => {
                                             <ListSubheader><h3 style={{ color: 'black' }}>{`${sectionId}`}</h3></ListSubheader>
                                             {following.map((followed) => (
                                                 <ListItem key={`item-${sectionId}-${followed}`}>
-                                                    <ListItemText primary={`${followed.name}`} />
+                                                    <a href={`/${followed.id}/getuser`}><ListItemText primary={`${followed.name}`} /></a>
                                                 </ListItem>
                                             ))}
                                         </ul>
