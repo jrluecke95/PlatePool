@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import "../components/MiddleContainer/Post.css";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from "@material-ui/core";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PublishIcon from "@material-ui/icons/Publish";
 import EditIcon from '@material-ui/icons/Edit';
@@ -19,12 +19,36 @@ const UserPost = forwardRef(
       isForSale
     })
 
+    const cuisines = [
+      {
+          name: 'Asian'
+      }, {
+          name: 'American'
+      }, {
+          name: 'Italian'
+      }, {
+          name: 'Mexican'
+      }, {
+          name: 'Breakfast'
+      }, {
+          name: 'French'
+      }, {
+          name: 'African'
+      }, {
+          name: 'BBQ'
+      }, {
+          name: 'Brazillian'
+      }, {
+          name: 'Jamaican'
+      }
+  ]
+
     const toggleEdit = () => {
       setEditing(!editing)
     }
 
     const saveForm = (id) => {
-      
+      console.log(form)
       fetch(`/api/v1/plates/${id}`, {
         method: 'PUT',
         headers: {
@@ -35,51 +59,83 @@ const UserPost = forwardRef(
       })
       .then((res) => res.json())
       .then(data => {
+        console.log(data)
         if (data.error) {
           alert(data.error)
         } else {
           alert('plate updated!');
-          
         }
       })
     }
 
+    const handleChange = (e) => {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value
+      })
+    }
+
     return (
-      <div className="post" key={ref}>
+      <form className="post" key={ref}>
         <div className="post__avatar">
           <Avatar src='profpic' />
+          {username}
         </div>
         <div className="post__body">
           {editing ? (
             <div className="post__header">
             <div className="post__headerText">
               <h3>
-              <input defaultValue={name} type='text'></input>
+              <TextField onChange={handleChange} defaultValue={form.price} name='price' defulatValue={form.price}type='text'></TextField>
+              <TextField onChange={handleChange} defaultValue={`${form.name}`} name='name' type='text'></TextField>
                 {" "}
-                <span className="post__headerSpecial">
-                  @
-                  {username}
-                </span>
                 <span><Button onClick={() => {saveForm(id)}}>Save</Button></span>
               </h3>
             </div>
             <div className="post__headerDescription">
-              <p>{description}</p>
+              <TextField onChange={handleChange} defaultValue={form.description} name='description' type="text"></TextField>
+              <TextField onChange={handleChange} value={form.cuisine} name="cuisine" style={{ marginTop: '20%' }} select id="standard-select-state" label="Cuisine">
+                {
+                  cuisines.map((cuisine) => (
+                    <MenuItem key={cuisine.name} value={cuisine.name} default>
+                        {cuisine.name}
+                    </MenuItem>
+                  ))
+                }
+              </TextField>
+              You have <TextField onChange={handleChange} defaultValue={form.quantity} name='quantity'></TextField> listed
+              <TextField type="text" name="allergenInfo" defaultValue={form.allergenInfo} onChange={handleChange}></TextField>
+              <FormControl style={{marginTop: '5%'}} component="fieldset">
+                    <FormLabel component="legend">Do you want this item listed?</FormLabel>
+                    <RadioGroup aria-label="forSale" name="isForSale" value={form.isForSale} onChange={handleChange}>
+                        {form.isForSale ? (
+                          <>
+                          <FormControlLabel value="true" control={<Radio />} label="yes" checked/>
+                          <FormControlLabel value="false" control={<Radio />} label="no" />
+                          </>
+                        ) : (
+                          <>
+                          <FormControlLabel value="true" control={<Radio />} label="yes" />
+                          <FormControlLabel value="false" control={<Radio />} label="no" checked/>
+                          </>
+                        )}
+                    </RadioGroup>
+                </FormControl>
             </div>
           </div>
           ) : (
             <div className="post__header">
             <div className="post__headerText">
               <h3>
-                {name}{" "}
-                <span className="post__headerSpecial">
-                  @
-                  {username}
-                </span>
+                ${form.price}{" "}
+                {form.name}{" "}
               </h3>
             </div>
             <div className="post__headerDescription">
-              <p>{description}</p>
+              <p>{form.description}</p>
+              <p>{form.cuisine}</p>
+              <p>{`You have ${form.quantity} listed`}</p>
+              <p>{form.allergenInfo}</p>
             </div>
           </div>
           )}
@@ -90,7 +146,7 @@ const UserPost = forwardRef(
             <Button onClick={toggleEdit}><EditIcon fontSize="small"/></Button>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 );
