@@ -4,11 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import HomeFollowSection from '../components/RightContainer/HomeFollowSection';
 import { Avatar } from "@material-ui/core";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import RepeatIcon from "@material-ui/icons/Repeat";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import PublishIcon from "@material-ui/icons/Publish";
-import Post from '../components/MiddleContainer/Post';
+import UserPost from '../components/UserPost';
 import StarRating from '../components/StarRating';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,11 +41,17 @@ export const UserProfile = () => {
             <h1>{user.name}</h1>
             <StarRating rating={user.rating}/>
             {plates.length > 0 && plates.map((plate) => (
-          <Post
-            key={plate.id}
+          <UserPost
+            id={plate.id}
             name={plate.name}
+            price={plate.price}
+            description={plate.description}
+            cuisine={plate.cuisine}
+            quantity={plate.quantity}
+            allergenInfo={plate.allergenInfo}
+            isForSale={plate.isForSale}
             username={user.name}
-            dsecription={plate.description}
+            
           />
         ))}
             </Paper>
