@@ -8,6 +8,8 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
+import Post from '../components/MiddleContainer/Post';
+import StarRating from '../components/StarRating';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,38 +43,15 @@ export const UserProfile = () => {
         <Grid item xs={8}>
           <Paper className={classes.paper}>
             <h1>{user.name}</h1>
-            {plates.length > 0 && plates.map(plate => {
-                  return (
-                    <div className="post" key={plate.id}>
-                      <div className="post__avatar">
-                        <Avatar />
-                      </div>
-                      <div className="post__body">
-                        <div className="post__header">
-                          <div className="post__headerText">
-                            <h3>
-                              {plate.name}{" "}
-                              <span className="post__headerSpecial">
-                                @
-                                {user.name}
-                              </span>
-                            </h3>
-                          </div>
-                          <div className="post__headerDescription">
-                            <p>{plate.description}</p>
-                          </div>
-                        </div>
-                        <img alt="pic of meal" />
-                        <div className="post__footer">
-                          <ChatBubbleOutlineIcon fontSize="small" />
-                          <RepeatIcon fontSize="small" />
-                          <FavoriteBorderIcon fontSize="small" />
-                          <PublishIcon fontSize="small" />
-                        </div>
-                      </div>
-                    </div>
-              )
-            })}
+            <StarRating rating={user.rating}/>
+            {plates.length > 0 && plates.map((plate) => (
+          <Post
+            key={plate.id}
+            name={plate.name}
+            username={user.name}
+            dsecription={plate.description}
+          />
+        ))}
             </Paper>
         </Grid>
         <Grid item xs={4}>

@@ -81,6 +81,7 @@ router.post('/login', async (req, res) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    rating: user.rating,
     updatedAt: user.updatedAt
   })
 })
@@ -93,6 +94,7 @@ router.get('/current', (req, res) => {
       id: user.id,
       name: user.name,
       email: user.email,
+      rating: user.rating,
       updatedAt: user.updatedAt
     })
   } else {
@@ -102,7 +104,7 @@ router.get('/current', (req, res) => {
   }
 })
 
-// localhost:3000/api/v1/users/:id
+// localhost:3000/api/v1/users/:id/getuser
 router.get('/:id/getuser', async (req, res) => {
   const user = await models.User.findByPk(req.params.id);
   if (!user) {
