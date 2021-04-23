@@ -27,25 +27,38 @@ const HomeFollowSection = () => {
     const user = useSelector((state) => state.user)
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
-    console.log(following)
 
     useEffect(() => {
+        user ? (
+            fetchFollowers()
+        ) : (
+            console.log('login')
+        )
+    }, [])
+
+    useEffect(() => {
+        user ? (
+            fetchFollowing()
+        ) : (
+            console.log('login')
+        )
+    }, [])
+
+    const fetchFollowers = () => {
         fetch(`/api/v1/users/${user.id}/followers`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setFollowers(data)
             })
-    }, [])
+    }
 
-    useEffect(() => {
+    const fetchFollowing = () => {
         fetch(`/api/v1/users/${user.id}/following`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setFollowing(data)
             })
-    }, [])
+    }
 
     
 
@@ -91,7 +104,10 @@ const HomeFollowSection = () => {
                     </>
                 ) : (
                     <>
-                        <Button component={NavLink} to='/login'>Login</Button>
+                        <p style={{color: 'black'}}>Login in to see connections</p>
+                        <Button color="inherit" component={NavLink} to="/login">
+                            Login
+                        </Button>
                     </>
                 )}
         </div>
