@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostBox from "./PostBox";
 import Post from "./Post";
 import "./Feed.css";
 import FlipMove from "react-flip-move";
 
 function Feed() {
-  const [posts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  // useEffect(() => {
-    
-  //   ;
-  // }, []);
+  useEffect(() => {
+    fetch('/api/v1/plates/getall')
+    .then(res => res.json())
+    .then(data => {
+      setPosts(data)
+    })
+    ;
+  }, []);
 
   return (
     <div className="feed">
@@ -23,12 +27,10 @@ function Feed() {
       <FlipMove>
         {posts.map((post) => (
           <Post
-            key={post.text}
-            displayName={post.displayName}
-            username={post.username}
-            text={post.text}
-            avatar={post.avatar}
-            image={post.image}
+            key={post.id}
+            name={post.name}
+            username={post.User.name}
+            dsecription={post.description}
           />
         ))}
       </FlipMove>
