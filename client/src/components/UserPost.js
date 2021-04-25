@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import "../components/MiddleContainer/Post.css";
-import { Avatar, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from "@material-ui/core";
+import { Avatar, Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, TextField } from "@material-ui/core";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PublishIcon from "@material-ui/icons/Publish";
 import EditIcon from '@material-ui/icons/Edit';
@@ -48,7 +48,6 @@ const UserPost = forwardRef(
     }
 
     const saveForm = (id) => {
-      console.log(form)
       fetch(`/api/v1/plates/${id}`, {
         method: 'PUT',
         headers: {
@@ -66,6 +65,7 @@ const UserPost = forwardRef(
           alert('plate updated!');
         }
       })
+      toggleEdit()
     }
 
     const handleChange = (e) => {
@@ -86,15 +86,14 @@ const UserPost = forwardRef(
             <div className="post__header">
             <div className="post__headerText">
               <h3>
-              <TextField onChange={handleChange} defaultValue={form.price} name='price' defulatValue={form.price}type='text'></TextField>
-              <TextField onChange={handleChange} defaultValue={`${form.name}`} name='name' type='text'></TextField>
+              <TextField onChange={handleChange} defaultValue={form.price} name='price' defulatValue={form.price}type='text' label='$ Price' style={{ marginRight: '5px' }}></TextField>
+              <TextField onChange={handleChange} defaultValue={`${form.name}`} name='name' type='text' label='Name' style={{ marginRight: '5px' }}></TextField >
                 {" "}
-                <span><Button onClick={() => {saveForm(id)}}>Save</Button></span>
               </h3>
             </div>
             <div className="post__headerDescription">
-              <TextField onChange={handleChange} defaultValue={form.description} name='description' type="text"></TextField>
-              <TextField onChange={handleChange} value={form.cuisine} name="cuisine" style={{ marginTop: '20%' }} select id="standard-select-state" label="Cuisine">
+              <TextField onChange={handleChange} defaultValue={form.description} name='description' type="text" label="Description" style={{ marginRight: '5px' }}></TextField>
+              <TextField onChange={handleChange} value={form.cuisine} name="cuisine" style={{ marginRight: '5px' }} select id="standard-select-state" label="Cuisine">
                 {
                   cuisines.map((cuisine) => (
                     <MenuItem key={cuisine.name} value={cuisine.name} default>
@@ -103,9 +102,9 @@ const UserPost = forwardRef(
                   ))
                 }
               </TextField>
-              You have <TextField onChange={handleChange} defaultValue={form.quantity} name='quantity'></TextField> listed
-              <TextField type="text" name="allergenInfo" defaultValue={form.allergenInfo} onChange={handleChange}></TextField>
-              <FormControl style={{marginTop: '5%'}} component="fieldset">
+              <TextField type="text" name="allergenInfo" defaultValue={form.allergenInfo} onChange={handleChange} label="Allergen Info" style={{ marginRight: '5px' }}></TextField>
+              <TextField onChange={handleChange} defaultValue={form.quantity} name='quantity' label="Quantity" style={{ marginRight: '5px' }}></TextField>
+              <FormControl style={{marginTop: '2%'}} component="fieldset">
                     <FormLabel component="legend">Do you want this item listed?</FormLabel>
                     <RadioGroup aria-label="forSale" name="isForSale" value={form.isForSale} onChange={handleChange}>
                         {form.isForSale ? (
@@ -121,6 +120,7 @@ const UserPost = forwardRef(
                         )}
                     </RadioGroup>
                 </FormControl>
+                
             </div>
           </div>
           ) : (
@@ -132,10 +132,9 @@ const UserPost = forwardRef(
               </h3>
             </div>
             <div className="post__headerDescription">
-              <p>{form.description}</p>
-              <p>{form.cuisine}</p>
+              <p>{form.description} </p>
+              <p>{form.cuisine} {form.allergenInfo}</p>
               <p>{`You have ${form.quantity} listed`}</p>
-              <p>{form.allergenInfo}</p>
             </div>
           </div>
           )}
@@ -143,7 +142,13 @@ const UserPost = forwardRef(
           <div className="post__footer">
             <ChatBubbleOutlineIcon fontSize="small" />
             <PublishIcon fontSize="small" />
-            <Button onClick={toggleEdit}><EditIcon fontSize="small"/></Button>
+            {editing ? (
+              <Button color='primary' onClick={() => {saveForm(id)}}>Save</Button>
+            ) : (
+              <Button onClick={toggleEdit}><EditIcon fontSize="small"/></Button>
+            )}
+            
+            
           </div>
         </div>
       </form>
