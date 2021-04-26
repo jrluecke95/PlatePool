@@ -80,29 +80,6 @@ const CreatePlateSection = () => {
         }
     ]
 
-    const quantities = [
-        {
-            number: 1
-        }, {
-            number: 2
-        }, {
-            number: 3
-        }, {
-            number: 4
-        }, {
-            number: 5
-        }, {
-            number: 6
-        }, {
-            number: 7
-        }, {
-            number: 8
-        }, {
-            number: 9
-        }, {
-            number: 10
-        }
-    ]
 
     return (
         <div>
@@ -116,7 +93,7 @@ const CreatePlateSection = () => {
                 </FormControl>
                 <FormControl>
                     <InputLabel>$ Price</InputLabel>
-                    <Input onChange={handleChange} name="price" value={form.price} />
+                    <Input onChange={handleChange} type="number" name="price" value={form.price} />
                     <TextField onChange={handleChange} value={form.cuisine} name="cuisine" style={{ marginTop: '20%' }} select id="standard-select-state" label="Cuisine">
                         {
                             cuisines.map((cuisine) => (
@@ -126,15 +103,7 @@ const CreatePlateSection = () => {
                             ))
                         }
                     </TextField>
-                    <TextField onChange={handleChange} name="quantity" value={form.quantity} style={{ marginTop: '18%' }} select id="standard-select-state" label="quantity">
-                        {
-                            quantities.map((quantity) => (
-                                <MenuItem key={quantity.number} value={quantity.number}>
-                                    {quantity.number}
-                                </MenuItem>
-                            ))
-                        }
-                    </TextField>
+                    <TextField onChange={handleChange} name="quantity" type="number" value={form.quantity} style={{ marginTop: '18%' }}  label="quantity" />
                 </FormControl>
                 <br />
                 <FormControl style={{marginTop: '5%'}} component="fieldset">

@@ -30,7 +30,7 @@ const FollowSection = () => {
     const [person, setPerson] = useState(null)
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
-    const {id} = useParams()
+    const { id } = useParams()
 
     useEffect(() => {
         fetch(`/api/v1/users/${id}/getuser`)
@@ -40,57 +40,57 @@ const FollowSection = () => {
                 console.log(data)
             })
 
-            fetch(`/api/v1/users/${id}/followers`)
+        fetch(`/api/v1/users/${id}/followers`)
             .then((res) => res.json())
             .then((data) => {
                 setFollowers(data)
             })
 
-            fetch(`/api/v1/users/${id}/following`)
+        fetch(`/api/v1/users/${id}/following`)
             .then((res) => res.json())
             .then((data) => {
                 setFollowing(data)
             })
     }, [])
 
-    
+
 
 
 
     const classes = useStyles();
     return (
         <div>
-            <Typography style={{color: 'black'}} variant="h4">
-                            People you Know
+            <Typography style={{ color: 'black' }} variant="h4">
+                People you Know
                 <List style={{ marginTop: '5%' }} className={classes.root} subheader={<li />}>
-                                {['Followers'].map((sectionId) => (
-                                    <li key={`section-${sectionId}`} className={classes.listSection} >
-                                        <ul className={classes.ul} >
-                                            <ListSubheader><h3 style={{ color: 'black' }}>{`${sectionId}`}</h3></ListSubheader>
-                                            {followers.map((follower) => (
-                                                <ListItem key={`item-${sectionId}-${follower}`}>
-                                                    <a href={`/${follower.id}/proSection`}><ListItemText primary={`${follower.name}`} /></a>
-                                                </ListItem>
-                                            ))}
-                                        </ul>
-                                    </li>
+                    {['Followers'].map((sectionId) => (
+                        <li key={`section-${sectionId}`} className={classes.listSection} >
+                            <ul className={classes.ul} >
+                                <ListSubheader><h3 style={{ color: 'black' }}>{`${sectionId}`}</h3></ListSubheader>
+                                {followers.map((follower) => (
+                                    <ListItem key={`item-${sectionId}-${follower}`}>
+                                        <a href={`/${follower.id}/proSection`}><ListItemText primary={`${follower.name}`} /></a>
+                                    </ListItem>
                                 ))}
-                            </List>
-                            <List style={{ marginTop: '5%' }} className={classes.root} subheader={<li />}>
-                                {['Following'].map((sectionId) => (
-                                    <li key={`section-${sectionId}`} className={classes.listSection} >
-                                        <ul className={classes.ul} >
-                                            <ListSubheader><h3 style={{ color: 'black' }}>{`${sectionId}`}</h3></ListSubheader>
-                                            {following.map((followed) => (
-                                                <ListItem key={`item-${sectionId}-${followed}`}>
-                                                    <a href={`/${followed.id}/proSection`}><ListItemText primary={`${followed.name}`} /></a>
-                                                </ListItem>
-                                            ))}
-                                        </ul>
-                                    </li>
+                            </ul>
+                        </li>
+                    ))}
+                </List>
+                <List style={{ marginTop: '5%' }} className={classes.root} subheader={<li />}>
+                    {['Following'].map((sectionId) => (
+                        <li key={`section-${sectionId}`} className={classes.listSection} >
+                            <ul className={classes.ul} >
+                                <ListSubheader><h3 style={{ color: 'black' }}>{`${sectionId}`}</h3></ListSubheader>
+                                {following.map((followed) => (
+                                    <ListItem key={`item-${sectionId}-${followed}`}>
+                                        <a href={`/${followed.id}/proSection`}><ListItemText primary={`${followed.name}`} /></a>
+                                    </ListItem>
                                 ))}
-                            </List>
-                        </Typography>
+                            </ul>
+                        </li>
+                    ))}
+                </List>
+            </Typography>
         </div>
     )
 }
