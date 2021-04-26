@@ -95,7 +95,11 @@ router.get('/current', (req, res) => {
       name: user.name,
       email: user.email,
       rating: user.rating,
-      updatedAt: user.updatedAt
+      updatedAt: user.updatedAt,
+      street: user.street,
+      city: user.city,
+      state: user.state,
+      zipcode: user.zipcode
     })
   } else {
     res.status(401).json({

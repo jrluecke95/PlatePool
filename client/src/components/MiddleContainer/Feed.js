@@ -30,6 +30,10 @@ function Feed() {
             key={post.id}
             name={post.name}
             username={post.User.name}
+            userStreet ={post.User.street}
+            userCity = {post.User.city}
+            userState = {post.User.state}
+            userZipcode = {post.User.zipcode}
             description={post.description}
           />
         ))}
