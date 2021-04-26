@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Button, MenuItem } from '@material-ui/core'
+import { TextField, Button, MenuItem, Input } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 
 
@@ -235,7 +235,8 @@ const RegisterSection = () => {
                 street: form.street,
                 city: form.city,
                 state: form.state,
-                zipcode: form.zipcode
+                zipcode: form.zipcode,
+                profilePic: form.profilePic
             }),
         })
             .then(res => res.json())

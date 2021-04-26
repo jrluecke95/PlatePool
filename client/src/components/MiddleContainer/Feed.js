@@ -31,6 +31,7 @@ function Feed() {
             name={post.name}
             username={post.User.name}
             description={post.description}
+            profilePic={post.User.profilePic}
           />
         ))}
       </FlipMove>

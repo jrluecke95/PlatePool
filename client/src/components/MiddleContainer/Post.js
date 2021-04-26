@@ -8,11 +8,11 @@ import PublishIcon from "@material-ui/icons/Publish";
 import EditIcon from '@material-ui/icons/Edit';
 
 const Post = forwardRef(
-  ({ name, username, description }, ref) => {
+  ({ name, username, description, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
         <div className="post__avatar">
-          <Avatar src='profpic' />
+          <Avatar src={profilePic} />
         </div>
         <div className="post__body">
           <div className="post__header">

@@ -16,7 +16,7 @@ const UserPost = forwardRef(
       cuisine,
       quantity,
       allergenInfo,
-      isForSale
+      isForSale: isForSale ? 'true' : 'false'
     })
 
     const cuisines = [
@@ -58,7 +58,6 @@ const UserPost = forwardRef(
       })
       .then((res) => res.json())
       .then(data => {
-        console.log(data)
         if (data.error) {
           alert(data.error)
         } else {
@@ -106,18 +105,9 @@ const UserPost = forwardRef(
               <TextField onChange={handleChange} defaultValue={form.quantity} name='quantity' label="Quantity" style={{ marginRight: '5px' }}></TextField>
               <FormControl style={{marginTop: '2%'}} component="fieldset">
                     <FormLabel component="legend">Do you want this item listed?</FormLabel>
-                    <RadioGroup aria-label="forSale" name="isForSale" value={form.isForSale} onChange={handleChange}>
-                        {form.isForSale ? (
-                          <>
-                          <FormControlLabel value="true" control={<Radio />} label="yes" checked/>
-                          <FormControlLabel value="false" control={<Radio />} label="no" />
-                          </>
-                        ) : (
-                          <>
-                          <FormControlLabel value="true" control={<Radio />} label="yes" />
-                          <FormControlLabel value="false" control={<Radio />} label="no" checked/>
-                          </>
-                        )}
+                    <RadioGroup value={form.isForSale} aria-label="forSale" name="isForSale" onChange={handleChange}>
+                      <FormControlLabel  value="true" control={<Radio name="isForSale"/>} label="yes" />
+                      <FormControlLabel  value="false" control={<Radio name="isForSale"/>} label="no"/>
                     </RadioGroup>
                 </FormControl>
                 
