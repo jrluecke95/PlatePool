@@ -82,6 +82,7 @@ router.post('/login', async (req, res) => {
     name: user.name,
     email: user.email,
     rating: user.rating,
+    profilePic: user.profilePic,
     updatedAt: user.updatedAt
   })
 })
@@ -95,6 +96,7 @@ router.get('/current', (req, res) => {
       name: user.name,
       email: user.email,
       rating: user.rating,
+      profilePic: user.profilePic,
       updatedAt: user.updatedAt
     })
   } else {
@@ -208,6 +210,17 @@ router.post('/:id/rate', async (req, res) => {
     })
     res.status(201).json(newRating)
   }
+})
+
+router.post('/setProfilePic', async (req, res) => {
+  const user = await models.User.update({
+    profilePic: req.body.profilePic
+  }, {
+    where: {
+      id: req.session.user.id
+    }
+  })
+  res.status(201).json(user)
 })
 
 module.exports = router;

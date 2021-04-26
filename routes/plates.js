@@ -93,7 +93,7 @@ router.get('/getall', async (req, res) => {
     },
     include: [{
       model: models.User, 
-      attributes: ['name', 'id']
+      attributes: ['name', 'id', 'profilePic']
     }]
   })
   res.status(201).json(plates)

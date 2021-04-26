@@ -9,6 +9,7 @@ import CreatePlate from "./pages/CreatePlate";
 import { UserProfile } from "./pages/UserProfile";
 import ProfileView from "./pages/ProfileView";
 import FollowSection from "./components/FollowSection";
+import { ImageTest } from "./components/ImageTest";
 
 
 
@@ -38,6 +39,9 @@ function App() {
               </Route>
               <Route path='/:id/proSection'>
                 <ProfileView />
+              </Route>
+              <Route path='/images'>
+                <ImageTest />
               </Route>
               {/* <Route path="/#">
                 <Page />
