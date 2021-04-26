@@ -7,6 +7,8 @@ import Register from './pages/Register'
 import Navbar from "./components/Navbar";
 import CreatePlate from "./pages/CreatePlate";
 import { UserProfile } from "./pages/UserProfile";
+import ProfileView from "./pages/ProfileView";
+import FollowSection from "./components/FollowSection";
 
 
 
@@ -33,6 +35,9 @@ function App() {
               </Route>
               <Route path='/profile'>
                 <UserProfile />
+              </Route>
+              <Route path='/:id/proSection'>
+                <ProfileView />
               </Route>
               {/* <Route path="/#">
                 <Page />
