@@ -47,7 +47,6 @@ const CreatePlateSection = () => {
     }
 
     const handleChange = (e) => {
-        console.log(e)
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -113,7 +112,7 @@ const CreatePlateSection = () => {
                     <InputLabel>Name</InputLabel>
                     <Input onChange={handleChange} name="name" value={form.name} />
                     <TextField onChange={handleChange} name="description" value={form.description} multiline row={4} style={{ marginTop: '10%' }} placeholder="Description" />
-                    <TextField onChange={handleChange} name="allergenInfo" value={form.allergenInfo} style={{ marginTop: '10%' }} placeholder="Alergies" />
+                    <TextField onChange={handleChange} name="allergenInfo" value={form.allergenInfo} style={{ marginTop: '10%' }} placeholder="Allergies" />
                 </FormControl>
                 <FormControl>
                     <InputLabel>$ Price</InputLabel>
