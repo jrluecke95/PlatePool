@@ -40,7 +40,8 @@ router.post('/register', async (req, res) => {
     street: req.body.street,
     zipcode: req.body.zipcode,
     city: req.body.city,
-    state: req.body.state
+    state: req.body.state,
+    profilePic: req.body.profilePic
   })
   // respond with success message
   return res.status(201).json(newUser)

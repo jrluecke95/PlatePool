@@ -43,12 +43,6 @@ function App() {
               <Route path='/images'>
                 <ImageTest />
               </Route>
-              {/* <Route path="/#">
-                <Page />
-              </Route>
-              <Route path="/#">
-                <Page />
-              </Route>             */}
             </Switch>
           </Container>
       </Router>
