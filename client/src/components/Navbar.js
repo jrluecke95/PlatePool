@@ -12,7 +12,7 @@ import Loading from './Loading'
 
 const useStyles = makeStyles({
     toolBar: {
-        backgroundColor: 'black'
+        backgroundColor: '#092F37'
     }
 });
 
@@ -27,7 +27,7 @@ export default function Navbar() {
         fetch('/api/v1/users/logout')
             .then((res) => res.json())
             .then((data) => {
-                console.log('wprking')
+                console.log('working')
                 if (data.success) {
                     alert(data.success);
                     dispatch(setUser(null));

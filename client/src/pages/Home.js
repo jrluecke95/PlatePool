@@ -25,7 +25,6 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <Paper className={classes.paper}><LeftContainer /></Paper>
