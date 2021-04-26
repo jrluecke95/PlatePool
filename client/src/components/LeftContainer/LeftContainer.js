@@ -1,14 +1,27 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import './LeftContainer.css';
 import StarRating from '../StarRating';
 
+
 export default function LeftContainer() {
     const user = useSelector((state) => state.user);
+    const [plates, setPlates] = useState([]);
+
+
+    useEffect(() => {
+        fetch('/api/v1/plates/:id/getuserplates')
+          .then((res) => res.json())
+          .then((data) => {
+            setPlates(data);
+          });
+      }, []);
+
     
+
     return (
         <div>
             {user ? (
@@ -19,7 +32,10 @@ export default function LeftContainer() {
                             <i className="fas fa-utensils"></i></Button>
                     </div>
                     <div className="left2">
-                        <h2>{user.name}</h2>
+                        <Button component={NavLink} to="/profile">
+                            <h2><strong>{user.name} </strong></h2>
+                        </Button>
+                        
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
                         <div>Rating:
                             <div className="starRating">
@@ -30,7 +46,7 @@ export default function LeftContainer() {
                     <br></br>
                     <br></br>
                     <div className="left3">
-                        <p>Plates created: </p>
+                        <p>Plates created: {plates.length > 0 ? plates.length : 'None'}</p>
                         <p>Plates purchased: </p>
                     </div>
                     <div>

@@ -12,7 +12,7 @@ import Loading from './Loading'
 
 const useStyles = makeStyles({
     toolBar: {
-        backgroundColor: 'black'
+        backgroundColor: '#092F37'
     }
 });
 

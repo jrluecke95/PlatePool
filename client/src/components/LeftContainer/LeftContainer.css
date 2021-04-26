@@ -1,26 +1,26 @@
 .createPlateBtn {
-    background-color: black !important;
-    color: white !important;
-    font-size: 20px !important;
-  }
-  
-  .left1 {
-    padding-bottom: 2vh;
-    border-bottom: black;
-    border-bottom-style: solid;
-    border-width: .5mm;
-  }
+  background-color: black !important;
+  color: white !important;
+  font-size: 20px !important;
+}
 
-  .left2 {
-      color: black;
-  }
-  
-  .left3 p{
-    text-align: left;
+.left1 {
+  padding-bottom: 2vh;
+  border-bottom: black;
+  border-bottom-style: solid;
+  border-width: .5mm;
+}
+
+.left2 {
     color: black;
-  }
+}
 
-  .starRating {
-    display: flex;
-    justify-content: center;
-  }
+.left3 p{
+  text-align: left;
+  color: black;
+}
+
+.starRating {
+  display: flex;
+  justify-content: center;
+}
