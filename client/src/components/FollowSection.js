@@ -1,7 +1,8 @@
-import { Button, List, ListItem, ListItemText, ListSubheader, makeStyles, Typography } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListSubheader, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { useParams } from 'react-router'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,43 +23,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const HomeFollowSection = () => {
-    // const {id} = useSelector((state) => state.user);
+
+const FollowSection = () => {
+
     const user = useSelector((state) => state.user)
+    const [person, setPerson] = useState(null)
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
+    const {id} = useParams()
 
     useEffect(() => {
-        user ? (
-            fetchFollowers()
-        ) : (
-            console.log('login')
-        )
-    }, [])
+        fetch(`/api/v1/users/${id}/getuser`)
+            .then(res => res.json())
+            .then(data => {
+                setPerson(data)
+                console.log(data)
+            })
 
-    useEffect(() => {
-        user ? (
-            fetchFollowing()
-        ) : (
-            console.log('login')
-        )
-    }, [])
-
-    const fetchFollowers = () => {
-        fetch(`/api/v1/users/${user.id}/followers`)
+            fetch(`/api/v1/users/${id}/followers`)
             .then((res) => res.json())
             .then((data) => {
                 setFollowers(data)
             })
-    }
 
-    const fetchFollowing = () => {
-        fetch(`/api/v1/users/${user.id}/following`)
+            fetch(`/api/v1/users/${id}/following`)
             .then((res) => res.json())
             .then((data) => {
                 setFollowing(data)
             })
-    }
+    }, [])
 
     
 
@@ -67,10 +60,7 @@ const HomeFollowSection = () => {
     const classes = useStyles();
     return (
         <div>
-            {
-                user ? (
-                    <>
-                        <Typography style={{color: 'black'}} variant="h4">
+            <Typography style={{color: 'black'}} variant="h4">
                             People you Know
                 <List style={{ marginTop: '5%' }} className={classes.root} subheader={<li />}>
                                 {['Followers'].map((sectionId) => (
@@ -101,17 +91,8 @@ const HomeFollowSection = () => {
                                 ))}
                             </List>
                         </Typography>
-                    </>
-                ) : (
-                    <>
-                        <p style={{color: 'black'}}>Login in to see connections</p>
-                        <Button color="inherit" component={NavLink} to="/login">
-                            Login
-                        </Button>
-                    </>
-                )}
         </div>
     )
 }
 
-export default HomeFollowSection
+export default FollowSection;
