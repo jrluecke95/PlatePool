@@ -46,14 +46,17 @@ module.exports = (sequelize, DataTypes) => {
       state: DataTypes.STRING,
       latitude: DataTypes.STRING,
       longitude: DataTypes.STRING,
+      profilePic: DataTypes.TEXT,
       rating: {
         type: DataTypes.VIRTUAL,
         get() {
           let totalSum = 0;
           let totalRatings = 0;
-          for (const rating of this.Ratings) {
-            totalSum += rating.rating;
-            totalRatings++;
+          if (this.Ratings > 0) {
+            for (const rating of this.Ratings) {
+              totalSum += rating.rating;
+              totalRatings++;
+            }
           }
           const averageRating = totalSum / totalRatings;
           return averageRating;
