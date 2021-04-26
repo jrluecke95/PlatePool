@@ -35,6 +35,7 @@ function Feed() {
             userState = {post.User.state}
             userZipcode = {post.User.zipcode}
             description={post.description}
+            profilePic={post.User.profilePic}
           />
         ))}
       </FlipMove>
