@@ -12,6 +12,7 @@ export default function LeftContainer() {
     const [plates, setPlates] = useState([]);
 
 
+
     useEffect(() => {
         fetch('/api/v1/plates/:id/getuserplates')
           .then((res) => res.json())
@@ -19,8 +20,6 @@ export default function LeftContainer() {
             setPlates(data);
           });
       }, []);
-
-    
 
     return (
         <div>
