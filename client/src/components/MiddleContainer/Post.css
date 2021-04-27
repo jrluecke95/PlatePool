@@ -3,6 +3,7 @@
   align-items: flex-start;
   padding-bottom: 10px;
   border: 1px solid var(--post-background);
+  background-color: rgb(148, 176, 182);
 }
 
 .post__body {
@@ -13,14 +14,26 @@
 
 .post__footer {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+
+  justify-content: flex-end;
+}
+
+.listingBtn {
+  color: white;
+}
+
+.post__header {
+  height: 100%;
 }
 
 .post__headerDescription {
   margin-bottom: 10px;
   font-size: 15px;
+  border-color: white;
+  border-width: 1mm;
+  border-style: solid;
 }
+
 
 .post__headerText > h3 {
   font-size: 15px;
@@ -34,10 +47,26 @@
 
 .post__headerSpecial {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 20px;
   color: gray;
 }
 
 .post__avatar {
   padding: 20px;
+}
+
+.plateName{
+  font-size: 35px;
+  margin-top: 0;
+  border-color: white;
+  border-bottom: solid;
+  border-width: 1mm;
+}
+
+.plateDescription{
+  font-size: 20px;
+}
+
+.directions {
+  font-size: 12px;
 }

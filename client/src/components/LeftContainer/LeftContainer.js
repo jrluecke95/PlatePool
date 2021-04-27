@@ -35,6 +35,7 @@ export default function LeftContainer() {
                         <Button component={NavLink} to="/profile">
                             <h2><strong>{user.name} </strong></h2>
                         </Button>
+                            <p></p>
                         
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
                         <div>Rating:

@@ -20,10 +20,10 @@ function Feed() {
     <div className="feed">
       
       <div className="feed__header">
-        <h2>Activity</h2>
+        <h2>What's Cookin'</h2>
       </div>
 
-      <PostBox />
+      {/* <PostBox /> */}
 
       <FlipMove>
         {posts.map((post) => (
