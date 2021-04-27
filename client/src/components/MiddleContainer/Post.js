@@ -50,6 +50,7 @@ const Post = forwardRef(
             type="submit">
             <div className="listingBtn">Go To Listing <i class="fas fa-arrow-circle-right"></i></div>
           </Button>
+
           </div>
           
         </div>
