@@ -50,7 +50,7 @@ function App() {
                 <Page />
               <Route path='/images'>
                 <ImageTest />
-              </Route>
+  </Route>*/}
             </Switch>
           </Container>
       </Router>
