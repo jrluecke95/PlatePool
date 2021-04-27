@@ -35,7 +35,6 @@ const Post = forwardRef(
             <ChatBubbleOutlineIcon fontSize="small" />
             <RepeatIcon fontSize="small" />
             <FavoriteBorderIcon fontSize="small" />
-            <PublishIcon fontSize="small" />
           </div>
         </div>
       </div>

@@ -14,19 +14,20 @@ export default function LeftContainer() {
 
     useEffect(() => {
         fetch('/api/v1/plates/:id/getuserplates')
-          .then((res) => res.json())
-          .then((data) => {
+            .then((res) => res.json())
+            .then((data) => {
             setPlates(data);
-          });
-      }, []);
+            });
+        }, []);
 
     
 
     return (
-        <div>
+        <div className='leftBox'>
             {user ? (
                 <>
                 {console.log(user)}
+                    
                     <div className="left1">
                         <Button component={NavLink} to="/CreatePlate" className="createPlateBtn"><strong>Create Plate </strong>
                             <i className="fas fa-utensils"></i></Button>
@@ -51,6 +52,7 @@ export default function LeftContainer() {
                     </div>
                     <div>
                     </div>
+                    
                 </>
             ) : (
                 <div>
