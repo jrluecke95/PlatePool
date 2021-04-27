@@ -6,13 +6,14 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import EditIcon from '@material-ui/icons/Edit';
+import Directions from "../Directions";
 
 const Post = forwardRef(
-  ({ name, username, description }, ref) => {
+  ({ name, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
         <div className="post__avatar">
-          <Avatar src='profpic' />
+          <Avatar src={profilePic} />
         </div>
         <div className="post__body">
           <div className="post__header">
@@ -23,7 +24,7 @@ const Post = forwardRef(
                   @
                   {username}
                 </span>
-                <p></p>
+                <p><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode}/></p>
               </h3>
             </div>
             <div className="post__headerDescription">

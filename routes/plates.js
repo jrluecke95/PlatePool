@@ -93,7 +93,7 @@ router.get('/getall', async (req, res) => {
     },
     include: [{
       model: models.User, 
-      attributes: ['name', 'id']
+      attributes: ['name', 'id', 'city', 'state', 'zipcode', 'street', 'profilePic']
     }]
   })
   res.status(201).json(plates)
@@ -125,7 +125,8 @@ router.get('/ownplates', checkAuth, async (req, res) => {
   const plates = await models.Plate.findAll({
     where: {
       UserId: user.id
-    }
+    },
+    order: [['id', 'DESC'], ['createdAt', 'DESC'] ]
   })
   res.json(plates)
 })
@@ -141,6 +142,9 @@ router.delete('/:id/deleteplate', checkAuth, async (req, res) => {
   res.status(204).json('plate deleted')
 })
 
+
+
+
 router.put('/:id', checkAuth, async (req, res) => {
   const recipe = await models.Plate.update({
     name: req.body.name,
@@ -148,7 +152,8 @@ router.put('/:id', checkAuth, async (req, res) => {
     description: req.body.description,
     cuisine: req.body.cuisine,
     quantity: req.body.quantity,
-    allergenInfo: req.body.allergenInfo
+    allergenInfo: req.body.allergenInfo,
+    isForSale: req.body.isForSale
   }, {
     where: {
       id: req.params.id
