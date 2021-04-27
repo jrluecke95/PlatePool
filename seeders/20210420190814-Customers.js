@@ -40,6 +40,19 @@ module.exports = {
       longitude: "-95.423050",
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      name: 'Kendall oliver',
+      email: "kndllransom93@gmail.com",
+      password: '$2b$10$eIhcwHttfgXHq/r03sKYWORgVrgv12g92.2yOgOvrXjRtxb9cx/SK', //password
+      street: "25554 Pitchfork Ranch Pl",
+      zipcode: "77493",
+      city: "Katy",
+      state: "TX",
+      latitude: "null",
+      longitude: "null",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }],
   )},
 

@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '110%',
+        width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
         position: 'relative',
@@ -70,6 +70,7 @@ const HomeFollowSection = () => {
             {
                 user ? (
                     <>
+                        <div className='right-container'>
                         <Typography style={{color: 'black'}} variant="h4">
                             People you Know
                 <List style={{ marginTop: '5%' }} className={classes.root} subheader={<li />}>
@@ -101,6 +102,7 @@ const HomeFollowSection = () => {
                                 ))}
                             </List>
                         </Typography>
+                        </div>
                     </>
                 ) : (
                     <>
