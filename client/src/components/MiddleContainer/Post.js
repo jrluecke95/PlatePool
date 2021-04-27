@@ -1,43 +1,57 @@
 import React, { forwardRef } from "react";
 import "./Post.css";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
+import { NavLink } from 'react-router-dom';
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
-import EditIcon from '@material-ui/icons/Edit';
+// import EditIcon from '@material-ui/icons/Edit';
+// import { Grid } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// import TextField from '@material-ui/core/TextField';
 import Directions from "../Directions";
+
 
 const Post = forwardRef(
   ({ name, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
+
     return (
       <div className="post" key={ref}>
         <div className="post__avatar">
           <Avatar src={profilePic} />
         </div>
-        <div className="post__body">
+        <div className="post__body" style={{color: 'white', backgroundColor: '#092F37'}}>
           <div className="post__header">
             <div className="post__headerText">
               <h3>
-                {name}{" "}
+                <p className="plateName">{name}</p>{" "}
                 <span className="post__headerSpecial">
                   @
                   {username}
                 </span>
-                <p><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode}/></p>
+                <p className="directions"><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode} /></p>
               </h3>
             </div>
             <div className="post__headerDescription">
-              <p>{description}</p>
+              <p className="plateDescription">{description}</p>
             </div>
           </div>
           <img src='food' alt="" />
           <div className="post__footer">
-            <ChatBubbleOutlineIcon fontSize="small" />
+            {/* <Button type="submit" href="#text-buttons" color="primary">
+              <ChatBubbleOutlineIcon fontSize="small" />
+            </Button>
             <RepeatIcon fontSize="small" />
             <FavoriteBorderIcon fontSize="small" />
-            <PublishIcon fontSize="small" />
+            <PublishIcon fontSize="small" /> */}
+            <Button 
+            component={NavLink} to="/:id/plate"
+            type="submit">
+            <div className="listingBtn">Go To Listing <i class="fas fa-arrow-circle-right"></i></div>
+          </Button>
           </div>
+          
         </div>
       </div>
     );
