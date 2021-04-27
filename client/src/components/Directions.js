@@ -9,13 +9,14 @@ export default function Directions({postStreet, postCity, postState, postZipcode
     const user = useSelector((state) => state.user);
     const [time, setTime] = useState(null);
 
-    let userAddress = `${user.street}${user.city}${user.state}${user.zipcode}`
-    let postAddress = `${postStreet}${postCity}${postState}${postZipcode}`
+    let userAddress;
+    let postAddress;
     
-  
- 
-
-
+    if(user) {
+        userAddress = `${user.street}${user.city}${user.state}${user.zipcode}`
+        postAddress = `${postStreet}${postCity}${postState}${postZipcode}`
+    }
+    
     useEffect(() => {
         fetch(`https://www.mapquestapi.com/directions/v2/route?key=${REACT_APP_KEY}&from=${userAddress}&to=${postAddress}&outFormat=json&ambiguities=ignore&routeType=fastest&doReverseGeocode=false&enhancedNarrative=false&avoidTimedConditions=false`)
           .then((res) => res.json())
@@ -24,6 +25,13 @@ export default function Directions({postStreet, postCity, postState, postZipcode
             console.log(time)
           });
       }, []);
+    
+    
+  
+ 
+
+
+    
       
 
     return (
