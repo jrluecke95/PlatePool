@@ -5,8 +5,20 @@
 @media only screen and (max-width: 900px) {
   body {
   }
+  .navbar {
+    display: none;
+  }
+
   
   
+
+}
+
+@media only screen and (min-width: 901px) {
   
+  .sidebar{
+    display: none;
+  }
+
 
 }

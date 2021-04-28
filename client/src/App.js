@@ -15,6 +15,7 @@ import SearchPost from "./pages/SearchPost";
 import EditProfile from './pages/EditProfile'
 
 
+
 function App() {
 
   return (
@@ -53,7 +54,7 @@ function App() {
                 <Page />
               <Route path='/images'>
                 <ImageTest />
-  </Route>*/}
+              </Route>*/}
             </Switch>
           </Container>
       </Router>
