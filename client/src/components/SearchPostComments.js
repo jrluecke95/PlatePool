@@ -1,5 +1,6 @@
 import { Grid, List, ListItem, ListItemText, ListSubheader, makeStyles, Paper, Typography } from '@material-ui/core';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +30,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchPostComments = () => {
+    const [userPlate, setUserPlate] = useState([])
+    const {id} = useParams()
+
+    useEffect(() => {
+        fetch(`/api/v1/plates/${id}/usersplates`)
+            .then(res => res.json())
+            .then(data => {
+                setUserPlate(data)
+                console.log(data, "word")
+            })
+    }, [])
+
+
     const classes = useStyles();
     return (
         <Grid style={{display: 'flex', flexDirection: 'column'}} item md={5} xs={12}>
@@ -52,9 +66,9 @@ const SearchPostComments = () => {
                     Other Dishes by User
                 <List style={{ marginTop: '5%' }} className={classes.root2} subheader={<li />}>
                         <ul className={classes.ul} >
-                            {['comment', 'comment', 'comment', 'comment', '5', '6', '7', '8', '9'].map((item) => (
-                                <ListItem key={`item--${item}`}>
-                                    <a href={`/`}><ListItemText primary={`${item}`} /></a>
+                            {userPlate.map((plate) => (
+                                <ListItem key={`item--${plate}`}>
+                                    <a style={{textDecoration: 'none'}} href={`/`}><ListItemText primary={`${plate.name}`} /></a>
                                 </ListItem>
                             ))}
                         </ul>

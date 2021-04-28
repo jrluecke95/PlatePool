@@ -14,8 +14,7 @@ import Directions from "../Directions";
 
 
 const Post = forwardRef(
-  ({ name, username, userId, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
-
+  ({id, name, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
         <div className="post__avatar">
@@ -51,7 +50,7 @@ const Post = forwardRef(
             <FavoriteBorderIcon fontSize="small" />
             <PublishIcon fontSize="small" /> */}
             <Button 
-            component={NavLink} to="/:id/plate"
+            component={NavLink} to={`/${id}/plate`}
             type="submit">
             <div className="listingBtn">Go To Listing <i class="fas fa-arrow-circle-right"></i></div>
           </Button>
