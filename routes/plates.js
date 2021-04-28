@@ -100,7 +100,7 @@ router.get('/getall', async (req, res) => {
 })
 
 // gets plate based on id of plate
-// localhost:3000/api/v1/plates/:id/getplate
+// localhost:3000/api/v1/plates/:id/plate
 router.get('/:id/plate', async (req, res) => {
   const plate = await models.Plate.findByPk(req.params.id)
   res.status(200).json(plate)
