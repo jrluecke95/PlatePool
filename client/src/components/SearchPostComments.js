@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const SearchPostComments = () => {
     const classes = useStyles();
     return (
-        <Grid item md={5} xs={12}>
+        <Grid style={{display: 'flex', flexDirection: 'column'}} item md={5} xs={12}>
             <Paper className={classes.paper}>
                 <Typography style={{ color: 'black' }} variant="h4">
                     Comments
