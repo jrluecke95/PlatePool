@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../redux/actions';
 import { useHistory } from "react-router";
 import Loading from '../Loading'
-
+import Button from '@material-ui/core/Button';
 
 
 
 export default function Home() {
+
   
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -62,30 +63,37 @@ useEffect(() => {
             
               {user ? (
               <>
-                
-                <a className="menu-item" href="/">
+                <div className="menu-btn">
+                <Button variant="contained" size="large" className="menu-item" href="/">
                   Home
-                </a>
+                </Button>
                     <br />
-                <a className="menu-item" href="/profile">
-                  UserProfile
-                </a>
+                <Button variant="contained" size="large" className="menu-item" href="/profile">
+                  My Profile
+                </Button>
                     <br />
-                <a className="menu-item" href="/CreatePlate">
-                  CreatePlate
-                </a>
+                <Button variant="contained" size="large" className="menu-item" href="/CreatePlate">
+                  Create Plate
+                </Button>
 
+                </div>
                 <br />
-                <a onClick={logout}>
+                <Button variant="contained" size="large" color='secondary' onClick={logout}>
                   Logout
-                </a>
-
+                </Button>
               </>
             ) : (
               <>
-            <a className="menu-item" >
-            </a>
-            </>
+                <div className='logout-menu'>
+                  <Button variant="contained" color="primary" href="/login">
+                    Login
+                  </Button>
+                    <br />
+                  <Button variant="contained" color="primary" href="/register">
+                    Register
+                  </Button>
+                </div>
+              </>
             
             )}
             </Menu>
