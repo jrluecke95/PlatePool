@@ -1,6 +1,7 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Modal, Paper, TextField } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 
 
 
@@ -29,6 +30,24 @@ const PostSection = () => {
     const [openComment, setOpenComment] = useState(false)
     const [openRating, setOpenRating] = useState(false)
     const [rating, setRating] = useState(0)
+    const [plate, setPlate] = useState({
+        name: '',
+        price: 0,
+        description: '',
+        cuisine: '',
+        quantity: 0,
+        allergenInfo: '',
+    })
+
+    const {id} = useParams()
+
+    useEffect(() => {
+        fetch(`/api/v1/plates/${id}/plate`)
+            .then(res => res.json())
+            .then(data => {
+                setPlate(data)
+            })
+    }, [])
 
     const handleOpen = () => {
         setOpen(true)
@@ -60,13 +79,13 @@ const PostSection = () => {
             <Grid item xs={12}>
                 <h2 style={{display: 'flex', justifyContent: 'center'}}>Order</h2>
             </Grid>
-            <Grid style={{textAlign: 'center'}} md={6} xs={12}>
+            <Grid style={{textAlign: 'center'}} item md={6} xs={12}>
                 <h3>Estimated Time:</h3>
                 <p>10 minutes</p>
             </Grid>
-            <Grid style={{textAlign: 'center'}} md={6} xs={12}>
+            <Grid style={{textAlign: 'center'}} item md={6} xs={12}>
                 <h3>Quantity</h3>
-                <p>23</p>
+                <p>{plate.quantity}</p>
             </Grid>
             <Grid item xs={12}>
                 <FormControl style={{marginTop: '3%', display: 'flex', justifyContent: 'center'}}>
@@ -113,35 +132,22 @@ const PostSection = () => {
     return (
             <Grid item md={7} xs={12}>
                 <Paper className={classes.paper}>
-                    <h1>Food Section</h1>
+                    <h1>{plate.name}</h1>
                     <img style={{ width: '70%' }} src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="food" />
                     <h4>Description</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Suspendisse id augue maximus, gravida
-                    ligula pretium, pellentesque leo. Curabitur dignissim
-                    sem purus. In hac habitasse platea dictumst. Ut massa
-                    massa, sodales nec diam rhoncus, volutpat pretium libero.
-                    Sed hendrerit nec lectus non rhoncus. Duis ac dolor sapien.
-                    Vestibulum vitae tempus ligula. Quisque semper egestas
-                    augue, vitae mollis augue commodo in. Ut iaculis, augue
-                    in tempor aliquet, justo augue mattis nibh, a malesuada
-                    velit dolor vel felis. Quisque sodales condimentum ipsum,
-                    vitae consectetur ante scelerisque vel. Nulla mattis
-                    maximus nulla, a rhoncus nunc ultrices at. Proin elementum
-                    vel ex quis fringilla. Donec sodales tempus augue et
-                        posuere. Pellentesque id turpis elit.</p>
+                    <p>{plate.description}</p>
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
                             <h4>Allergies</h4>
-                            <p>Nuts, Eggs, Soy</p>
+                            <p>{plate.allergenInfo}</p>
                         </Grid>
                         <Grid item xs={4}>
                             <h4>Quantity</h4>
-                            <p>10</p>
+                            <p>{plate.quantity}</p>
                         </Grid>
                         <Grid item xs={4}>
                             <h4>Cuisine</h4>
-                            <p>Latin</p>
+                            <p>{plate.cuisine}</p>
                         </Grid>
                     </Grid>
                     <Grid style={{marginTop: '4%', marginBottom: '2%'}} container spacing={2}>

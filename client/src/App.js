@@ -44,7 +44,7 @@ function App() {
               <Route path='/:id/proSection'>
                 <ProfileView />
               </Route>
-              <Route path='/post'>
+              <Route path='/:id/plate'>
                 <SearchPost />
               </Route>
               {/* <Route path="/#">
