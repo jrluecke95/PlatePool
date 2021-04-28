@@ -90,9 +90,18 @@ h1 {
 .sidebarHeader {
   background-color: #092F37;
   position: sticky;
-  padding: 20px;
+  padding: 10px;
 }
 
-.menu-item {
-  font-size: medium;
+.menu-btn {
+display: flex;
+justify-content: space-around;
+flex-direction: column;
+}
+
+.logout-menu {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+
 }
