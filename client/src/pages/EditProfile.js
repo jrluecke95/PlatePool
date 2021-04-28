@@ -1,6 +1,5 @@
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/actions';
 
@@ -14,7 +13,6 @@ const EditProfile = () => {
     state: '',
     zipcode: ''
   })
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const states = [
@@ -249,8 +247,7 @@ const EditProfile = () => {
                 alert(data.error)
             } else {
                 alert('please log back in to see the changes you made!')
-                dispatch(setUser(null))
-                history.push('/login')
+                dispatch(setUser(data))
             }
         });
 };

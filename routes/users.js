@@ -251,43 +251,28 @@ router.put('/editprofile', upload.single('profilePic'), async (req, res) => {
     const s3File = await s3Upload(req.file, 'profilePics')
     req.body.profilePic = s3File
   }
-
-  if (req.body.password !== 'undefined') {
+  const user = await models.User.findByPk(req.session.user.id)
+  //if (!user)
+  if (req.body.password) {
+    console.log(req.body)
     hash = await bcrypt.hash(req.body.password, 10)
-    const user = await models.User.update({
-      name: req.body.name,
-      email: req.body.email,
-      password: hash,
-      street: req.body.street,
-      city: req.body.city,
-      state: req.body.state,
-      zipcode: req.body.zipcode,
-      profilePic: req.body.profilePic
-    }, {
-      where: {
-        id: req.session.user.id
-      }
-    })
+    req.body.password = hash
   } else {
-    const user = await models.User.update({
+    req.body.password = user.password
+  }
+    user.update({
       name: req.body.name,
       email: req.body.email,
+      password: req.body.password,
       street: req.body.street,
       city: req.body.city,
       state: req.body.state,
       zipcode: req.body.zipcode,
       profilePic: req.body.profilePic
-    }, {
-      where: {
-        id: req.session.user.id
-      }
     })
-  }
   
-  req.session.user = null;
-  res.json({
-    success: 'logged out'
-  })
+  req.session.user = user;
+  res.json(user)
 })
 
 module.exports = router;
