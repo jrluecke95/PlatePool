@@ -1,39 +1,30 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { Button, TextField } from '@material-ui/core';
+import { Button, FormControl, Grid, TextField } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const useStyles = makeStyles((theme) => ({
+  root: {
+      flexGrow: 1,
+  },
   paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+  },
+  paper2: {
+      position: 'absolute',
+      width: 600,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
   },
 }));
 
 export default function CommentModal() {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [ text, setText ] = React.useState('');
   const {id} = useParams();
@@ -52,7 +43,6 @@ export default function CommentModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO update this id with id being passed through props on click
     fetch(`/api/v1/plates/${id}/addcomment`, {
       method: 'POST',
       headers: {
@@ -73,28 +63,35 @@ export default function CommentModal() {
     })
   }
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <form onSubmit={handleSubmit}>
-        <TextField multiline rows={4} name="text" value={text} onChange={handleChange}></TextField>
-        <Button type="submit" variant="contained">Submit</Button>
-      </form>
-    </div>
-  );
+  const commentModalBody = (
+    <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
+        <Grid item xs={12}>
+            <h2 style={{display: 'flex', justifyContent: 'center'}}>Rate and Comment</h2>
+        </Grid>
+        <Grid item xs={12}>
+          <form onSubmit={handleSubmit}>
+          <FormControl style={{display: 'flex', justifyContent: 'center'}}>
+                <TextField style={{marginTop: '3%'}} name="comment" multiline row={4} placeholder="Comment" onChange={handleChange}/>
+                <Button type="submit" style={{marginTop: '5%'}} variant="contained" color="primary">Leave Comment</Button>
+            </FormControl>
+          </form>
+            
+        </Grid>
+    </Grid>
+)
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+    <>
+      <Button variant="contained" color="primary" onClick={handleOpen} type="button">
         Add Comment
       </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        style={{display: 'flex', justifyContent: 'center'}}
       >
-        {body}
+        {commentModalBody}
       </Modal>
-    </div>
+    </>
   );
 }

@@ -2,7 +2,11 @@ import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Mod
 import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
+
+import CommentModal from './CommentModal';
+
 import RatingModal from './RatingModal';
+
 
 
 
@@ -28,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 const PostSection = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
-    const [openComment, setOpenComment] = useState(false)
     const [openRating, setOpenRating] = useState(false)
     // const [rating, setRating] = useState(0)
     const [plate, setPlate] = useState({
@@ -47,6 +50,7 @@ const PostSection = () => {
         fetch(`/api/v1/plates/${id}/plate`)
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setPlate(data)
                 console.log(data)
             })
@@ -58,14 +62,6 @@ const PostSection = () => {
 
     const handleClose = () => {
         setOpen(false)
-    }
-
-    const handleOpenComment = () => {
-        setOpenComment(true)
-    }
-
-    const handleCloseComment = () => {
-        setOpenComment(false)
     }
 
 
@@ -94,36 +90,8 @@ const PostSection = () => {
         </Grid>
     )
 
-    const commentModalBody = (
-        <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
-            <Grid item xs={12}>
-                <h2 style={{display: 'flex', justifyContent: 'center'}}>Rate and Comment</h2>
-            </Grid>
-            <Grid item xs={12}>
-                <FormControl style={{display: 'flex', justifyContent: 'center'}}>
-                    <TextField style={{marginTop: '3%'}} name="comment" multiline row={4} placeholder="Comment" />
-                    <Button type="submit" style={{marginTop: '5%'}} variant="contained" color="primary">Leave Comment</Button>
-                </FormControl>
-            </Grid>
-        </Grid>
-    )
 
-    // const ratingModalBody = (
-    //     <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
-    //         <Grid item xs={12}>
-    //             <h2 style={{display: 'flex', justifyContent: 'center'}}>Rating</h2>
-    //             <Grid item xs={12}>
-    //                 <FormControl style={{display: 'flex', justifyContent: 'center'}}>
-    //                     <FormLabel style={{marginLeft:'46%', marginTop: '2%'}}>Rating</FormLabel>
-    //                     <Rating style={{marginLeft: '39%', marginTop: '2%'}} name="simple-controlled" value={rating} onChange={(event, newValue) => {
-    //                         setRating(newValue)
-    //                     }} />
-    //                     <Button type="submit" style={{ marginTop: '5%'}} variant="contained" color="primary">Leave Comment</Button>
-    //                 </FormControl>
-    //             </Grid>
-    //         </Grid>
-    //     </Grid>
-    // )
+   
 
 
     return (
@@ -155,10 +123,7 @@ const PostSection = () => {
                             </Modal>
                         </Grid>
                         <Grid item xs={4}>
-                            <Button type="button" onClick={handleOpenComment} variant="contained" color="primary">Comment</Button>
-                            <Modal style={{display: 'flex', justifyContent: 'center'}} open={openComment} onClose={handleCloseComment} >
-                                {commentModalBody}
-                            </Modal>
+                            <CommentModal />
                         </Grid>
                         <RatingModal UserId={plate.UserId}/>
                     </Grid>
