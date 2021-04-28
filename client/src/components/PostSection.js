@@ -2,6 +2,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Mod
 import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
+import RatingModal from './RatingModal';
 
 
 
@@ -29,7 +30,7 @@ const PostSection = () => {
     const [open, setOpen] = useState(false)
     const [openComment, setOpenComment] = useState(false)
     const [openRating, setOpenRating] = useState(false)
-    const [rating, setRating] = useState(0)
+    // const [rating, setRating] = useState(0)
     const [plate, setPlate] = useState({
         name: '',
         price: 0,
@@ -37,6 +38,7 @@ const PostSection = () => {
         cuisine: '',
         quantity: 0,
         allergenInfo: '',
+        UserId: 0
     })
 
     const {id} = useParams()
@@ -46,6 +48,7 @@ const PostSection = () => {
             .then(res => res.json())
             .then(data => {
                 setPlate(data)
+                console.log(data)
             })
     }, [])
 
@@ -65,13 +68,7 @@ const PostSection = () => {
         setOpenComment(false)
     }
 
-    const handleOpenRating = () => {
-        setOpenRating(true)
-    }
 
-    const handleCloseRating = () => {
-        setOpenRating(false)
-    }
 
 
     const orderModalBody = (
@@ -111,28 +108,28 @@ const PostSection = () => {
         </Grid>
     )
 
-    const ratingModalBody = (
-        <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
-            <Grid item xs={12}>
-                <h2 style={{display: 'flex', justifyContent: 'center'}}>Rating</h2>
-                <Grid item xs={12}>
-                    <FormControl style={{display: 'flex', justifyContent: 'center'}}>
-                        <FormLabel style={{marginLeft:'46%', marginTop: '2%'}}>Rating</FormLabel>
-                        <Rating style={{marginLeft: '39%', marginTop: '2%'}} name="simple-controlled" value={rating} onChange={(event, newValue) => {
-                            setRating(newValue)
-                        }} />
-                        <Button type="submit" style={{ marginTop: '5%'}} variant="contained" color="primary">Leave Comment</Button>
-                    </FormControl>
-                </Grid>
-            </Grid>
-        </Grid>
-    )
+    // const ratingModalBody = (
+    //     <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
+    //         <Grid item xs={12}>
+    //             <h2 style={{display: 'flex', justifyContent: 'center'}}>Rating</h2>
+    //             <Grid item xs={12}>
+    //                 <FormControl style={{display: 'flex', justifyContent: 'center'}}>
+    //                     <FormLabel style={{marginLeft:'46%', marginTop: '2%'}}>Rating</FormLabel>
+    //                     <Rating style={{marginLeft: '39%', marginTop: '2%'}} name="simple-controlled" value={rating} onChange={(event, newValue) => {
+    //                         setRating(newValue)
+    //                     }} />
+    //                     <Button type="submit" style={{ marginTop: '5%'}} variant="contained" color="primary">Leave Comment</Button>
+    //                 </FormControl>
+    //             </Grid>
+    //         </Grid>
+    //     </Grid>
+    // )
 
 
     return (
             <Grid item md={7} xs={12}>
                 <Paper className={classes.paper}>
-                    <h1>{plate.name}</h1>
+                    <h1 style={{color: 'darkgray'}}>{plate.name}</h1>
                     <img style={{ width: '70%' }} src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="food" />
                     <h4>Description</h4>
                     <p>{plate.description}</p>
@@ -163,12 +160,7 @@ const PostSection = () => {
                                 {commentModalBody}
                             </Modal>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Button type="button" onClick={handleOpenRating} variant="contained" color="primary">Leave Rating</Button>
-                            <Modal style={{display: 'flex', justifyContent: 'center'}} open={openRating} onClose={handleCloseRating} >
-                                {ratingModalBody}
-                            </Modal>
-                        </Grid>
+                        <RatingModal UserId={plate.UserId}/>
                     </Grid>
                 </Paper>
             </Grid>
