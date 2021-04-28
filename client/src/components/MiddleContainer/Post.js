@@ -2,10 +2,6 @@ import React, { forwardRef } from "react";
 import "./Post.css";
 import { Avatar, Button } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import RepeatIcon from "@material-ui/icons/Repeat";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import PublishIcon from "@material-ui/icons/Publish";
 // import EditIcon from '@material-ui/icons/Edit';
 // import { Grid } from '@material-ui/core';
 // import { makeStyles } from '@material-ui/core/styles';
@@ -27,7 +23,7 @@ const Post = forwardRef(
               <p className="plateName">{name}</p>{" "}
                 <Button
                 component={NavLink}
-                to={`/${userId}/proSection`}
+                to={`/${id}/proSection`}
                 type="submit">
                   <span className="post__headerSpecial">
                   @
