@@ -24,7 +24,7 @@ const Post = forwardRef(
                   @
                   {username}
                 </span>
-                <p><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode}/></p>
+                {/* <p><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode}/></p> */}
               </h3>
             </div>
             <div className="post__headerDescription">

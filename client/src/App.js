@@ -11,8 +11,7 @@ import ProfileView from "./pages/ProfileView";
 import FollowSection from "./components/FollowSection";
 import Post from "./components/MiddleContainer/Post";
 import SearchPost from "./pages/SearchPost";
-import { ImageTest } from "./components/ImageTest";
-
+import EditProfile from './pages/EditProfile'
 
 
 
@@ -45,6 +44,9 @@ function App() {
               </Route>
               <Route path='/post'>
                 <SearchPost />
+              </Route>
+              <Route path='/editprofile'>
+                <EditProfile />
               </Route>
               {/* <Route path="/#">
                 <Page />
