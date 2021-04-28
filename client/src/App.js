@@ -8,9 +8,7 @@ import Navbar from "./components/Navbar";
 import CreatePlate from "./pages/CreatePlate";
 import { UserProfile } from "./pages/UserProfile";
 import ProfileView from "./pages/ProfileView";
-import FollowSection from "./components/FollowSection";
 import Sidebar from './components/Sidebar/MobileSidebar'
-import Post from "./components/MiddleContainer/Post";
 import SearchPost from "./pages/SearchPost";
 import EditProfile from './pages/EditProfile'
 
