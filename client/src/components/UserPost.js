@@ -5,6 +5,7 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PublishIcon from "@material-ui/icons/Publish";
 import EditIcon from '@material-ui/icons/Edit';
 
+//TODO update so that it references back end and not state
 
 const UserPost = forwardRef(
   ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale }, ref) => {

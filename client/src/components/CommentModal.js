@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, TextField } from '@material-ui/core';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -36,6 +36,7 @@ export default function CommentModal() {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [ text, setText ] = React.useState('');
+  const {id} = useParams();
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,7 +53,7 @@ export default function CommentModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO update this id with id being passed through props on click
-    fetch(`/api/v1/plates/2/addcomment`, {
+    fetch(`/api/v1/plates/${id}/addcomment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
