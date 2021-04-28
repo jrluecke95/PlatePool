@@ -10,7 +10,7 @@ import Directions from "../Directions";
 
 
 const Post = forwardRef(
-  ({id, name, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
+  ({id, name, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
         <div className="post__avatar">
@@ -23,7 +23,7 @@ const Post = forwardRef(
               <p className="plateName">{name}</p>{" "}
                 <Button
                 component={NavLink}
-                to={`/${id}/proSection`}
+                to={`/${userId}/proSection`}
                 type="submit">
                   <span className="post__headerSpecial">
                   @

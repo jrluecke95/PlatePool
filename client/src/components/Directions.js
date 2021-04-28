@@ -36,7 +36,7 @@ export default function Directions({postStreet, postCity, postState, postZipcode
     return (
         <div>
             {time && time.route.formattedTime && (
-                <TimeLogic postState={postState} time={time.route.formattedTime}/>
+                <TimeLogic userAddress={userAddress} postAddress={postAddress} postState={postState} time={time.route.formattedTime}/>
             )}
         </div>
     )
