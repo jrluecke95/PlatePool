@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@material-ui/core'
+import { Button, Grid, Paper } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import HomeFollowSection from '../components/RightContainer/HomeFollowSection';
 import { Avatar } from "@material-ui/core";
 import UserPost from '../components/UserPost';
 import StarRating from '../components/StarRating';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,8 +39,9 @@ export const UserProfile = () => {
         <Grid container spacing={2}>
         <Grid item xs={8}>
           <Paper className={classes.paper}>
-            <h1>{user.name}</h1>
+            <h1>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
             <StarRating rating={user.rating}/>
+            
             {plates.length > 0 && plates.map((plate) => (
           <UserPost
             id={plate.id}

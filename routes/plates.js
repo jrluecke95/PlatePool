@@ -142,9 +142,6 @@ router.delete('/:id/deleteplate', checkAuth, async (req, res) => {
   res.status(204).json('plate deleted')
 })
 
-
-
-
 router.put('/:id', checkAuth, async (req, res) => {
   const recipe = await models.Plate.update({
     name: req.body.name,

@@ -30,6 +30,7 @@ const Post = forwardRef(
                   @
                   {username}
                 </span>
+
                 <p className="directions"><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode} /></p>
               </h3>
             </div>
