@@ -29,13 +29,14 @@ export default function LeftContainer() {
                     
                     <div className="left1">
                         <Button component={NavLink} to="/CreatePlate" className="createPlateBtn"><strong>Create Plate </strong>
-                            <i className="fas fa-utensils"></i></Button>
+                            <i className="fas fa-utensils"></i>
+                        </Button>
                     </div>
                     <div className="left2">
                         <Button component={NavLink} to="/profile">
                             <h2><strong>{user.name} </strong></h2>
                         </Button>
-                            <p></p>
+                            {/* <p><strong>{`${user.city}, ${user.state}`}</strong></p> */}
                         
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
                         <div>Rating:

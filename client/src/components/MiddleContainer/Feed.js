@@ -18,10 +18,10 @@ function Feed() {
 
   return (
     <div className="feed">
-      
-      <div className="feed__header">
+      <h2>What's Cookin'</h2>
+      {/* <div className="feed__header">
         <h2>What's Cookin'</h2>
-      </div>
+      </div> */}
 
       {/* <PostBox /> */}
 
@@ -31,6 +31,7 @@ function Feed() {
             key={post.id}
             name={post.name}
             username={post.User.name}
+            userId={post.User.id}
             userStreet ={post.User.street}
             userCity = {post.User.city}
             userState = {post.User.state}
