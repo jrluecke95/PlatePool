@@ -223,21 +223,18 @@ const RegisterSection = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const data = new FormData()
+        data.append('name', form.name)
+        data.append('email', form.email)
+        data.append('password', form.password)
+        data.append('street', form.street)
+        data.append('city', form.city)
+        data.append('state', form.state)
+        data.append('zipcode', form.zipcode)
+        data.append('profilePic', form.profilePic)
         fetch('/api/v1/users/register', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: form.name,
-                email: form.email,
-                password: form.password,
-                street: form.street,
-                city: form.city,
-                state: form.state,
-                zipcode: form.zipcode,
-                profilePic: form.profilePic
-            }),
+            body: data,
         })
             .then(res => res.json())
             .then(data => {
@@ -254,6 +251,14 @@ const RegisterSection = () => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
+        })
+    }
+
+    function handleFileChange(e) {
+        var file = e.target.files[0];
+        setForm({
+            ...form,
+            [e.target.name]: file
         })
     }
 
@@ -281,6 +286,7 @@ const RegisterSection = () => {
                 }
                 </TextField>
                 <TextField name="zipcode" onChange={handleChange} value={form.zipcode} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="Zipcode" />
+                <input type="file" name="profilePic"  onChange={handleFileChange}></input>
                 <br />
                 <Button type="submit" style={{ marginTop: '2%' }} variant="contained" color="primary">Register</Button>
             </form>

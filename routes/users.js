@@ -3,6 +3,19 @@ var router = express.Router();
 const models = require('../models');
 const bcrypt = require('bcrypt');
 const { route } = require('./plates');
+const multer = require('multer');
+const path = require('path');
+const s3Upload = require('../utils/s3upload');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+const upload = multer({storage});
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,7 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 // localhost:3000/api/v1/users/register
-router.post('/register', async (req, res) => {
+router.post('/register', upload.single('profilePic'), async (req, res) => {
   // check for username and password
   if (!req.body.email || !req.body.password) {
     return res.status(400).json({
@@ -28,6 +41,10 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({
       error: 'user already exists'
     })
+  }
+  if (req.file) {
+    const s3File = await s3Upload(req.file, 'profilePics')
+    req.body.profilePic = s3File
   }
 
   // hash password
@@ -83,6 +100,10 @@ router.post('/login', async (req, res) => {
     name: user.name,
     email: user.email,
     rating: user.rating,
+    street: user.street,
+    city: user.city,
+    state: user.state,
+    zipcode: user.zipcode,
     profilePic: user.profilePic,
     updatedAt: user.updatedAt
   })
@@ -226,6 +247,36 @@ router.post('/setProfilePic', async (req, res) => {
     }
   })
   res.status(201).json(user)
+})
+
+// localhost:3000/api/v1/users/editprofile
+router.put('/editprofile', upload.single('profilePic'), async (req, res) => {
+  if (req.file) {
+    const s3File = await s3Upload(req.file, 'profilePics')
+    req.body.profilePic = s3File
+  }
+  const user = await models.User.findByPk(req.session.user.id)
+  //if (!user)
+  if (req.body.password) {
+    console.log(req.body)
+    hash = await bcrypt.hash(req.body.password, 10)
+    req.body.password = hash
+  } else {
+    req.body.password = user.password
+  }
+    user.update({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      street: req.body.street,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zipcode,
+      profilePic: req.body.profilePic
+    })
+  
+  req.session.user = user;
+  res.json(user)
 })
 
 module.exports = router;

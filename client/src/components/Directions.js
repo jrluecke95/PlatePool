@@ -22,7 +22,6 @@ export default function Directions({postStreet, postCity, postState, postZipcode
           .then((res) => res.json())
           .then((data) => {
             setTime(data);
-            console.log(time)
           });
       }, []);
     

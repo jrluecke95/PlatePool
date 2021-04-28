@@ -62,22 +62,27 @@ export default function Navbar() {
                 }} variant="dense">
                     <IconButton edge="start" color="inherit" aria-label="menu">
                     </IconButton>
-                    <Typography variant="h6" >
-                        <Button color="inherit" component={NavLink} to="/">
-                            PlatePool
-                        </Button>
-                    </Typography>
+                    
                     {user ? (
                         <>
-                        
-                            <Button color="inherit" component={NavLink} to="/profile">{user.name}
+                        <Typography variant="h6" >
+                            <Button color="inherit" component={NavLink} to="/">
+                                PlatePool
                             </Button>
-                            <Button color="inherit" onClick={logout}>
-                                Logout
-                            </Button>
+                        </Typography>
+                        <Button color="inherit" component={NavLink} to="/profile">{user.name}
+                        </Button>
+                        <Button color="inherit" onClick={logout}>
+                            Logout
+                        </Button>
                         </>
                         ) : (
                         <>
+                        <Typography variant="h6" >
+                            <Button color="inherit">
+                                PlatePool
+                            </Button>
+                        </Typography>
                             <Button color="inherit" component={NavLink} to="/login">
                                 Login
                             </Button>

@@ -7,6 +7,8 @@ const rootReducer = combineReducers({
   user: userReducer
 })
 
+//persisted storage is messing with log out functionality 
+
 const persistConfig = { // configuration object for redux-persist
   key: 'root',
   storage, // define which storage to use
