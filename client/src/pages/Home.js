@@ -9,6 +9,7 @@ import Feed from '../components/MiddleContainer/Feed';
 
 
 
+export default function Home() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,12 +44,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Home() {
   const classes = useStyles();
 
   return (
     <div>
-    {/* <Sidebar /> */}
       
       <Grid container spacing={2}>
         <Grid item xs={3}>

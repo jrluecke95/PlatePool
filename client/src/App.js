@@ -16,6 +16,7 @@ import { ImageTest } from "./components/ImageTest";
 
 
 
+
 function App() {
 
   return (
@@ -51,7 +52,7 @@ function App() {
                 <Page />
               <Route path='/images'>
                 <ImageTest />
-  </Route>*/}
+              </Route>*/}
             </Switch>
           </Container>
       </Router>

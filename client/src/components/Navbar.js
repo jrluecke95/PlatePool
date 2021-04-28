@@ -8,7 +8,8 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/actions';
-import Loading from './Loading'
+import Loading from './Loading';
+import './navbar.css'
 
 const useStyles = makeStyles({
     toolBar: {
@@ -49,7 +50,7 @@ export default function Navbar() {
     }, [])
 
     return (
-        <div>
+        <div className='navbar'>
             {userStatus === 'LOADING' && (
                 <Loading animation="border" role="status">
                     <span className="sr-only">Loading...</span>
