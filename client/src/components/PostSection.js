@@ -2,6 +2,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Mod
 import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
+import CommentModal from './CommentModal';
 
 
 
@@ -27,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 const PostSection = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
-    const [openComment, setOpenComment] = useState(false)
     const [openRating, setOpenRating] = useState(false)
     const [rating, setRating] = useState(0)
     const [plate, setPlate] = useState({
@@ -45,6 +45,7 @@ const PostSection = () => {
         fetch(`/api/v1/plates/${id}/plate`)
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setPlate(data)
             })
     }, [])
@@ -55,14 +56,6 @@ const PostSection = () => {
 
     const handleClose = () => {
         setOpen(false)
-    }
-
-    const handleOpenComment = () => {
-        setOpenComment(true)
-    }
-
-    const handleCloseComment = () => {
-        setOpenComment(false)
     }
 
     const handleOpenRating = () => {
@@ -92,20 +85,6 @@ const PostSection = () => {
                     <h3 style={{display: 'flex', justifyContent: 'center'}}>How many plates?</h3>
                     <TextField style={{marginTop: '-3%'}} type="number"  name="quantity" label="quantity" />
                     <Button type="submit" style={{ marginTop: '5%'}} variant="contained" color="primary">Order</Button>
-                </FormControl>
-            </Grid>
-        </Grid>
-    )
-
-    const commentModalBody = (
-        <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
-            <Grid item xs={12}>
-                <h2 style={{display: 'flex', justifyContent: 'center'}}>Rate and Comment</h2>
-            </Grid>
-            <Grid item xs={12}>
-                <FormControl style={{display: 'flex', justifyContent: 'center'}}>
-                    <TextField style={{marginTop: '3%'}} name="comment" multiline row={4} placeholder="Comment" />
-                    <Button type="submit" style={{marginTop: '5%'}} variant="contained" color="primary">Leave Comment</Button>
                 </FormControl>
             </Grid>
         </Grid>
@@ -158,10 +137,7 @@ const PostSection = () => {
                             </Modal>
                         </Grid>
                         <Grid item xs={4}>
-                            <Button type="button" onClick={handleOpenComment} variant="contained" color="primary">Comment</Button>
-                            <Modal style={{display: 'flex', justifyContent: 'center'}} open={openComment} onClose={handleCloseComment} >
-                                {commentModalBody}
-                            </Modal>
+                            <CommentModal />
                         </Grid>
                         <Grid item xs={4}>
                             <Button type="button" onClick={handleOpenRating} variant="contained" color="primary">Leave Rating</Button>
