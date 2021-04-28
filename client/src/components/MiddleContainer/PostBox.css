@@ -1,4 +1,5 @@
 .postBox {
+  /* display: flex; */
   padding-bottom: 10px;
   border-bottom: 8px solid var(--post-background);
 }
