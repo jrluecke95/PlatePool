@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 //TODO update so that it references back end and not state
 
 const UserPost = forwardRef(
-  ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale }, ref) => {
+  ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale, profilePic, foodPic }, ref) => {
     const [ editing, setEditing ] = useState(false);
     const [form, setForm ] = useState({
       name,
@@ -49,13 +49,18 @@ const UserPost = forwardRef(
     }
 
     const saveForm = (id) => {
+      const data = new FormData()
+      data.append('name', form.name)
+      data.append('price', form.price)
+      data.append('description', form.description)
+      data.append('cuisine', form.cuisine)
+      data.append('allergies', form.allergies)
+      data.append('quantity', form.quantity)
+      data.append('isForSale', form.isForSale)
+      data.append('foodPic', form.foodPic)
       fetch(`/api/v1/plates/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "*"
-        },
-        body: JSON.stringify(form),
+        body: data,
       })
       .then((res) => res.json())
       .then(data => {
@@ -75,10 +80,18 @@ const UserPost = forwardRef(
       })
     }
 
+    function handleFileChange(e) {
+      const file = e.target.files[0];
+      setForm({
+          ...form,
+          [e.target.name]: file
+      })
+  }
+
     return (
       <form className="post" key={ref}>
         <div className="post__avatar">
-          <Avatar src='profpic' />
+          <Avatar src={profilePic} />
           {username}
         </div>
         <div className="post__body">
@@ -111,6 +124,8 @@ const UserPost = forwardRef(
                       <FormControlLabel  value="false" control={<Radio name="isForSale"/>} label="no"/>
                     </RadioGroup>
                 </FormControl>
+                <Avatar src={foodPic}/>
+                <input type="file" name="foodPic" onChange={handleFileChange}></input>
                 
             </div>
           </div>
@@ -126,6 +141,7 @@ const UserPost = forwardRef(
               <p>{form.description} </p>
               <p>{form.cuisine} {form.allergenInfo}</p>
               <p>{`You have ${form.quantity} listed`}</p>
+              <Avatar src={foodPic}/>
             </div>
           </div>
           )}

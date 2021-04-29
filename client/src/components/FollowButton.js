@@ -3,19 +3,15 @@ import React from 'react'
 
 const FollowButton = (props) => {
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     fetch('/api/v1/users/follow', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: props.userId
+        id: props.id
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      
     })
   }
 

@@ -213,7 +213,7 @@ const RegisterSection = () => {
         name: '',
         email: '',
         password: '',
-        address: '',
+        street: '',
         city: '',
         state: '',
         zipcode: ''
@@ -255,7 +255,7 @@ const RegisterSection = () => {
     }
 
     function handleFileChange(e) {
-        var file = e.target.files[0];
+        const file = e.target.files[0];
         setForm({
             ...form,
             [e.target.name]: file

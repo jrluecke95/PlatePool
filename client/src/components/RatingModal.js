@@ -4,30 +4,10 @@ import Modal from "@material-ui/core/Modal";
 import {
   Button,
   FormControl,
-  FormControlLabel,
   FormLabel,
-  Grid,
-  Radio,
-  RadioGroup
+  Grid
 } from "@material-ui/core";
-import { useParams } from "react-router";
-import { useSelector } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,13 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RatingModal(props) {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  // const [score, setScore] = React.useState("");
   const [score, setScore] = useState(0)
-  const { id } = useParams();
-  const user = useSelector((state) => state.user);
 
   const handleOpen = () => {
     setOpen(true);
@@ -66,13 +41,8 @@ export default function RatingModal(props) {
     setOpen(false);
   };
 
-  // const handleChange = (e) => {
-  //   setScore(e.target.value);
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO update this id with id being passed through props on click
     fetch(`/api/v1/users/${props.UserId}/rate`, {
       method: "POST",
       headers: {

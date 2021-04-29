@@ -29,6 +29,9 @@ module.exports = {
       isForSale: {
         type: Sequelize.BOOLEAN
       },
+      foodPic: {
+        type: Sequelize.STRING
+      },
       UserId: {
         type: Sequelize.INTEGER,
         references: {

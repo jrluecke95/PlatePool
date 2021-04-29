@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
 const PostSection = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
-    const [openRating, setOpenRating] = useState(false)
-    // const [rating, setRating] = useState(0)
     const [plate, setPlate] = useState({
         name: '',
         price: 0,
@@ -41,6 +39,7 @@ const PostSection = () => {
         cuisine: '',
         quantity: 0,
         allergenInfo: '',
+        foodPic: '',
         UserId: 0
     })
 
@@ -50,9 +49,7 @@ const PostSection = () => {
         fetch(`/api/v1/plates/${id}/plate`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setPlate(data)
-                console.log(data)
             })
     }, [])
 
@@ -63,9 +60,6 @@ const PostSection = () => {
     const handleClose = () => {
         setOpen(false)
     }
-
-
-
 
     const orderModalBody = (
         <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
@@ -98,7 +92,7 @@ const PostSection = () => {
             <Grid item md={7} xs={12}>
                 <Paper className={classes.paper}>
                     <h1 style={{color: 'darkgray'}}>{plate.name}</h1>
-                    <img style={{ width: '70%' }} src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="food" />
+                    <img style={{ width: '70%' }} src={plate.foodPic} alt="food" />
                     <h4>Description</h4>
                     <p>{plate.description}</p>
                     <Grid container spacing={2}>
