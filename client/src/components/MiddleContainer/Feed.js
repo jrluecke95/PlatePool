@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PostBox from "./PostBox";
 import Post from "./Post";
 import "./Feed.css";
 import FlipMove from "react-flip-move";

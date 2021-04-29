@@ -237,6 +237,33 @@ router.post('/:id/rate', async (req, res) => {
   }
 })
 
+// localhost:3000/api/v1/users/:id/userrating
+router.get('/:id/userrating', async (req, res) => {
+  const user = await models.User.findByPk(req.params.id)
+  if (!user) {
+    return res.status(404).json({
+      error: "could not find user with that id"
+    })
+  }
+
+  const ratings = await models.Rating.findAll({
+    where: {
+      UserId: req.params.id
+    }
+  })
+  console.log(ratings)
+  let totalSum = 0;
+  let totalRatings = 0;
+  for (const rating of ratings) {
+    totalSum += rating.rating;
+    totalRatings++;
+  }
+  const averageRating = totalSum / totalRatings
+
+  res.json(averageRating)
+
+})
+
 router.post('/setProfilePic', async (req, res) => {
   const user = await models.User.update({
     profilePic: req.body.profilePic
