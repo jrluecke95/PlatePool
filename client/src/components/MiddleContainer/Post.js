@@ -13,6 +13,7 @@ const Post = forwardRef(
   ({id, name, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
+        {console.log(description)}
         <div className="post__avatar">
           <Avatar src={profilePic} />
         </div>
@@ -37,7 +38,6 @@ const Post = forwardRef(
               <p className="plateDescription"><strong>{description}</strong></p>
             </div>
           </div>
-          <img src='food' alt="" />
           <div className="post__footer">
             <Button 
             component={NavLink} to={`/${id}/plate`}

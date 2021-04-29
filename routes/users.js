@@ -251,7 +251,7 @@ router.get('/:id/userrating', async (req, res) => {
       UserId: req.params.id
     }
   })
-  console.log(ratings)
+  
   let totalSum = 0;
   let totalRatings = 0;
   for (const rating of ratings) {

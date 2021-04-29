@@ -40,7 +40,6 @@ const ProfileViewSection = () => {
             .then(res => res.json())
             .then(data => {
                 setPerson(data)
-                console.log(data)
             })
     }, [])
 
@@ -54,11 +53,12 @@ const ProfileViewSection = () => {
                             <FollowButton id={id}/>
                             <StarRating rating={person.rating} />
                             {plates.length > 0 && plates.map((plate) => (
+                                
                                 <Post
                                     key={plate.id}
                                     name={plate.name}
                                     username={person.name}
-                                    dsecription={plate.description}
+                                    description={plate.description}
                                 />
                             ))}
                         </Paper>

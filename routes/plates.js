@@ -161,8 +161,8 @@ router.delete('/:id/deleteplate', checkAuth, async (req, res) => {
 })
 
 // edit plate route 
-// localhost:3000/api/v1/plates/:id
-router.put('/:id', upload.single('foodPic'), checkAuth, async (req, res) => {
+// localhost:3000/api/v1/plates/:id/useredit
+router.put('/:id/useredit', upload.single('foodPic'), checkAuth, async (req, res) => {
   const id = req.params.id;
   if (req.file) {
     const s3File = await s3Upload(req.file, 'foodPics')
@@ -180,6 +180,23 @@ router.put('/:id', upload.single('foodPic'), checkAuth, async (req, res) => {
     allergenInfo: req.body.allergenInfo,
     isForSale: req.body.isForSale,
     foodPic: req.body.foodPic
+  })
+  res.json(plate)
+})
+
+// localhost:3000/api/v1/plates/:id/order
+router.put('/:id/order', checkAuth, async (req, res) => {
+  const id = req.params.id;
+
+  const plate = await models.Plate.findByPk(id)
+
+  if (req.body.order > plate.quantity) {
+    return res.json({
+      error: "sorry there aren't that many plates available"
+    })
+  }
+  plate.update({
+    quantity: plate.quantity - req.body.order
   })
   res.json(plate)
 })

@@ -44,9 +44,7 @@ const SearchPostComments = ({plate}) => {
         fetch(`/api/v1/plates/${plate.UserId}/usersplates`)
             .then(res => res.json())
             .then(data => {
-                console.log('working', plate.UserId)
                 setUserPlate(data)
-                console.log(data, "word")
             })
 
 
@@ -54,7 +52,6 @@ const SearchPostComments = ({plate}) => {
             .then(res => res.json())
             .then(data => {
                 setUserComment(data)
-                console.log(data)
             })
     }, [plate])
 
