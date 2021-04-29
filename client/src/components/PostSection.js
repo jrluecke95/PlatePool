@@ -29,32 +29,31 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PostSection = () => {
+const PostSection = ({plate}) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
-    const [openRating, setOpenRating] = useState(false)
+    // const [openRating, setOpenRating] = useState(false)
     // const [rating, setRating] = useState(0)
-    const [plate, setPlate] = useState({
-        name: '',
-        price: 0,
-        description: '',
-        cuisine: '',
-        quantity: 0,
-        allergenInfo: '',
-        UserId: 0
-    })
+    // const [plate, setPlate] = useState({
+    //     name: '',
+    //     price: 0,
+    //     description: '',
+    //     cuisine: '',
+    //     quantity: 0,
+    //     allergenInfo: '',
+    //     UserId: 0
+    // })
 
-    const {id} = useParams()
+    // const {id} = useParams()
 
-    useEffect(() => {
-        fetch(`/api/v1/plates/${id}/plate`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setPlate(data)
-                console.log(data)
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch(`/api/v1/plates/${id}/plate`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             setPlate(data)
+    //         })
+    // }, [])
 
     const handleOpen = () => {
         setOpen(true)
@@ -64,6 +63,9 @@ const PostSection = () => {
         setOpen(false)
     }
 
+    if (!plate) {
+        return ''
+    }
 
 
 
@@ -89,6 +91,9 @@ const PostSection = () => {
             </Grid>
         </Grid>
     )
+
+
+    
 
 
    
