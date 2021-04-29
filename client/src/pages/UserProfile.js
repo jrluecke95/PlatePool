@@ -41,7 +41,7 @@ export const UserProfile = () => {
     <>
       {user ? (
         <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item md={8} xs={12}>
           <Paper className={classes.paper}>
             <Avatar src={user.profilePic}/>
             <h1 style={{color: 'black'}}>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
@@ -67,7 +67,7 @@ export const UserProfile = () => {
             
             </Paper>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item md={4} xs={8}>
           <Paper className={classes.paper}><HomeFollowSection /></Paper>
         </Grid>
       </Grid>

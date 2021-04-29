@@ -2,9 +2,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Mod
 import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-
 import CommentModal from './CommentModal';
-
 import RatingModal from './RatingModal';
 
 
@@ -30,31 +28,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostSection = ({plate}) => {
+    const {id} = useParams();
     const classes = useStyles();
     const [open, setOpen] = useState(false)
+    const [ orderAmount, setOrderAmount ] = useState(0)
 
-    // const [openRating, setOpenRating] = useState(false)
-    // const [rating, setRating] = useState(0)
-    // const [plate, setPlate] = useState({
-    //     name: '',
-    //     price: 0,
-    //     description: '',
-    //     cuisine: '',
-    //     quantity: 0,
-    //     allergenInfo: '',
-    //     UserId: 0
-    // })
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        fetch(`/api/v1/plates/${id}/order`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                order: orderAmount
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                alert(`${data.error}`)
+            } else {
+                const total = orderAmount * plate.price
+                alert(`Your total is $${total}`)
+            }
+            
+        })
+    }
 
-    // const {id} = useParams()
-
-    // useEffect(() => {
-    //     fetch(`/api/v1/plates/${id}/plate`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             setPlate(data)
-    //         })
-    // }, [])
+    const handleChange = (e) => {
+        setOrderAmount(e.target.value)
+    }
 
 
     const handleOpen = () => {
@@ -85,21 +89,17 @@ const PostSection = ({plate}) => {
                 <p>{plate.quantity}</p>
             </Grid>
             <Grid item xs={12}>
+                <form onSubmit={handleSubmit}>
                 <FormControl style={{marginTop: '3%', display: 'flex', justifyContent: 'center'}}>
                     <h3 style={{display: 'flex', justifyContent: 'center'}}>How many plates?</h3>
-                    <TextField style={{marginTop: '-3%'}} type="number"  name="quantity" label="quantity" />
+                    <TextField style={{marginTop: '-3%'}} type="number"  name="order" label="quantity" onChange={handleChange}/>
                     <Button type="submit" style={{ marginTop: '5%'}} variant="contained" color="primary">Order</Button>
                 </FormControl>
+                </form>
+                
             </Grid>
         </Grid>
     )
-
-
-    
-
-
-   
-
 
     return (
             <Grid item md={7} xs={12}>
