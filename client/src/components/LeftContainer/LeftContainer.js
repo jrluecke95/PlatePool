@@ -33,10 +33,10 @@ export default function LeftContainer() {
                         </Button>
                     </div>
                     <div className="left2">
-                        <Button component={NavLink} to="/profile">
+                        <Button className="usernameBtn" component={NavLink} to="/profile">
                             <h2><strong>{user.name} </strong></h2>
                         </Button>
-                            {/* <p><strong>{`${user.city}, ${user.state}`}</strong></p> */}
+                            <p className="userLocation"><strong>{`${user.city}, ${user.state}`}</strong></p>
                         
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
                         <div>Rating:
