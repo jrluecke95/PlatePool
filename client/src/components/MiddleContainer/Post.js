@@ -39,12 +39,6 @@ const Post = forwardRef(
           </div>
           <img src='food' alt="" />
           <div className="post__footer">
-            {/* <Button type="submit" href="#text-buttons" color="primary">
-              <ChatBubbleOutlineIcon fontSize="small" />
-            </Button>
-            <RepeatIcon fontSize="small" />
-            <FavoriteBorderIcon fontSize="small" />
-            <PublishIcon fontSize="small" /> */}
             <Button 
             component={NavLink} to={`/${id}/plate`}
             type="submit">

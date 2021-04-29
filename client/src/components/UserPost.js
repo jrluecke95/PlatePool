@@ -1,11 +1,8 @@
 import React, { forwardRef, useState } from "react";
 import "../components/MiddleContainer/Post.css";
-import { Avatar, Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, TextField } from "@material-ui/core";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import PublishIcon from "@material-ui/icons/Publish";
+import { Avatar, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from "@material-ui/core";
+import './UserPost.css';
 import EditIcon from '@material-ui/icons/Edit';
-
-//TODO update so that it references back end and not state
 
 const UserPost = forwardRef(
   ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale, profilePic, foodPic, onSave }, ref) => {
@@ -96,7 +93,7 @@ const UserPost = forwardRef(
           <Avatar src={profilePic} />
           {username}
         </div>
-        <div className="post__body">
+        <div className="post__body" style={{color: 'white', backgroundColor: '#092F37'}}>
           {editing ? (
             <div className="post__header">
             <div className="post__headerText">
@@ -149,15 +146,11 @@ const UserPost = forwardRef(
           )}
           <img src='food' alt="" />
           <div className="post__footer">
-            <ChatBubbleOutlineIcon fontSize="small" />
-            <PublishIcon fontSize="small" />
             {editing ? (
-              <Button color='primary' onClick={() => {saveForm(id)}}>Save</Button>
+              <Button color='white' onClick={() => {saveForm(id)}}>Save</Button>
             ) : (
               <Button onClick={toggleEdit}><EditIcon fontSize="small"/></Button>
             )}
-            
-            
           </div>
         </div>
       </form>

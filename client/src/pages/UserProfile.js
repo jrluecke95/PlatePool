@@ -7,6 +7,7 @@ import { Avatar } from "@material-ui/core";
 import UserPost from '../components/UserPost';
 import StarRating from '../components/StarRating';
 import { NavLink } from 'react-router-dom';
+import FlipMove from "react-flip-move";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,7 @@ export const UserProfile = () => {
             <Avatar src={user.profilePic}/>
             <h1 style={{color: 'black'}}>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
             <StarRating rating={user.rating}/>
-            
+            <FlipMove>
             {plates.length > 0 && plates.map((plate) => (
           <UserPost
             id={plate.id}
@@ -62,6 +63,8 @@ export const UserProfile = () => {
             onSave={getData}
           />
         ))}
+            </FlipMove>
+            
             </Paper>
         </Grid>
         <Grid item xs={4}>
