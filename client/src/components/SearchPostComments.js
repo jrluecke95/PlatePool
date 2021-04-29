@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -29,21 +30,41 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SearchPostComments = () => {
+const SearchPostComments = ({plate}) => {
     const [userPlate, setUserPlate] = useState([])
-    const {id} = useParams()
+    const [userComment, setUserComment] = useState([])
+    const [plateId, setPlateId] = useState([])
 
+    // console.log(plate.UserId)
     useEffect(() => {
-        fetch(`/api/v1/plates/${id}/usersplates`)
+        if (!plate) {
+            return 
+        }
+
+        fetch(`/api/v1/plates/${plate.UserId}/usersplates`)
             .then(res => res.json())
             .then(data => {
+                console.log('working', plate.UserId)
                 setUserPlate(data)
                 console.log(data, "word")
             })
-    }, [])
 
+
+        fetch(`/api/v1/plates/${plate.id}/getcomments`)
+            .then(res => res.json())
+            .then(data => {
+                setUserComment(data)
+                console.log(data)
+            })
+    }, [plate])
 
     const classes = useStyles();
+
+    if (!plate) {
+        return ''
+    }
+
+
     return (
         <Grid style={{display: 'flex', flexDirection: 'column'}} item md={5} xs={12}>
             <Paper className={classes.paper}>
@@ -51,9 +72,9 @@ const SearchPostComments = () => {
                     Comments
                 <List style={{ marginTop: '5%' }} className={classes.root2} subheader={<li />}>
                         <ul className={classes.ul} >
-                            {['comment', 'comment', 'comment', 'comment', '5', '6', '7', '8', '9'].map((item) => (
-                                <ListItem key={`item--${item}`}>
-                                    <a href={`/`}><ListItemText primary={`${item}`} /></a>
+                            {userComment.map((comment) => (
+                                <ListItem key={`item--${comment}`}>
+                                    <ListItemText primary={`${comment.text}`} />
                                 </ListItem>
                             ))}
                         </ul>

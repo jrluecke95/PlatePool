@@ -29,29 +29,33 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PostSection = () => {
+const PostSection = ({plate}) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
-    const [plate, setPlate] = useState({
-        name: '',
-        price: 0,
-        description: '',
-        cuisine: '',
-        quantity: 0,
-        allergenInfo: '',
-        foodPic: '',
-        UserId: 0
-    })
 
-    const {id} = useParams()
+    // const [openRating, setOpenRating] = useState(false)
+    // const [rating, setRating] = useState(0)
+    // const [plate, setPlate] = useState({
+    //     name: '',
+    //     price: 0,
+    //     description: '',
+    //     cuisine: '',
+    //     quantity: 0,
+    //     allergenInfo: '',
+    //     UserId: 0
+    // })
 
-    useEffect(() => {
-        fetch(`/api/v1/plates/${id}/plate`)
-            .then(res => res.json())
-            .then(data => {
-                setPlate(data)
-            })
-    }, [])
+    // const {id} = useParams()
+
+    // useEffect(() => {
+    //     fetch(`/api/v1/plates/${id}/plate`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             setPlate(data)
+    //         })
+    // }, [])
+
 
     const handleOpen = () => {
         setOpen(true)
@@ -60,6 +64,12 @@ const PostSection = () => {
     const handleClose = () => {
         setOpen(false)
     }
+
+
+    if (!plate) {
+        return ''
+    }
+
 
     const orderModalBody = (
         <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
@@ -83,6 +93,9 @@ const PostSection = () => {
             </Grid>
         </Grid>
     )
+
+
+    
 
 
    
