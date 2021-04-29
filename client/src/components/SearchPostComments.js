@@ -1,4 +1,4 @@
-import { Grid, List, ListItem, ListItemText, ListSubheader, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Avatar, Grid, List, ListItem, ListItemText, ListSubheader, makeStyles, Paper, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 
@@ -67,11 +67,23 @@ const SearchPostComments = ({plate}) => {
             <Paper className={classes.paper}>
                 <Typography style={{ color: 'black' }} variant="h4">
                     Comments
-                <List style={{ marginTop: '5%' }} className={classes.root2} subheader={<li />}>
+                <List style={{ marginTop: '5%'}} className={classes.root2} subheader={<li />}>
                         <ul className={classes.ul} >
                             {userComment.map((comment) => (
-                                <ListItem key={`item--${comment}`}>
-                                    <ListItemText primary={`${comment.text}`} />
+                                <ListItem key={`item--${comment}`} >
+                                    <Paper style={{width: '100%'}} variant="outlined" >
+                                        <Grid container spacing={2}>
+                                            <Grid item lg={8}>
+                                                <a href="/" style={{textDecoration: 'none', fontSize: '.7em', marginLeft: '2%'}}>{comment.User.name}</a>
+                                            </Grid>
+                                            <Grid item lg={4}>
+                                                <Avatar style={{marginTop: '5%'}} src={comment.User.profilePic} />
+                                            </Grid>
+                                            <Grid item lg={12}>
+                                                <ListItemText style={{marginLeft: '2%'}} primary={comment.text} />
+                                            </Grid> 
+                                        </Grid>
+                                    </Paper>
                                 </ListItem>
                             ))}
                         </ul>
@@ -86,7 +98,7 @@ const SearchPostComments = ({plate}) => {
                         <ul className={classes.ul} >
                             {userPlate.map((plate) => (
                                 <ListItem key={`item--${plate}`}>
-                                    <a style={{textDecoration: 'none'}} href={`/`}><ListItemText primary={`${plate.name}`} /></a>
+                                     <a style={{textDecoration: 'none'}} href={`/`}><ListItemText primary={plate.name} /></a>
                                 </ListItem>
                             ))}
                         </ul>

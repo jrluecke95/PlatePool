@@ -95,7 +95,7 @@ router.get('/:id/getcomments', async (req, res) => {
   }
 
   const comments = await plate.getComments({
-    include: [{ model: models.User, attributes: ['name', 'id'] }]
+    include: [{ model: models.User, attributes: ['name', 'id', 'profilePic'] }]
   })
 
   res.status(201).json(comments)
