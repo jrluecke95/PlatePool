@@ -246,7 +246,7 @@ const EditProfile = () => {
             if (data.error) {
                 alert(data.error)
             } else {
-                alert('please log back in to see the changes you made!')
+                alert('your profile has been updated')
                 dispatch(setUser(data))
             }
         });

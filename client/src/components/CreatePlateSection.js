@@ -20,20 +20,18 @@ const CreatePlateSection = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const data = new FormData()
+        data.append('name', form.name)
+        data.append('price', form.price)
+        data.append('description', form.description)
+        data.append('cuisine', form.cuisine)
+        data.append('allergies', form.allergies)
+        data.append('quantity', form.quantity)
+        data.append('isForSale', form.isForSale)
+        data.append('foodPic', form.foodPic)
         fetch('/api/v1/plates/create', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: form.name,
-                price: form.price,
-                description: form.description,
-                cuisine: form.cuisine,
-                allergenInfo: form.allergenInfo,
-                quantity: form.quantity,
-                isForSale: form.isForSale
-            }),
+            body: data
         })
             .then(res => res.json())
             .then(data => {
@@ -53,8 +51,13 @@ const CreatePlateSection = () => {
         })
     }
 
-
-
+    function handleFileChange(e) {
+        const file = e.target.files[0];
+        setForm({
+            ...form,
+            [e.target.name]: file
+        })
+    }
 
     const cuisines = [
         {
@@ -114,6 +117,7 @@ const CreatePlateSection = () => {
                     </RadioGroup>
                 </FormControl>
                 <br />
+                <input type="file" name="foodPic"  onChange={handleFileChange}></input>
                 <Button type="submit" style={{ marginTop: '2%' }} variant="contained" color="primary">Create Meal!</Button>
             </form>
         </div>

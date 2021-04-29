@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const models = require('../models');
 const bcrypt = require('bcrypt');
-const { route } = require('./plates');
 const multer = require('multer');
 const path = require('path');
 const s3Upload = require('../utils/s3upload');

@@ -25,13 +25,16 @@ export const UserProfile = () => {
   const [ plates, setPlates ] = useState([]);
 
 
-  useEffect(() => {
+  const getData = () => {
     fetch(`/api/v1/plates/ownplates`)
     .then(res => res.json())
     .then(data => {
       setPlates(data)
     })
-  }, [])
+  }
+  useEffect(() => {
+    getData()
+}, [])
 
   return (
     <>
@@ -39,7 +42,8 @@ export const UserProfile = () => {
         <Grid container spacing={2}>
         <Grid item xs={8}>
           <Paper className={classes.paper}>
-            <h1>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
+            <Avatar src={user.profilePic}/>
+            <h1 style={{color: 'black'}}>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
             <StarRating rating={user.rating}/>
             
             {plates.length > 0 && plates.map((plate) => (
@@ -53,7 +57,9 @@ export const UserProfile = () => {
             allergenInfo={plate.allergenInfo}
             isForSale={plate.isForSale}
             username={user.name}
-            
+            profilePic={user.profilePic}
+            foodPic={plate.foodPic}
+            onSave={getData}
           />
         ))}
             </Paper>

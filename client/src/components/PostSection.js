@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const PostSection = ({plate}) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
+
     // const [openRating, setOpenRating] = useState(false)
     // const [rating, setRating] = useState(0)
     // const [plate, setPlate] = useState({
@@ -55,6 +56,7 @@ const PostSection = ({plate}) => {
     //         })
     // }, [])
 
+
     const handleOpen = () => {
         setOpen(true)
     }
@@ -63,10 +65,10 @@ const PostSection = ({plate}) => {
         setOpen(false)
     }
 
+
     if (!plate) {
         return ''
     }
-
 
 
     const orderModalBody = (
@@ -103,7 +105,7 @@ const PostSection = ({plate}) => {
             <Grid item md={7} xs={12}>
                 <Paper className={classes.paper}>
                     <h1 style={{color: 'darkgray'}}>{plate.name}</h1>
-                    <img style={{ width: '70%' }} src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="food" />
+                    <img style={{ width: '70%' }} src={plate.foodPic} alt="food" />
                     <h4>Description</h4>
                     <p>{plate.description}</p>
                     <Grid container spacing={2}>

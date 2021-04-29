@@ -2,11 +2,22 @@ var express = require('express');
 var router = express.Router();
 const models = require('../models');
 const checkAuth = require('../auth/CheckAuth');
-const plate = require('../models/plate');
+const multer = require('multer');
+const path = require('path');
+const s3Upload = require('../utils/s3upload');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+const upload = multer({storage});
 
 // creating new plate
 //localhost:3000/api/v1/plates/create
-router.post('/create', checkAuth, async (req, res) => {
+router.post('/create', upload.single('foodPic'), checkAuth, async (req, res) => {
   //check to make sure recipe has all fields filled out
   const { user } = req.session;
   // checks to see if fields are filled out
@@ -27,6 +38,11 @@ router.post('/create', checkAuth, async (req, res) => {
       error: "you already have this recipe listed!"
     })
   }
+
+  if (req.file) {
+    const s3File = await s3Upload(req.file, 'foodPics')
+    req.body.foodPic = s3File
+  }
 // creates new plate
   const newPlate = await models.Plate.create({
     name: req.body.name,
@@ -36,7 +52,8 @@ router.post('/create', checkAuth, async (req, res) => {
     quantity: req.body.quantity,
     allergenInfo: req.body.allergenInfo,
     isForSale: req.body.isForSale,
-    UserId: user.id,
+    foodPic: req.body.foodPic,
+    UserId: user.id
   })
 
   return res.status(201).json(newPlate)
@@ -145,21 +162,26 @@ router.delete('/:id/deleteplate', checkAuth, async (req, res) => {
 
 // edit plate route 
 // localhost:3000/api/v1/plates/:id
-router.put('/:id', checkAuth, async (req, res) => {
-  const recipe = await models.Plate.update({
+router.put('/:id', upload.single('foodPic'), checkAuth, async (req, res) => {
+  const id = req.params.id;
+  if (req.file) {
+    const s3File = await s3Upload(req.file, 'foodPics')
+    req.body.foodPic = s3File
+  }
+
+  const plate = await models.Plate.findByPk(id)
+
+  plate.update({
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
     cuisine: req.body.cuisine,
     quantity: req.body.quantity,
     allergenInfo: req.body.allergenInfo,
-    isForSale: req.body.isForSale
-  }, {
-    where: {
-      id: req.params.id
-    }
+    isForSale: req.body.isForSale,
+    foodPic: req.body.foodPic
   })
-  res.status(204).json(recipe)
+  res.json(plate)
 })
 
 module.exports = router;

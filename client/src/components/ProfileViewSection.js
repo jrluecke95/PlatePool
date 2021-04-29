@@ -2,6 +2,7 @@ import { Grid, makeStyles, Paper } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import FollowButton from './FollowButton';
 import FollowSection from './FollowSection';
 import Post from './MiddleContainer/Post';
 import HomeFollowSection from './RightContainer/HomeFollowSection';
@@ -43,16 +44,14 @@ const ProfileViewSection = () => {
             })
     }, [])
 
-
-
-
     return (
         <>
             {user ? (
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
                         <Paper className={classes.paper}>
-                            <h1>{person.name}</h1>
+                            <h1 style={{color: 'black'}}>{person.name}</h1>
+                            <FollowButton id={id}/>
                             <StarRating rating={person.rating} />
                             {plates.length > 0 && plates.map((plate) => (
                                 <Post

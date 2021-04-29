@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
     allergenInfo: DataTypes.STRING,
     isForSale: DataTypes.BOOLEAN,
-    UserId: DataTypes.INTEGER,
+    foodPic: DataTypes.STRING,
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Plate',
