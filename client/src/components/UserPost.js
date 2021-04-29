@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 //TODO update so that it references back end and not state
 
 const UserPost = forwardRef(
-  ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale, profilePic, foodPic }, ref) => {
+  ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale, profilePic, foodPic, onSave }, ref) => {
     const [ editing, setEditing ] = useState(false);
     const [form, setForm ] = useState({
       name,
@@ -68,9 +68,11 @@ const UserPost = forwardRef(
           alert(data.error)
         } else {
           alert('plate updated!');
+          onSave();
         }
       })
       toggleEdit()
+      
     }
 
     const handleChange = (e) => {

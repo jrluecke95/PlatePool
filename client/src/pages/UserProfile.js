@@ -25,13 +25,16 @@ export const UserProfile = () => {
   const [ plates, setPlates ] = useState([]);
 
 
-  useEffect(() => {
+  const getData = () => {
     fetch(`/api/v1/plates/ownplates`)
     .then(res => res.json())
     .then(data => {
       setPlates(data)
     })
-  }, [])
+  }
+  useEffect(() => {
+    getData()
+}, [])
 
   return (
     <>
@@ -56,6 +59,7 @@ export const UserProfile = () => {
             username={user.name}
             profilePic={user.profilePic}
             foodPic={plate.foodPic}
+            onSave={getData}
           />
         ))}
             </Paper>
