@@ -1,14 +1,21 @@
 import React, { forwardRef, useState } from "react";
 import "../components/MiddleContainer/Post.css";
-import { Avatar, Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, TextField } from "@material-ui/core";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import PublishIcon from "@material-ui/icons/Publish";
+import { Avatar, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField, makeStyles  } from "@material-ui/core";
+import './UserPost.css';
 import EditIcon from '@material-ui/icons/Edit';
 
-//TODO update so that it references back end and not state
+const useStyles = makeStyles((theme) => ({
+
+  text: {
+    color: 'white'
+  },
+  label: {
+    color: 'white'
+  }
+}));
 
 const UserPost = forwardRef(
-  ({ id, name, price, username, description, cuisine, quantity, allergenInfo, isForSale, profilePic, foodPic, onSave }, ref) => {
+  ({ id, name, price, description, cuisine, quantity, allergenInfo, isForSale, profilePic, foodPic, onSave }, ref) => {
     const [ editing, setEditing ] = useState(false);
     const [form, setForm ] = useState({
       name,
@@ -19,6 +26,8 @@ const UserPost = forwardRef(
       allergenInfo,
       isForSale: isForSale ? 'true' : 'false'
     })
+    
+    const styles = useStyles()
 
     const cuisines = [
       {
@@ -58,7 +67,7 @@ const UserPost = forwardRef(
       data.append('quantity', form.quantity)
       data.append('isForSale', form.isForSale)
       data.append('foodPic', form.foodPic)
-      fetch(`/api/v1/plates/${id}`, {
+      fetch(`/api/v1/plates/${id}/useredit`, {
         method: 'PUT',
         body: data,
       })
@@ -94,21 +103,22 @@ const UserPost = forwardRef(
       <form className="post" key={ref}>
         <div className="post__avatar">
           <Avatar src={profilePic} />
-          {username}
         </div>
-        <div className="post__body">
+        <div className="post__body" style={{color: 'white', backgroundColor: '#092F37'}}>
           {editing ? (
             <div className="post__header">
             <div className="post__headerText">
               <h3>
-              <TextField onChange={handleChange} defaultValue={form.price} name='price' defulatValue={form.price}type='text' label='$ Price' style={{ marginRight: '5px' }}></TextField>
-              <TextField onChange={handleChange} defaultValue={`${form.name}`} name='name' type='text' label='Name' style={{ marginRight: '5px' }}></TextField >
+                <TextField onChange={handleChange} inputProps={{className: styles.text}} defaultValue={form.price} name='price' type='text' label='$ Price' style={{ marginRight: '5px' }}></TextField>
+
+              <TextField inputProps={{className: styles.text}} onChange={handleChange} defaultValue={`${form.name}`} name='name' type='text' label='Name' style={{ marginRight: '5px' }}></TextField >
                 {" "}
               </h3>
             </div>
             <div className="post__headerDescription">
-              <TextField onChange={handleChange} defaultValue={form.description} name='description' type="text" label="Description" style={{ marginRight: '5px' }}></TextField>
-              <TextField onChange={handleChange} value={form.cuisine} name="cuisine" style={{ marginRight: '5px' }} select id="standard-select-state" label="Cuisine">
+              <TextField onChange={handleChange} defaultValue={form.description} name='description' type="text" label="Description" style={{ marginRight: '5px' }} inputProps={{className: styles.text}}></TextField>
+
+              <TextField onChange={handleChange} value={form.cuisine} name="cuisine" style={{ marginRight: '5px' }} select id="standard-select-state" label="Cuisine" inputProps={{className: styles.text}}>
                 {
                   cuisines.map((cuisine) => (
                     <MenuItem key={cuisine.name} value={cuisine.name} default>
@@ -117,17 +127,22 @@ const UserPost = forwardRef(
                   ))
                 }
               </TextField>
-              <TextField type="text" name="allergenInfo" defaultValue={form.allergenInfo} onChange={handleChange} label="Allergen Info" style={{ marginRight: '5px' }}></TextField>
-              <TextField onChange={handleChange} defaultValue={form.quantity} name='quantity' label="Quantity" style={{ marginRight: '5px' }}></TextField>
+
+              <TextField type="text" name="allergenInfo" defaultValue={form.allergenInfo} onChange={handleChange} label="Allergen Info" style={{ marginRight: '5px' }} inputProps={{className: styles.text}}></TextField>
+
+              <TextField onChange={handleChange} defaultValue={form.quantity} name='quantity' label="Quantity" style={{ marginRight: '5px' }} inputProps={{className: styles.text}}></TextField>
+
               <FormControl style={{marginTop: '2%'}} component="fieldset">
-                    <FormLabel component="legend">Do you want this item listed?</FormLabel>
-                    <RadioGroup value={form.isForSale} aria-label="forSale" name="isForSale" onChange={handleChange}>
+                    <FormLabel style={{color: 'white'}}component="legend">Do you want this item listed?</FormLabel>
+                    <RadioGroup value={form.isForSale} name="isForSale" onChange={handleChange}>
                       <FormControlLabel  value="true" control={<Radio name="isForSale"/>} label="yes" />
                       <FormControlLabel  value="false" control={<Radio name="isForSale"/>} label="no"/>
                     </RadioGroup>
                 </FormControl>
+                <div>
                 <Avatar src={foodPic}/>
-                <input type="file" name="foodPic" onChange={handleFileChange}></input>
+                <input type="file" name="foodPic" onChange={handleFileChange} style={{float: 'left'}}></input>
+                </div>
                 
             </div>
           </div>
@@ -149,15 +164,11 @@ const UserPost = forwardRef(
           )}
           <img src='food' alt="" />
           <div className="post__footer">
-            <ChatBubbleOutlineIcon fontSize="small" />
-            <PublishIcon fontSize="small" />
             {editing ? (
-              <Button color='primary' onClick={() => {saveForm(id)}}>Save</Button>
+              <Button style={{color: 'white'}} onClick={() => {saveForm(id)}}>Save</Button>
             ) : (
-              <Button onClick={toggleEdit}><EditIcon fontSize="small"/></Button>
+              <Button  onClick={toggleEdit}><EditIcon style={{color: 'white'}} fontSize="small"/></Button>
             )}
-            
-            
           </div>
         </div>
       </form>

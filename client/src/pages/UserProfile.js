@@ -7,6 +7,7 @@ import { Avatar } from "@material-ui/core";
 import UserPost from '../components/UserPost';
 import StarRating from '../components/StarRating';
 import { NavLink } from 'react-router-dom';
+import FlipMove from "react-flip-move";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,7 @@ export const UserProfile = () => {
   const classes = useStyles();
   const user = useSelector((state) => state.user);
   const [ plates, setPlates ] = useState([]);
+  const [ rating, setRating ] = useState([null]);
 
 
   const getData = () => {
@@ -31,6 +33,12 @@ export const UserProfile = () => {
     .then(data => {
       setPlates(data)
     })
+
+    fetch(`/api/v1/users/${user.id}/userrating`)
+    .then((res) => res.json())
+    .then((data) => {
+    setRating(data);
+    });
   }
   useEffect(() => {
     getData()
@@ -38,14 +46,15 @@ export const UserProfile = () => {
 
   return (
     <>
+    {console.log(user)}
       {user ? (
         <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item md={8} xs={12}>
           <Paper className={classes.paper}>
             <Avatar src={user.profilePic}/>
             <h1 style={{color: 'black'}}>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
-            <StarRating rating={user.rating}/>
-            
+            <StarRating rating={rating}/>
+            <FlipMove>
             {plates.length > 0 && plates.map((plate) => (
           <UserPost
             id={plate.id}
@@ -62,9 +71,11 @@ export const UserProfile = () => {
             onSave={getData}
           />
         ))}
+            </FlipMove>
+            
             </Paper>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item md={4} xs={8}>
           <Paper className={classes.paper}><HomeFollowSection /></Paper>
         </Grid>
       </Grid>

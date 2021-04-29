@@ -13,13 +13,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function StarRating(props) {
+export default function StarRating({rating}) {
     const classes = useStyles();
-
 
     return (
         <div className={classes.root}>
-      <Rating name="half-rating-read" defaultValue={props.rating} precision={0.5} readOnly />
-    </div>
+          <Rating name="half-rating-read" value={rating} precision={0.5} readOnly />
+        </div>
     )
 }

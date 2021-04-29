@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Avatar, Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -7,17 +7,25 @@ import './LeftContainer.css';
 import StarRating from '../StarRating';
 
 
+
 export default function LeftContainer() {
     const user = useSelector((state) => state.user);
     const [plates, setPlates] = useState([]);
+    const [rating, setRating] = useState(null);
 
 
 
     useEffect(() => {
-        fetch('/api/v1/plates/:id/getuserplates')
+        fetch(`/api/v1/plates/${user.id}/usersplates`)
             .then((res) => res.json())
             .then((data) => {
             setPlates(data);
+            });
+
+        fetch(`/api/v1/users/${user.id}/userrating`)
+            .then((res) => res.json())
+            .then((data) => {
+            setRating(data);
             });
         }, []);
 
@@ -33,23 +41,25 @@ export default function LeftContainer() {
                         </Button>
                     </div>
                     <div className="left2">
+                        <div>
+                        <Button className="usernameBtn" component={NavLink} to="/profile">
+                            <Avatar style={{width: '25vh', height: '25vh'}} src={user.profilePic}/>
+                        </Button>
                         <Button className="usernameBtn" component={NavLink} to="/profile">
                             <h2><strong>{user.name} </strong></h2>
                         </Button>
-                            <p className="userLocation"><strong>{`${user.city}, ${user.state}`}</strong></p>
+                        </div>
+                        <p className="userLocation"><strong>{`${user.city}, ${user.state}`}</strong></p>
                         
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
                         <div>Rating:
                             <div className="starRating">
-                                <StarRating />
+                                <StarRating rating={rating}/>
                             </div>
                         </div>
                     </div>
-                    <br></br>
-                    <br></br>
                     <div className="left3">
                         <p>Plates created: {plates.length > 0 ? plates.length : 'None'}</p>
-                        <p>Plates purchased: </p>
                     </div>
                     <div>
                     </div>
