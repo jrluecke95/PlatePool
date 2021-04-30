@@ -58,6 +58,7 @@ const ProfileViewSection = () => {
                                     name={plate.name}
                                     username={person.name}
                                     description={plate.description}
+                                    profilePic={person.profilePic}
                                 />
                             ))}
                         </Paper>
