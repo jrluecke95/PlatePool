@@ -80,13 +80,17 @@ const PostSection = ({plate}) => {
             <Grid item xs={12}>
                 <h2 style={{display: 'flex', justifyContent: 'center'}}>Order</h2>
             </Grid>
-            <Grid style={{textAlign: 'center'}} item md={6} xs={12}>
+            <Grid style={{textAlign: 'center'}} item md={4} xs={12}>
                 <h3>Estimated Time:</h3>
                 <p>10 minutes</p>
             </Grid>
-            <Grid style={{textAlign: 'center'}} item md={6} xs={12}>
+            <Grid style={{textAlign: 'center'}} item md={4} xs={12}>
                 <h3>Quantity</h3>
                 <p>{plate.quantity}</p>
+            </Grid>
+            <Grid style={{textAlign: 'center'}} item md={4} xs={12}>
+                <h3>Price</h3>
+                <p>${plate.price}</p>
             </Grid>
             <Grid item xs={12}>
                 <form onSubmit={handleSubmit}>
@@ -109,17 +113,21 @@ const PostSection = ({plate}) => {
                     <h4>Description</h4>
                     <p>{plate.description}</p>
                     <Grid container spacing={2}>
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                             <h4>Allergies</h4>
                             <p>{plate.allergenInfo}</p>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                             <h4>Quantity</h4>
                             <p>{plate.quantity}</p>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                             <h4>Cuisine</h4>
                             <p>{plate.cuisine}</p>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <h4>Price</h4>
+                            <p>${plate.price}</p>
                         </Grid>
                     </Grid>
                     <Grid style={{marginTop: '4%', marginBottom: '2%'}} container spacing={2}>
