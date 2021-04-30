@@ -1,13 +1,9 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Modal, Paper, TextField } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import React, { useEffect, useState } from 'react'
+import { Button, FormControl, Grid, makeStyles, Modal, Paper, TextField } from '@material-ui/core';
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import CommentModal from './CommentModal';
 import RatingModal from './RatingModal';
-
-
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -136,9 +132,8 @@ const PostSection = ({ plate }) => {
                     </Grid>
                 </Grid>
                 <Grid style={{ marginTop: '4%', marginBottom: '2%' }} container spacing={2}>
-                    <Grid item sm={4} xs={12}>
-                        <Button type="button" onClick={handleOpen} variant="contained" color="primary">Order Now</Button>
-                        <Grid item xs={4}>
+                    <Grid style={{marginTop: '4%', marginBottom: '2%'}} container spacing={2}>
+                        <Grid item sm={4} xs={12}>
                             {user ? (
                                 <Button type="button" onClick={handleOpen} variant="contained" color="primary">Order Now</Button>
                             ) : (

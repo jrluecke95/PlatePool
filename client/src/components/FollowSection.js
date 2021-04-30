@@ -1,9 +1,6 @@
 import { List, ListItem, ListItemText, ListSubheader, makeStyles, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router'
-
-
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,19 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 const FollowSection = () => {
 
-    const user = useSelector((state) => state.user)
-    const [person, setPerson] = useState(null)
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
     const { id } = useParams()
 
     useEffect(() => {
-        fetch(`/api/v1/users/${id}/getuser`)
-            .then(res => res.json())
-            .then(data => {
-                setPerson(data)
-                console.log(data)
-            })
 
         fetch(`/api/v1/users/${id}/followers`)
             .then((res) => res.json())
@@ -52,10 +41,6 @@ const FollowSection = () => {
                 setFollowing(data)
             })
     }, [])
-
-
-
-
 
     const classes = useStyles();
     return (
