@@ -96,20 +96,22 @@ const SearchPostComments = ({plate}) => {
                     Other Dishes by User
                 <List style={{ marginTop: '5%', maxWidth: '100%', backgroundColor: '#092F37', border: '3px solid black' }} className={classes.root2} subheader={<li />}>
                         <ul className={classes.ul} >
-                            {userPlate.map((plate) => (
-                                <ListItem key={`item--${plate}`}>
+                            {userPlate.map((Userplate) => (
+                                plate.name !== Userplate.name && (
+                                <ListItem key={`item--${Userplate}`}>
                                     <Paper style={{width: '100%', backgroundColor: '#C7DDE2'}}>
                                         <Grid container spacing={2}>
                                             <Grid item md={9} xs={9}>
-                                                <a style={{textDecoration: 'none'}} href={`/${plate.id}/plate`}><ListItemText style={{marginLeft: '5%'}} primary={plate.name} /></a>
+                                                <a style={{textDecoration: 'none'}} href={`/${plate.id}/plate`}><ListItemText style={{marginLeft: '5%'}} primary={Userplate.name} /></a>
                                             </Grid>
                                             <Grid item md={3} xs={3}>
-                                                <ListItemText primary={plate.price} />
+                                                <ListItemText primary={Userplate.price} />
                                             </Grid>
                                         </Grid>
                                     </Paper>
 
                                 </ListItem>
+                                )
                             ))}
                         </ul>
                     </List>
