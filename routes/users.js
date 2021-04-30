@@ -4,6 +4,7 @@ const models = require('../models');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
+const checkAuth = require('../auth/CheckAuth');
 const s3Upload = require('../utils/s3upload');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -153,7 +154,7 @@ router.get('/logout', (req, res) => {
 
 // localhost:3000/api/v1/users/follow
 // lets user follow another user
-router.post('/follow', async (req, res) => {
+router.post('/follow', checkAuth, async (req, res) => {
   if (req.session.user.id === req.body.id) {
     return res.status(400).json({
       error: 'cannot follow yourself'
@@ -193,7 +194,7 @@ router.get('/:id/following', async (req, res) => {
 
 // localhost:3000/api/v1/users/:id/rate
 // allows users to submit a rating for another user
-router.post('/:id/rate', async (req, res) => {
+router.post('/:id/rate', checkAuth, async (req, res) => {
   if (!req.body.rating) {
     res.status(400).json({
       error: 'please include rating'
@@ -283,8 +284,7 @@ router.put('/editprofile', upload.single('profilePic'), async (req, res) => {
   }
   const user = await models.User.findByPk(req.session.user.id)
   //if (!user)
-  if (req.body.password) {
-    console.log(req.body)
+  if (req.body.password !== 'undefined') {
     hash = await bcrypt.hash(req.body.password, 10)
     req.body.password = hash
   } else {

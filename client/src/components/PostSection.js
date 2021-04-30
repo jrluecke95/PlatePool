@@ -1,6 +1,7 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Grid, makeStyles, Modal, Paper, TextField } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import CommentModal from './CommentModal';
 import RatingModal from './RatingModal';
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostSection = ({plate}) => {
+    const user = useSelector((state) => state.user);
     const {id} = useParams();
     const classes = useStyles();
     const [open, setOpen] = useState(false)
@@ -124,7 +126,12 @@ const PostSection = ({plate}) => {
                     </Grid>
                     <Grid style={{marginTop: '4%', marginBottom: '2%'}} container spacing={2}>
                         <Grid item xs={4}>
-                            <Button type="button" onClick={handleOpen} variant="contained" color="primary">Order Now</Button>
+                            {user ? (
+                                <Button type="button" onClick={handleOpen} variant="contained" color="primary">Order Now</Button>
+                            ) : (
+                                <Button type="button" color='primary' variant="contained">Log in to Order</Button>
+                            )}
+                            
                             <Modal style={{display: 'flex', justifyContent: 'center'}} open={open} onClose={handleClose} >
                                 {orderModalBody}
                             </Modal>
