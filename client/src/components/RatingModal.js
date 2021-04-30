@@ -102,8 +102,6 @@ export default function RatingModal(props) {
 
   return (
     <Grid item sm={4} xs={12}>
-      <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
-    <Grid item xs={4}>
       {user ? (
         <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
         ) : (

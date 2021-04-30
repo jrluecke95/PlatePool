@@ -1,6 +1,5 @@
-import { Avatar, Grid, List, ListItem, ListItemText, ListSubheader, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Avatar, Grid, List, ListItem, ListItemText, makeStyles, Paper, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router';
 
 
 
@@ -33,9 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const SearchPostComments = ({plate}) => {
     const [userPlate, setUserPlate] = useState([])
     const [userComment, setUserComment] = useState([])
-    const [plateId, setPlateId] = useState([])
 
-    // console.log(plate.UserId)
     useEffect(() => {
         if (!plate) {
             return 
@@ -102,7 +99,7 @@ const SearchPostComments = ({plate}) => {
                                     <Paper style={{width: '100%', backgroundColor: '#C7DDE2'}}>
                                         <Grid container spacing={2}>
                                             <Grid item md={9} xs={9}>
-                                                <a style={{textDecoration: 'none'}} href={`/${plate.id}/plate`}><ListItemText style={{marginLeft: '5%'}} primary={Userplate.name} /></a>
+                                                <a style={{textDecoration: 'none'}} href={`/${Userplate.id}/plate`}><ListItemText style={{marginLeft: '5%'}} primary={Userplate.name} /></a>
                                             </Grid>
                                             <Grid item md={3} xs={3}>
                                                 <ListItemText primary={Userplate.price} />
