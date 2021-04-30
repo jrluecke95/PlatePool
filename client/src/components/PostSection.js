@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     paper2: {
         position: 'absolute',
         width: 600,
+        '@media (max-width:414px)': {
+            width:'300px',
+          },
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -115,36 +118,37 @@ const PostSection = ({plate}) => {
                     <h4>Description</h4>
                     <p>{plate.description}</p>
                     <Grid container spacing={2}>
-                        <Grid item xs={3}>
+                        <Grid item sm={3} xs={12}>
                             <h4>Allergies</h4>
                             <p>{plate.allergenInfo}</p>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid itemm sm={3} xs={12}>
                             <h4>Quantity</h4>
                             <p>{plate.quantity}</p>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item sm={3} xs={12}>
                             <h4>Cuisine</h4>
                             <p>{plate.cuisine}</p>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item sm={3} xs={12}>
                             <h4>Price</h4>
                             <p>${plate.price}</p>
                         </Grid>
                     </Grid>
                     <Grid style={{marginTop: '4%', marginBottom: '2%'}} container spacing={2}>
+                        <Grid item sm={4} xs={12}>
+                            <Button type="button" onClick={handleOpen} variant="contained" color="primary">Order Now</Button>
                         <Grid item xs={4}>
                             {user ? (
                                 <Button type="button" onClick={handleOpen} variant="contained" color="primary">Order Now</Button>
                             ) : (
                                 <Button type="button" color='primary' variant="contained">Log in to Order</Button>
                             )}
-                            
                             <Modal style={{display: 'flex', justifyContent: 'center'}} open={open} onClose={handleClose} >
                                 {orderModalBody}
                             </Modal>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item sm={4} xs={12}>
                             <CommentModal />
                         </Grid>
                         <RatingModal UserId={plate.UserId}/>
