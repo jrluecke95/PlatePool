@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         width: 600,
         '@media (max-width:414px)': {
-            width:'300px',
-          },
+            width: '300px',
+        },
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -27,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PostSection = ({plate}) => {
+const PostSection = ({ plate }) => {
     const user = useSelector((state) => state.user);
-    const {id} = useParams();
+    const { id } = useParams();
     const classes = useStyles();
     const [open, setOpen] = useState(false)
-    const [ orderAmount, setOrderAmount ] = useState(0)
+    const [orderAmount, setOrderAmount] = useState(0)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -45,16 +45,16 @@ const PostSection = ({plate}) => {
                 order: orderAmount
             })
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.error) {
-                alert(`${data.error}`)
-            } else {
-                const total = orderAmount * plate.price
-                alert(`Your total is $${total}`)
-            }
-            
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert(`${data.error}`)
+                } else {
+                    const total = orderAmount * plate.price
+                    alert(`Your total is $${total}`)
+                }
+
+            })
     }
 
     const handleChange = (e) => {
@@ -77,60 +77,61 @@ const PostSection = ({plate}) => {
 
 
     const orderModalBody = (
-        <Grid style={{marginTop: '10%'}} container className={classes.paper2} spacing={2}>
+        <Grid style={{ marginTop: '10%' }} container className={classes.paper2} spacing={2}>
             <Grid item xs={12}>
-                <h2 style={{display: 'flex', justifyContent: 'center'}}>Order</h2>
+                <h2 style={{ display: 'flex', justifyContent: 'center' }}>Order</h2>
             </Grid>
-            <Grid style={{textAlign: 'center'}} item md={4} xs={12}>
+            <Grid style={{ textAlign: 'center' }} item md={4} xs={12}>
                 <h3>Estimated Time:</h3>
                 <p>10 minutes</p>
             </Grid>
-            <Grid style={{textAlign: 'center'}} item md={4} xs={12}>
+            <Grid style={{ textAlign: 'center' }} item md={4} xs={12}>
                 <h3>Quantity</h3>
                 <p>{plate.quantity}</p>
             </Grid>
-            <Grid style={{textAlign: 'center'}} item md={4} xs={12}>
+            <Grid style={{ textAlign: 'center' }} item md={4} xs={12}>
                 <h3>Price</h3>
                 <p>${plate.price}</p>
             </Grid>
             <Grid item xs={12}>
                 <form onSubmit={handleSubmit}>
-                <FormControl style={{marginTop: '3%', display: 'flex', justifyContent: 'center'}}>
-                    <h3 style={{display: 'flex', justifyContent: 'center'}}>How many plates?</h3>
-                    <TextField style={{marginTop: '-3%'}} type="number"  name="order" label="quantity" onChange={handleChange}/>
-                    <Button type="submit" style={{ marginTop: '5%'}} variant="contained" color="primary">Order</Button>
-                </FormControl>
+                    <FormControl style={{ marginTop: '3%', display: 'flex', justifyContent: 'center' }}>
+                        <h3 style={{ display: 'flex', justifyContent: 'center' }}>How many plates?</h3>
+                        <TextField style={{ marginTop: '-3%' }} type="number" name="order" label="quantity" onChange={handleChange} />
+                        <Button type="submit" style={{ marginTop: '5%' }} variant="contained" color="primary">Order</Button>
+                    </FormControl>
                 </form>
-                
+
             </Grid>
         </Grid>
     )
 
     return (
-            <Grid item md={7} xs={12}>
-                <Paper className={classes.paper}>
-                    <h1 style={{color: 'darkgray'}}>{plate.name}</h1>
-                    <img style={{ width: '70%' }} src={plate.foodPic} alt="food" />
-                    <h4>Description</h4>
-                    <p>{plate.description}</p>
-                    <Grid container spacing={2}>
-                        <Grid item sm={3} xs={12}>
-                            <h4>Allergies</h4>
-                            <p>{plate.allergenInfo}</p>
-                        </Grid>
-                        <Grid itemm sm={3} xs={12}>
-                            <h4>Quantity</h4>
-                            <p>{plate.quantity}</p>
-                        </Grid>
-                        <Grid item sm={3} xs={12}>
-                            <h4>Cuisine</h4>
-                            <p>{plate.cuisine}</p>
-                        </Grid>
-                        <Grid item sm={3} xs={12}>
-                            <h4>Price</h4>
-                            <p>${plate.price}</p>
-                        </Grid>
+        <Grid item md={7} xs={12}>
+            <Paper className={classes.paper}>
+                <h1 style={{ color: 'darkgray' }}>{plate.name}</h1>
+                <img style={{ width: '70%' }} src={plate.foodPic} alt="food" />
+                <h4>Description</h4>
+                <p>{plate.description}</p>
+                <Grid container spacing={2}>
+                    <Grid item sm={3} xs={12}>
+                        <h4>Allergies</h4>
+                        <p>{plate.allergenInfo}</p>
                     </Grid>
+                    <Grid itemm sm={3} xs={12}>
+                        <h4>Quantity</h4>
+                        <p>{plate.quantity}</p>
+                    </Grid>
+                    <Grid item sm={3} xs={12}>
+                        <h4>Cuisine</h4>
+                        <p>{plate.cuisine}</p>
+                    </Grid>
+                    <Grid item sm={3} xs={12}>
+                        <h4>Price</h4>
+                        <p>${plate.price}</p>
+                    </Grid>
+                </Grid>
+                <Grid style={{ marginTop: '4%', marginBottom: '2%' }} container spacing={2}>
                     <Grid style={{marginTop: '4%', marginBottom: '2%'}} container spacing={2}>
                         <Grid item sm={4} xs={12}>
                             {user ? (
@@ -138,17 +139,18 @@ const PostSection = ({plate}) => {
                             ) : (
                                 <Button type="button" color='primary' variant="contained">Log in to Order</Button>
                             )}
-                            <Modal style={{display: 'flex', justifyContent: 'center'}} open={open} onClose={handleClose} >
+                            <Modal style={{ display: 'flex', justifyContent: 'center' }} open={open} onClose={handleClose} >
                                 {orderModalBody}
                             </Modal>
                         </Grid>
                         <Grid item sm={4} xs={12}>
                             <CommentModal />
                         </Grid>
-                        <RatingModal UserId={plate.UserId}/>
+                        <RatingModal UserId={plate.UserId} />
                     </Grid>
-                </Paper>
-            </Grid>
+                </Grid>
+            </Paper>
+        </Grid>
     )
 }
 
