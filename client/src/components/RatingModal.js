@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     width: 600,
     '@media (max-width:414px)': {
-      width:'300px',
+      width: '300px',
     },
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
@@ -34,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '39%',
     marginTop: '2%',
     '@media (max-width:414px)': {
-      marginLeft:'25%',
+      marginLeft: '25%',
     },
   },
   label: {
-    marginLeft: '46%', 
+    marginLeft: '46%',
     marginTop: '2%',
     '@media (max-width:414px)': {
-      marginLeft:'42%',
+      marginLeft: '42%',
     },
   },
 }));
@@ -103,15 +103,16 @@ export default function RatingModal(props) {
   return (
     <Grid item sm={4} xs={12}>
       <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
-    <Grid item xs={4}>
-      {user ? (
-        <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
+      <Grid item xs={4}>
+        {user ? (
+          <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
         ) : (
-        <Button type="button" variant="contained" color='primary'>Log in to Rate</Button>
-      )}
-      <Modal style={{ display: 'flex', justifyContent: 'center' }} open={open} onClose={handleClose} >
-        {body}
-      </Modal>
+          <Button type="button" variant="contained" color='primary'>Log in to Rate</Button>
+        )}
+        <Modal style={{ display: 'flex', justifyContent: 'center' }} open={open} onClose={handleClose} >
+          {body}
+        </Modal>
+      </Grid>
     </Grid>
   );
 }
