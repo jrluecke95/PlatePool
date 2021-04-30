@@ -155,11 +155,17 @@ const UserPost = forwardRef(
                     {form.name}{" "}
                   </h3>
                 </div>
-                <div className="post__headerDescription">
-                  <p>{form.description} </p>
-                  <p>{form.cuisine} {form.allergenInfo}</p>
-                  <p>{`You have ${form.quantity} listed`}</p>
-                  <Avatar src={foodPic} />
+                <div className="post__headerDescription" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                  <div>
+                    <Avatar src={foodPic} style={{ width: '25vh', height: '25vh' }} />
+                  </div>
+                  <div>
+                    <strong>
+                      <p>{form.description} </p>
+                      <p>{form.cuisine} {form.allergenInfo}</p>
+                      <p>{`You have ${form.quantity} listed`}</p>
+                    </strong>
+                  </div>
                 </div>
               </div>
             )}
