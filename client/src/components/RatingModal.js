@@ -111,6 +111,5 @@ export default function RatingModal(props) {
           {body}
         </Modal>
       </Grid>
-    </Grid>
   );
 }
