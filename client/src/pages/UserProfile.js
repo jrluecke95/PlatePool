@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+  },
+  userPost: {
+    height: '100vh',
+    overflow: 'scroll',
   }
 }));
 
@@ -49,14 +53,16 @@ export const UserProfile = () => {
     {console.log(user)}
       {user ? (
         <Grid container spacing={2}>
-        <Grid item md={8} xs={12}>
+        <Grid item md={8} xs={12} >
           <Paper className={classes.paper}>
             <Avatar src={user.profilePic}/>
             <h1 style={{color: 'black'}}>{user.name} <Button color="inherit" component={NavLink} to='/editprofile'>Edit profile</Button></h1>
             <StarRating rating={rating}/>
-            <FlipMove>
+            <FlipMove 
+            className={classes.userPost}>
             {plates.length > 0 && plates.map((plate) => (
           <UserPost
+            
             id={plate.id}
             name={plate.name}
             price={plate.price}

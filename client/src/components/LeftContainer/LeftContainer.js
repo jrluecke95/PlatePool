@@ -14,19 +14,21 @@ export default function LeftContainer() {
     const [rating, setRating] = useState(null);
 
 
-
+    
     useEffect(() => {
-        fetch(`/api/v1/plates/${user.id}/usersplates`)
+        if (user) {
+            fetch(`/api/v1/plates/${user.id}/usersplates`)
             .then((res) => res.json())
             .then((data) => {
             setPlates(data);
             });
 
-        fetch(`/api/v1/users/${user.id}/userrating`)
+            fetch(`/api/v1/users/${user.id}/userrating`)
             .then((res) => res.json())
             .then((data) => {
             setRating(data);
             });
+        } 
         }, []);
 
     return (
