@@ -23,8 +23,3 @@
 
 }
 
-@media only screen and (max-width: 280px) {
-  p {
-    font-size: .9rem;
-  }
-}
