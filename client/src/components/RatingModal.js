@@ -21,11 +21,28 @@ const useStyles = makeStyles((theme) => ({
   paper2: {
     position: 'absolute',
     width: 600,
+    '@media (max-width:414px)': {
+      width:'300px',
+    },
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-},
+  },
+  rate: {
+    marginLeft: '39%',
+    marginTop: '2%',
+    '@media (max-width:414px)': {
+      marginLeft:'25%',
+    },
+  },
+  label: {
+    marginLeft: '46%', 
+    marginTop: '2%',
+    '@media (max-width:414px)': {
+      marginLeft:'42%',
+    },
+  },
 }));
 
 export default function RatingModal(props) {
@@ -69,8 +86,8 @@ export default function RatingModal(props) {
         <Grid item xs={12}>
           <form onSubmit={handleSubmit}>
             <FormControl style={{ display: 'flex', justifyContent: 'center' }}>
-              <FormLabel style={{ marginLeft: '46%', marginTop: '2%' }}>Rating</FormLabel>
-              <Rating style={{ marginLeft: '39%', marginTop: '2%' }} name="simple-controlled" value={score} onChange={(event, newValue) => {
+              <FormLabel className={classes.label}>Rating</FormLabel>
+              <Rating className={classes.rate} name="simple-controlled" value={score} onChange={(event, newValue) => {
                 setScore(newValue)
               }} />
               <Button type="submit" style={{ marginTop: '5%' }} variant="contained" color="primary">Leave Rating</Button>
@@ -82,7 +99,7 @@ export default function RatingModal(props) {
   );
 
   return (
-    <Grid item xs={4}>
+    <Grid item sm={4} xs={12}>
       <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
       <Modal style={{ display: 'flex', justifyContent: 'center' }} open={open} onClose={handleClose} >
         {body}
