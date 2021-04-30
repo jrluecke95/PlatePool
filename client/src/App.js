@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import Home from './pages/Home'
+import AltHome from './pages/AltHome'
 import './App.css'
 import Login from "./pages/Login";
 import Register from './pages/Register'
@@ -11,11 +12,12 @@ import ProfileView from "./pages/ProfileView";
 import Sidebar from './components/Sidebar/MobileSidebar'
 import SearchPost from "./pages/SearchPost";
 import EditProfile from './pages/EditProfile'
+import { useSelector } from "react-redux";
 
 
 
 function App() {
-
+  const user = useSelector((state) => state.user);
   return (
     <div className="App">
 
@@ -25,7 +27,7 @@ function App() {
         <Container style={{ margin: '2em auto' }}>
             <Switch>
               <Route path="/" exact>
-                <Home />
+                {user ? <Home /> : <AltHome />}
               </Route>
               <Route path='/register'>
                 <Register />
