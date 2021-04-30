@@ -10,7 +10,7 @@ import Directions from "../Directions";
 
 
 const Post = forwardRef(
-  ({id, name, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
+  ({id, name, price, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
         {console.log(description)}
@@ -36,6 +36,7 @@ const Post = forwardRef(
             </div>
             <div className="post__headerDescription">
               <p className="plateDescription"><strong>{description}</strong></p>
+              <p>${price}</p>
             </div>
           </div>
           <div className="post__footer">

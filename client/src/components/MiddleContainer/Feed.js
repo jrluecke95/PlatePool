@@ -37,6 +37,7 @@ function Feed() {
             userZipcode = {post.User.zipcode}
             description={post.description}
             profilePic={post.User.profilePic}
+            price={post.price}
           />
         ))}
       </FlipMove>

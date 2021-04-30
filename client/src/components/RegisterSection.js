@@ -286,9 +286,10 @@ const RegisterSection = () => {
                 }
                 </TextField>
                 <TextField name="zipcode" onChange={handleChange} value={form.zipcode} style={{ width: '75%', marginTop: '2%' }} fullWidth id="standard-basic"  label="Zipcode" />
-                <input type="file" name="profilePic"  onChange={handleFileChange}></input>
                 <br />
-                <Button type="submit" style={{ marginTop: '2%' }} variant="contained" color="primary">Register</Button>
+                <input style={{marginTop: '2%'}} type="file" name="profilePic"  onChange={handleFileChange} />
+                <br />
+                <Button type="submit" style={{ marginTop: '2%', marginRight: '5%' }} variant="contained" color="primary">Register</Button>
             </form>
         </div>
     )
