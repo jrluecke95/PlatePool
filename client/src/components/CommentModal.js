@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, FormControl, Grid, TextField } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CommentModal() {
+  const user = useSelector((state) => state.user);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [text, setText] = React.useState('');
@@ -85,9 +87,14 @@ export default function CommentModal() {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleOpen} type="button">
+    {user ? (
+        <Button variant="contained" color="primary" onClick={handleOpen} type="button">
         Add Comment
       </Button>
+        ) : (
+        <Button type="button" variant="contained" color='primary'>Log in to Comment</Button>
+      )}
+      
       <Modal
         open={open}
         onClose={handleClose}

@@ -8,6 +8,7 @@ import {
   Grid
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RatingModal(props) {
+  const user = useSelector((state) => state.user);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [score, setScore] = useState(0)
@@ -101,6 +103,12 @@ export default function RatingModal(props) {
   return (
     <Grid item sm={4} xs={12}>
       <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
+    <Grid item xs={4}>
+      {user ? (
+        <Button type="button" onClick={handleOpen} variant="contained" color="primary">Leave Rating</Button>
+        ) : (
+        <Button type="button" variant="contained" color='primary'>Log in to Rate</Button>
+      )}
       <Modal style={{ display: 'flex', justifyContent: 'center' }} open={open} onClose={handleClose} >
         {body}
       </Modal>
