@@ -1,4 +1,4 @@
-import { Button, MenuItem, TextField } from '@material-ui/core';
+import { Avatar, Button, FormLabel, Input, InputLabel, MenuItem, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/actions';
@@ -13,6 +13,7 @@ const EditProfile = () => {
     state: '',
     zipcode: ''
   })
+  const [profilePic, setProfilePic] = useState()
   const dispatch = useDispatch();
 
   const states = [
@@ -223,6 +224,7 @@ const EditProfile = () => {
     .then(res => res.json())
     .then(data => {
       setForm(data)
+      setProfilePic(data.profilePic)
     })
   }, [])
 
@@ -290,7 +292,18 @@ function handleFileChange(e) {
                 }
                 </TextField>
                 <TextField name="zipcode" onChange={handleChange} value={form.zipcode} style={{ width: '75%', marginTop: '2%' }} fullWidth  label="Zipcode" />
-                <input type="file" name="profilePic"  onChange={handleFileChange}></input>
+                <br />
+                <div style={{display: 'flex', justifyContent: 'center', marginTop: '2%'}}>
+                    <div>
+                    <Avatar src={profilePic} style={{height: '15vh', width: '15vh'}}/>
+                    </div>
+                    <div>
+                    <InputLabel>Profile Picture</InputLabel>
+                <Input label='profile picture' type="file" name="profilePic"  onChange={handleFileChange}></Input>
+                    </div>
+                
+                </div>
+                
                 <br />
                 <Button type="submit" style={{ marginTop: '2%' }} variant="contained" color="primary">Submit</Button>
             </form>

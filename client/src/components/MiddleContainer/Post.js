@@ -2,10 +2,6 @@ import React, { forwardRef } from "react";
 import "./Post.css";
 import { Avatar, Button } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
-// import EditIcon from '@material-ui/icons/Edit';
-// import { Grid } from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
 import Directions from "../Directions";
 
 
