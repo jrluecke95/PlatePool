@@ -93,7 +93,7 @@ h1 {
   padding: 10px;
 }
 
-.menu-btn {
+.login-menu {
 display: flex;
 justify-content: space-around;
 flex-direction: column;

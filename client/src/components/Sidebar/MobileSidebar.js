@@ -63,24 +63,30 @@ useEffect(() => {
             
               {user ? (
               <>
-                <div className="menu-btn">
+                <div className="login-menu">
                 <Button variant="contained" size="large" className="menu-item" href="/">
                   Home
-                </Button>
-                    <br />
+                </Button> 
+                <br />
                 <Button variant="contained" size="large" className="menu-item" href="/profile">
                   My Profile
                 </Button>
-                    <br />
+                <br />
                 <Button variant="contained" size="large" className="menu-item" href="/CreatePlate">
                   Create Plate
+                </Button>
+                <br />
+                <Button variant="contained" color="primary" href="/about">
+                  About Us
+                </Button>
+                <br />
+                
+                <Button variant="contained" size="small" className="menu-item" color='secondary' onClick={logout}>
+                  Logout
                 </Button>
 
                 </div>
                 <br />
-                <Button variant="contained" size="large" color='secondary' onClick={logout}>
-                  Logout
-                </Button>
               </>
             ) : (
               <>
@@ -92,10 +98,14 @@ useEffect(() => {
                   <Button variant="contained" color="primary" href="/register">
                     Register
                   </Button>
+                  <Button variant="contained" color="primary" href="/about">
+                    About Us
+                  </Button>
                 </div>
               </>
             
             )}
+              
             </Menu>
           </>
           )}
