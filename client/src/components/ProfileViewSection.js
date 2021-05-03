@@ -24,6 +24,7 @@ const ProfileViewSection = () => {
     const user = useSelector((state) => state.user);
     const [plates, setPlates] = useState([]);
     const [person, setPerson] = useState([])
+    const [ rating, setRating ] = useState([null]);
     const {id} = useParams() 
 
     useEffect(() => {
@@ -40,6 +41,12 @@ const ProfileViewSection = () => {
             .then(data => {
                 setPerson(data)
             })
+
+        fetch(`/api/v1/users/${id}/userrating`)
+            .then((res) => res.json())
+            .then((data) => {
+            setRating(data);
+            })
     }, [])
 
     return (
@@ -50,7 +57,7 @@ const ProfileViewSection = () => {
                         <Paper className={classes.paper}>
                             <h1 style={{color: 'black'}}>{person.name}</h1>
                             <FollowButton id={id}/>
-                            <StarRating rating={person.rating} />
+                            <StarRating rating={rating} />
                             {plates.length > 0 && plates.map((plate) => (
                                 
                                 <Post
