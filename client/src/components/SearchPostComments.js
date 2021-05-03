@@ -44,7 +44,6 @@ const SearchPostComments = ({plate}) => {
                 setUserPlate(data)
             })
 
-
         fetch(`/api/v1/plates/${plate.id}/getcomments`)
             .then(res => res.json())
             .then(data => {

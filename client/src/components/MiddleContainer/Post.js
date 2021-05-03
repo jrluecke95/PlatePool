@@ -9,7 +9,6 @@ const Post = forwardRef(
   ({id, name, price, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
-        {console.log(description)}
         <div className="post__avatar">
           <Avatar src={profilePic} />
         </div>

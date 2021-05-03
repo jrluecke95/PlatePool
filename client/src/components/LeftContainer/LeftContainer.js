@@ -34,9 +34,7 @@ export default function LeftContainer() {
     return (
         <div className='leftBox'>
             {user ? (
-                <>
-                {console.log(user)}
-                    
+                <>                  
                     <div className="left1">
                         <Button component={NavLink} to="/CreatePlate" className="createPlateBtn"><strong>Create Plate </strong>
                             <i className="fas fa-utensils"></i>

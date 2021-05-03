@@ -54,7 +54,7 @@ const ProfileViewSection = () => {
                             {plates.length > 0 && plates.map((plate) => (
                                 
                                 <Post
-                                    key={plate.id}
+                                    id={plate.id}
                                     name={plate.name}
                                     username={person.name}
                                     description={plate.description}
