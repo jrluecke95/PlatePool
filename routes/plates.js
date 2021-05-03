@@ -164,12 +164,13 @@ router.delete('/:id/deleteplate', checkAuth, async (req, res) => {
 // localhost:3000/api/v1/plates/:id/useredit
 router.put('/:id/useredit', upload.single('foodPic'), checkAuth, async (req, res) => {
   const id = req.params.id;
+  const plate = await models.Plate.findByPk(id)
   if (req.file) {
     const s3File = await s3Upload(req.file, 'foodPics')
     req.body.foodPic = s3File
+  } else {
+    req.body.foodPic = plate.foodPic
   }
-
-  const plate = await models.Plate.findByPk(id)
 
   plate.update({
     name: req.body.name,
