@@ -1,6 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 export default function TimeLogic({ time, postState, userAddress, postAddress}) {
+    const user = useSelector((state) => state.user);
     const relativeTimeLogic = (string) => {
         let relativeTime = string.split(":")
         if (Number(relativeTime[0]) === 1 && Number(relativeTime[1] < 55)) {
@@ -16,13 +18,14 @@ export default function TimeLogic({ time, postState, userAddress, postAddress}) 
             return `${relativeTime[1]} minutes away from you`
         }
     }
-    if (userAddress === postAddress) {
+    if (user && userAddress === postAddress) {
         return `This is your post`
     }
 
     if(!time) {
         return ""
     }
+
     return (
         <div>
             <p>{relativeTimeLogic(time)} </p>

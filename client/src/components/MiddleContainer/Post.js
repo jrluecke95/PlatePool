@@ -2,15 +2,11 @@ import React, { forwardRef } from "react";
 import "./Post.css";
 import { Avatar, Button } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
-// import EditIcon from '@material-ui/icons/Edit';
-// import { Grid } from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
 import Directions from "../Directions";
 
 
 const Post = forwardRef(
-  ({id, name, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
+  ({id, name, price, userId, username, description, userStreet, userCity, userState, userZipcode, profilePic }, ref) => {
     return (
       <div className="post" key={ref}>
         {console.log(description)}
@@ -31,11 +27,12 @@ const Post = forwardRef(
                   {username}
                 </span>
                 </Button>
-                {/* <p className="directions"><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode} /></p> */}
+                <p className="directions"><Directions postStreet={userStreet} postCity={userCity} postState={userState} postZipcode={userZipcode} /></p>
               </h3>
             </div>
             <div className="post__headerDescription">
               <p className="plateDescription"><strong>{description}</strong></p>
+              <p>${price}</p>
             </div>
           </div>
           <div className="post__footer">

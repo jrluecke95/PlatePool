@@ -25,14 +25,6 @@ export default function Directions({postStreet, postCity, postState, postZipcode
           });
       }, []);
     
-    
-  
- 
-
-
-    
-      
-
     return (
         <div>
             {time && time.route.formattedTime && (

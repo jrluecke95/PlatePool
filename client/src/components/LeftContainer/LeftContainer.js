@@ -14,19 +14,21 @@ export default function LeftContainer() {
     const [rating, setRating] = useState(null);
 
 
-
+    
     useEffect(() => {
-        fetch(`/api/v1/plates/${user.id}/usersplates`)
+        if (user) {
+            fetch(`/api/v1/plates/${user.id}/usersplates`)
             .then((res) => res.json())
             .then((data) => {
             setPlates(data);
             });
 
-        fetch(`/api/v1/users/${user.id}/userrating`)
+            fetch(`/api/v1/users/${user.id}/userrating`)
             .then((res) => res.json())
             .then((data) => {
             setRating(data);
             });
+        } 
         }, []);
 
     return (
@@ -52,14 +54,14 @@ export default function LeftContainer() {
                         <p className="userLocation"><strong>{`${user.city}, ${user.state}`}</strong></p>
                         
                         <h4>Member Since: {moment(user.createdAt).format("MMM Do YY")}</h4>
-                        <div>Rating:
+                        <div><strong>Rating:</strong>
                             <div className="starRating">
                                 <StarRating rating={rating}/>
                             </div>
                         </div>
                     </div>
                     <div className="left3">
-                        <p>Plates created: {plates.length > 0 ? plates.length : 'None'}</p>
+                        <p><strong>Plates created: {plates.length > 0 ? plates.length : 'None'}</strong></p>
                     </div>
                     <div>
                     </div>

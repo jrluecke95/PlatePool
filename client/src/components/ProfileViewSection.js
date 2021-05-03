@@ -5,7 +5,6 @@ import { useParams } from 'react-router';
 import FollowButton from './FollowButton';
 import FollowSection from './FollowSection';
 import Post from './MiddleContainer/Post';
-import HomeFollowSection from './RightContainer/HomeFollowSection';
 import StarRating from './StarRating';
 
 
@@ -59,6 +58,7 @@ const ProfileViewSection = () => {
                                     name={plate.name}
                                     username={person.name}
                                     description={plate.description}
+                                    profilePic={person.profilePic}
                                 />
                             ))}
                         </Paper>
@@ -68,7 +68,7 @@ const ProfileViewSection = () => {
                     </Grid>
                 </Grid>
             ) : (
-                'Loding'
+                'Loading'
             )}
         </>
     )

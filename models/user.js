@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       state: DataTypes.STRING,
       latitude: DataTypes.STRING,
       longitude: DataTypes.STRING,
-      profilePic: DataTypes.TEXT,
+      profilePic: DataTypes.STRING,
       rating: {
         type: DataTypes.VIRTUAL,
         get() {

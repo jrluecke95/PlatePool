@@ -83,7 +83,7 @@ export default function Navbar() {
                         ) : (
                         <>
                         <Typography variant="h6" >
-                            <Button color="inherit">
+                            <Button color="inherit" component= {NavLink} to="/">
                                 PlatePool
                             </Button>
                         </Typography>

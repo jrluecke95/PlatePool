@@ -18,12 +18,6 @@ function Feed() {
   return (
     <div className="feed">
       <h2>What's Cookin'</h2>
-      {/* <div className="feed__header">
-        <h2>What's Cookin'</h2>
-      </div> */}
-
-      {/* <PostBox /> */}
-
       <FlipMove>
         {posts.map((post) => (
           <Post
@@ -37,6 +31,7 @@ function Feed() {
             userZipcode = {post.User.zipcode}
             description={post.description}
             profilePic={post.User.profilePic}
+            price={post.price}
           />
         ))}
       </FlipMove>
