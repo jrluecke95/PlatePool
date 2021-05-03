@@ -11,6 +11,7 @@ import ProfileView from "./pages/ProfileView";
 import Sidebar from './components/Sidebar/MobileSidebar'
 import SearchPost from "./pages/SearchPost";
 import EditProfile from './pages/EditProfile'
+import About from "./pages/AboutUs";
 
 
 
@@ -48,11 +49,10 @@ function App() {
               <Route path='/editprofile'>
                 <EditProfile />
               </Route>
-              {/* <Route path="/#">
-                <Page />
-              <Route path='/images'>
-                <ImageTest />
-              </Route>*/}
+              <Route path="/about">
+                <About />
+              
+              </Route>
             </Switch>
           </Container>
       </Router>

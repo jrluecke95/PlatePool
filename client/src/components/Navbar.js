@@ -73,6 +73,9 @@ export default function Navbar() {
                         </Typography>
                         <Button color="inherit" component={NavLink} to="/profile">{user.name}
                         </Button>
+                        <Button color="inherit" component={NavLink} to="/about">
+                            About Us
+                        </Button>
                         <Button color="inherit" onClick={logout}>
                             Logout
                         </Button>
