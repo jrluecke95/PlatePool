@@ -141,7 +141,7 @@ const UserPost = forwardRef(
                     </RadioGroup>
                   </FormControl>
                   <div>
-                    <Avatar src={foodPic} />
+                    <Avatar src={foodPic} style={{ width: '15vh', height: '15vh' }}/>
                     <input type="file" name="foodPic" onChange={handleFileChange} style={{ float: 'left' }}></input>
                   </div>
 
